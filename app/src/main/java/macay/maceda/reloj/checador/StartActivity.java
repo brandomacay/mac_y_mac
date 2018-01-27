@@ -1,5 +1,6 @@
 package macay.maceda.reloj.checador;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,8 +21,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.admin:
+                startActivity(new Intent(StartActivity.this,AdminActivity.class));
                 break;
             case R.id.user:
+                startActivity(new Intent(StartActivity.this,MainActivity.class));
+                overridePendingTransition(0,0);
                 break;
         }
     }
