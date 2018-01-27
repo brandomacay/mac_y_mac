@@ -53,7 +53,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }else{
-                                repeatpassword.setError("Las contraseña no coinciden");
+                                repeatpassword.setError("Las contraseñas no coinciden");
                             }
                         }else{
                             Toast.makeText(StartActivity.this,
