@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".StartActivity">
+        <activity
+            android:name=".StartActivity"
+            android:theme="@style/FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,6 +31,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="macay.maceda.reloj.checador.AdminActivity" />
         </activity>
+        <activity android:name=".RegisterUserActivity"></activity>
     </application>
 
 </manifest>
