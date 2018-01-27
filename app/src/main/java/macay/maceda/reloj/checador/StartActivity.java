@@ -92,20 +92,15 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                             .getString("password", "");
 
                     if (password.getText().toString().trim().equals(realPassword)) {
-
+                        dialog.dismiss();
                         Toast.makeText(StartActivity.this,
                                 "Bienvenido",
                                 Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
                         startActivity(new Intent(StartActivity.this, AdminActivity.class));
-
 
                     }
                     else {
-                        Toast.makeText(StartActivity.this,
-                                "Error: La contraseña no coincide",
-                                Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
+                        password.setError("Contraseña incorrecta");
                     }
                 }
 
@@ -149,12 +144,12 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                         .putBoolean("isPasswordSet", true)
                         .putString("password", repeatpassword.getText().toString().trim())
                         .commit();
-                       // startActivity(new Intent(StartActivity.this, AdminActivity.class));
                         Toast.makeText(StartActivity.this,
-                                "Contraseña almacenada",
+                                "Bienvenido",
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        //login_password_dialog();
+                        startActivity(new Intent(StartActivity.this, AdminActivity.class));
+                        overridePendingTransition(0,0);
 
                     } else {
                         repeatpassword.setError("Las contraseñas no coinciden");
