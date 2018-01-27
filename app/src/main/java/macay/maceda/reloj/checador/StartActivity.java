@@ -23,6 +23,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         ImageButton btn_user = (ImageButton) findViewById(R.id.user);
         btn_admin.setOnClickListener(this);
         btn_user.setOnClickListener(this);
+        getSupportActionBar().hide();
     }
     public void onClick(View v) {
         switch (v.getId()) {
