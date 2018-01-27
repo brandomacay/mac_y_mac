@@ -4,9 +4,9 @@
     <item
         android:id="@+id/save"
         android:title="Guardar"
-        android:iconTint="@android:color/white"
+        android:iconTint="#FFFFFF"
         android:icon="@drawable/ic_save"
         app:showAsAction="always"
-        android:orderInCategory="1" />
+        android:orderInCategory="24" />
 
 </menu>

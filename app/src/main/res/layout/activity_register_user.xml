@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <ImageView
-            app:srcCompat="@drawable/ic_settings_applications"
+            android:id="@+id/foto"
+            app:srcCompat="@drawable/ic_account_circle"
             android:layout_gravity="start"
             android:adjustViewBounds="true"
             android:layout_width="150dp"
@@ -43,11 +44,18 @@
                     android:inputType="textPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-                <EditText
-                    android:hint="Fecha de nacimiento"
-                    android:inputType="textPersonName"
+                <TextView
+                    android:id="@+id/register_birthday_tv"
+                    style="?android:attr/spinnerStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de nacimiento"
+                    android:layout_gravity="center"
+                    android:textSize="16dp"
+                    android:padding="10dp"
+                    android:layout_marginTop="0dp"
+                    />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -76,11 +84,17 @@
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <EditText
-            android:hint="Fecha de contrato"
-            android:inputType="text"
+        <TextView
+            android:id="@+id/fecha_de_contrato"
+            style="?android:attr/spinnerStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Fecha de contrato"
+            android:layout_gravity="center"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:layout_marginTop="0dp"
+            />
 
     </LinearLayout>
     </ScrollView>
