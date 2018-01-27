@@ -45,12 +45,16 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 login.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!password.getText().toString().isEmpty() && !repeatpassword.getText().toString().isEmpty()){
-                            startActivity(new Intent(StartActivity.this,AdminActivity.class));
-                            Toast.makeText(StartActivity.this,
-                                    "Bienvenido!",
-                                    Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
+                        if(!password.getText().toString().isEmpty() && !repeatpassword.getText().toString().isEmpty()) {
+                            if (password.getText().toString().equals(repeatpassword.getText().toString())) {
+                                startActivity(new Intent(StartActivity.this, AdminActivity.class));
+                                Toast.makeText(StartActivity.this,
+                                        "Bienvenido!",
+                                        Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }else{
+                                repeatpassword.setError("Las contraseña no coinciden");
+                            }
                         }else{
                             Toast.makeText(StartActivity.this,
                                     "Ingresa todos los campos",
