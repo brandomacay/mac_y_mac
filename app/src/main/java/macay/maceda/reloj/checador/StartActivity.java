@@ -22,6 +22,7 @@ import java.util.Date;
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView vhour,vpuntos,vminutes,vppmm,datte;
+    boolean isShowed = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,17 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                                 vhour.setText(horass);
 
                                 vpuntos.setText(":");
+
+                                if (isShowed) {
+                                    vpuntos.setVisibility(View.INVISIBLE);
+                                    isShowed = false;
+
+                                }
+                                else {
+                                    vpuntos.setVisibility(View.VISIBLE);
+                                    isShowed = true;
+                                }
+
 
                                 SimpleDateFormat minuto = new SimpleDateFormat("mm");
                                 String minutoss = minuto.format(date);
