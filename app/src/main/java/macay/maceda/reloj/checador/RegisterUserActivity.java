@@ -4,8 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +39,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     private static boolean birthday_picked = false;
     private static boolean started_picked = false;
     private static int mYear, mMonth, mDay;
+    private DatabaseConnector dbConnector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +87,8 @@ public class RegisterUserActivity extends AppCompatActivity {
                 newfrag.show(getFragmentManager(), "datePicker");
             }
         });
+
+        dbConnector = new DatabaseConnector(this);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -216,15 +222,47 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         if (!name.getText().toString().trim().isEmpty() && !name.getText().toString().trim().isEmpty()
                  && birthday_picked && started_picked) {
+            save_user();
 
         }
 
     }
 
     private void save_user () {
-        Toast.makeText(RegisterUserActivity.this,
-                "Datos guardado correctamente!", Toast.LENGTH_LONG).show();
-        clean_fields();
+
+        AsyncTask<Object, Object, Cursor> insertTask =
+                new AsyncTask<Object, Object, Cursor>() {
+            @Override
+            protected Cursor doInBackground(Object... params) {
+               // public void insertUser (String name, String lastname, String birthday, String email, String phone,
+                 //       String address, String ocupation, String area, String started_date,
+                   //     String image )
+                dbConnector.insertUser(name.getText().toString().trim(),
+                        lastname.getText().toString().trim(), birthday.getText().toString().trim(),
+                        email.getText().toString().trim(), phone.getText().toString().trim(),
+                        address.getText().toString().trim(), ocupation.getText().toString().trim(),
+                        area.getText().toString().trim(), started_date.getText().toString().trim(),
+                        "");
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute (Cursor result) {
+                Toast.makeText(RegisterUserActivity.this,
+                          "Datos guardados correctamente!", Toast.LENGTH_LONG).show();
+                clean_fields();
+
+            }
+
+
+
+                };
+        insertTask.execute();
+
+        // Toast.makeText(RegisterUserActivity.this,
+              //  "Datos guardados correctamente!", Toast.LENGTH_LONG).show();
+       // clean_fields();
 
     }
 
@@ -233,6 +271,8 @@ public class RegisterUserActivity extends AppCompatActivity {
       //  private EditText name, lastname, email, phone, address, ocupation, area;
         birthday_picked = false;
         started_picked = false;
+        birthday.setText("Fecha de nacimiento");
+        started_date.setText("Fecha de contrato");
         name.setText("");
         lastname.setText("");
         email.setText("");
@@ -240,6 +280,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         address.setText("");
         ocupation.setText("");
         area.setText("");
+
 
     }
 
