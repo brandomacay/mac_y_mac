@@ -21,8 +21,7 @@ import java.util.Date;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView datte,time;
-    int h,m;
+    TextView vhour,vpuntos,vminutes,vppmm,datte;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +29,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         ImageButton btn_admin = (ImageButton) findViewById(R.id.admin);
         ImageButton btn_user = (ImageButton) findViewById(R.id.user);
         datte = (TextView) findViewById(R.id.fecha);
-        time = (TextView) findViewById(R.id.hora);
+        vhour = (TextView) findViewById(R.id.hora);
+        vpuntos = (TextView) findViewById(R.id.puntos);
+        vminutes = (TextView) findViewById(R.id.minutos);
+        vppmm = (TextView) findViewById(R.id.ppmm);
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -41,12 +43,23 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void run() {
                                 long date = System.currentTimeMillis();
-                                SimpleDateFormat hora = new SimpleDateFormat("hh:mm a");
-                                String vtime = hora.format(date);
-                                time.setText(vtime);
-                                SimpleDateFormat fecha = new SimpleDateFormat("E dd MMM  yyyy");
-                                String vdate = fecha.format(date);
-                                datte.setText(vdate);
+                                SimpleDateFormat hora = new SimpleDateFormat("hh");
+                                String horass = hora.format(date);
+                                vhour.setText(horass);
+
+                                vpuntos.setText(":");
+
+                                SimpleDateFormat minuto = new SimpleDateFormat("mm");
+                                String minutoss = minuto.format(date);
+                                vminutes.setText(minutoss);
+
+                                SimpleDateFormat aa = new SimpleDateFormat("a");
+                                String aaaa = aa.format(date);
+                                vppmm.setText(" "+aaaa);
+
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("E dd MMM  yyyy");
+                                String dates = dateFormat.format(date);
+                                datte.setText(dates);
                             }
                         });
                     }
@@ -173,7 +186,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                         .edit()
                         .putBoolean("isPasswordSet", true)
                         .putString("password", repeatpassword.getText().toString().trim())
-                        .commit();
+                        .apply();
                         Toast.makeText(StartActivity.this,
                                 "Bienvenido",
                                 Toast.LENGTH_SHORT).show();
