@@ -220,7 +220,6 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         }
 
-
     }
 
     private void save_user () {
