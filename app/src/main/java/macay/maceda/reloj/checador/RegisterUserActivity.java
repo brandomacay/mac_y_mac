@@ -189,7 +189,6 @@ public class RegisterUserActivity extends AppCompatActivity {
         }
 
 
-
         if (lastname.getText().toString().trim().isEmpty()) {
             lastname.setError("Apellidos del usuario");
         }
