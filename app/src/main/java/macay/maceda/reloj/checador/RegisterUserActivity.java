@@ -224,7 +224,24 @@ public class RegisterUserActivity extends AppCompatActivity {
     }
 
     private void save_user () {
-        Toast.makeText(RegisterUserActivity.this, "Datos guardado correctamente!", Toast.LENGTH_LONG).show();
+        Toast.makeText(RegisterUserActivity.this,
+                "Datos guardado correctamente!", Toast.LENGTH_LONG).show();
+        clean_fields();
+
+    }
+
+    private void clean_fields () {
+
+      //  private EditText name, lastname, email, phone, address, ocupation, area;
+        birthday_picked = false;
+        started_picked = false;
+        name.setText("");
+        lastname.setText("");
+        email.setText("");
+        phone.setText("");
+        address.setText("");
+        ocupation.setText("");
+        area.setText("");
 
     }
 
