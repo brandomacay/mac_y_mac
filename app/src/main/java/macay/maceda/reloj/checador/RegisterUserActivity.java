@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,17 +28,34 @@ import java.util.Calendar;
 public class RegisterUserActivity extends AppCompatActivity {
 
     ImageView photo;
-    private static TextView birthday,date_trato;
+    //private String createUsers = "CREATE TABLE users (_id integer primary key autoincrement, name,"
+    //      + " lastname, birthday, email, phone, address, ocupation, area, started_date, image);";
+    private EditText name, lastname, email, phone, address, ocupation, area;
+    private static TextView birthday, started_date;
     Bitmap bitmappost;
     boolean imageIsSet = false;
     private static boolean birthday_picked = false;
+    private static boolean started_picked = false;
     private static int mYear, mMonth, mDay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_register_user);
-        birthday = (TextView) findViewById(R.id.register_birthday_tv);
-        date_trato = (TextView) findViewById(R.id.fecha_de_contrato);
+
+        name = (EditText) findViewById(R.id.register_user_name_et);
+        lastname = (EditText) findViewById(R.id.register_user_lastname_et);
+        email = (EditText) findViewById(R.id.register_user_email_et);
+        phone = (EditText) findViewById(R.id.register_user_phone_et);
+        address = (EditText) findViewById(R.id.register_user_address_et);
+        ocupation = (EditText) findViewById(R.id.register_user_ocupation_et);
+        area = (EditText) findViewById(R.id.register_user_area_et);
+
+
+        birthday = (TextView) findViewById(R.id.register_user_birthday_tv);
+        started_date = (TextView) findViewById(R.id.register_user_started_date_tv);
+
         photo = (ImageView) findViewById(R.id.foto);
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +76,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 newfrag.show(getFragmentManager(), "datePicker");
             }
         });
-        date_trato.setOnClickListener(new View.OnClickListener() {
+        started_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogFragment newfrag = new DateStartWork();
@@ -135,11 +153,11 @@ public class RegisterUserActivity extends AppCompatActivity {
             mMonth = month;
             mDay = day;
 
-            date_trato.setText(new StringBuilder()
+            started_date.setText(new StringBuilder()
                     .append(mYear).append("-")
                     .append(mMonth + 1).append("-")
                     .append(mDay).append(" "));
-            birthday_picked = true;
+            started_picked = true;
 
         }
     }
@@ -155,10 +173,59 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.save) {
-            Toast.makeText(RegisterUserActivity.this, "Datos guardado correctamente!", Toast.LENGTH_LONG).show();
-            finish();
+
+            validate_new_user();
+            //Toast.makeText(RegisterUserActivity.this, "Datos guardado correctamente!", Toast.LENGTH_LONG).show();
+            //finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void validate_new_user () {
+
+        if (name.getText().toString().trim().isEmpty()) {
+            name.setError("Nombre del usuario");
+        }
+
+
+
+        if (lastname.getText().toString().trim().isEmpty()) {
+            lastname.setError("Apellidos del usuario");
+        }
+
+
+
+        if (!started_picked) {
+           // started_date.requestFocus();
+            started_date.setError("Fecha en que empezo a laborar");
+
+        }
+        else {
+            started_date.setError(null);
+        }
+
+
+        if (!birthday_picked) {
+
+            birthday.setError("Fecha de nacimiento");
+
+        }
+        else {
+            birthday.setError(null);
+        }
+
+        if (!name.getText().toString().trim().isEmpty() && !name.getText().toString().trim().isEmpty()
+                 && birthday_picked && started_picked) {
+
+        }
+
+
+    }
+
+    private void save_user () {
+        Toast.makeText(RegisterUserActivity.this, "Datos guardado correctamente!", Toast.LENGTH_LONG).show();
+
+    }
+
 }
