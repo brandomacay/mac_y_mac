@@ -6,6 +6,8 @@ import android.media.Image;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,14 +15,46 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
+    TextView datte,time;
+    int h,m;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         ImageButton btn_admin = (ImageButton) findViewById(R.id.admin);
         ImageButton btn_user = (ImageButton) findViewById(R.id.user);
+        datte = (TextView) findViewById(R.id.fecha);
+        time = (TextView) findViewById(R.id.hora);
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                long date = System.currentTimeMillis();
+                                SimpleDateFormat hora = new SimpleDateFormat("hh:mm a");
+                                String vtime = hora.format(date);
+                                time.setText(vtime);
+                                SimpleDateFormat fecha = new SimpleDateFormat("E dd MMM  yyyy");
+                                String vdate = fecha.format(date);
+                                datte.setText(vdate);
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+        t.start();
         btn_admin.setOnClickListener(this);
         btn_user.setOnClickListener(this);
         getSupportActionBar().hide();
@@ -40,10 +74,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                      else {
                          create_password_dialog();
                      }
-
-
-
-
                 break;
             case R.id.user:
                 startActivity(new Intent(StartActivity.this,MainActivity.class));
@@ -51,7 +81,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
 
     private void login_password_dialog () {
 
