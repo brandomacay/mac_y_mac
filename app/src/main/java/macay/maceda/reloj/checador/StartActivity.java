@@ -75,7 +75,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                             }
                         });
                     }
-                } catch (InterruptedException e) {
+                } catch (InterruptedException ignored) {
                 }
             }
         };
