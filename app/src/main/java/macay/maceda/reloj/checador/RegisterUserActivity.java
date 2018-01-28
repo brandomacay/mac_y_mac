@@ -1,5 +1,6 @@
 package macay.maceda.reloj.checador;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -23,9 +24,11 @@ import android.widget.Toast;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+
+import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
+import macay.maceda.reloj.checador.Model.Empleados_admin;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
@@ -39,7 +42,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     private static boolean birthday_picked = false;
     private static boolean started_picked = false;
     private static int mYear, mMonth, mDay;
-    private DatabaseConnector dbConnector;
+    private DatabaseOpenHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +91,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             }
         });
 
-        dbConnector = new DatabaseConnector(this);
+        dbHelper = new DatabaseOpenHelper(this);
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -230,19 +233,16 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     private void save_user () {
 
-        AsyncTask<Object, Object, Cursor> insertTask =
+        @SuppressLint("StaticFieldLeak") AsyncTask<Object, Object, Cursor> insertTask =
                 new AsyncTask<Object, Object, Cursor>() {
             @Override
             protected Cursor doInBackground(Object... params) {
-               // public void insertUser (String name, String lastname, String birthday, String email, String phone,
-                 //       String address, String ocupation, String area, String started_date,
-                   //     String image )
-                dbConnector.insertUser(name.getText().toString().trim(),
-                        lastname.getText().toString().trim(), birthday.getText().toString().trim(),
-                        email.getText().toString().trim(), phone.getText().toString().trim(),
-                        address.getText().toString().trim(), ocupation.getText().toString().trim(),
-                        area.getText().toString().trim(), started_date.getText().toString().trim(),
-                        "");
+                Empleados_admin person = new Empleados_admin(name.getText().toString(),
+                        lastname.getText().toString(), phone.getText().toString(),
+                        ocupation.getText().toString(), area.getText().toString(),
+                        email.getText().toString(), birthday.getText().toString(),
+                        address.getText().toString(), started_date.getText().toString(),"imagen");
+                dbHelper.insertPerson(person);
 
                 return null;
             }

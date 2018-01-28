@@ -34,11 +34,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="macay.maceda.reloj.checador.AdminActivity" />
         </activity>
-        <activity android:name=".RegisterUserActivity"></activity>
+        <activity android:name=".RegisterUserActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/FullScreen" />
-
+        <activity android:name=".EditUser"></activity>
     </application>
 
 </manifest>

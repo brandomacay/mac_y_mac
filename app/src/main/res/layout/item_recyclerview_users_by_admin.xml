@@ -31,16 +31,27 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/nombres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Nombres"
                     android:textColor="@android:color/black"
                     android:textSize="24sp" />
                 <TextView
+                    android:id="@+id/celular"
+                    android:drawableTint="@color/colorAccent"
+                    android:drawablePadding="4dp"
+                    android:drawableStart="@drawable/ic_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0989101248"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:drawableLeft="@drawable/ic_view" />
+                <TextView
+                    android:id="@+id/cargo"
+                    android:text="ocupation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <ImageView
@@ -49,5 +60,31 @@
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_view" />
         </LinearLayout>
+        <TextView
+            android:id="@+id/area"
+            android:text="area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/correo"
+            android:text="email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/nacimiento"
+            android:text="birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/direccion"
+            android:text="address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/iniciotrabajo"
+            android:text="startWork"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
-</>
+</android.support.v7.widget.CardView>

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
