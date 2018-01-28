@@ -33,17 +33,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <EditText
+                android:id="@+id/register_user_name_et"
                 android:hint="Nombres"
                 android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
                 <EditText
+                    android:id="@+id/register_user_lastname_et"
+
                     android:hint="Apellidos"
                     android:inputType="textPersonName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:id="@+id/register_birthday_tv"
+
+                    android:id="@+id/register_user_birthday_tv"
                     style="?android:attr/spinnerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -56,32 +60,42 @@
             </LinearLayout>
         </LinearLayout>
         <EditText
+            android:id="@+id/register_user_email_et"
+
             android:hint="Correo electronico"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/register_user_phone_et"
+
             android:hint="Celular"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/register_user_address_et"
+
             android:hint="Direccion"
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/register_user_ocupation_et"
+
             android:hint="Cargo en la empresa"
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/register_user_area_et"
+
             android:hint="Departamento o area"
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/fecha_de_contrato"
+            android:id="@+id/register_user_started_date_tv"
             style="?android:attr/spinnerStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
