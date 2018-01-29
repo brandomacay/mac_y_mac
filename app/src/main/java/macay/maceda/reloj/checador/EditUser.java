@@ -166,7 +166,7 @@ public class EditUser extends AppCompatActivity {
         File storageDir = new File (mCurrentPhotoPath);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
+                "0",         /* suffix */
                 storageDir      /* directory */
         );
 

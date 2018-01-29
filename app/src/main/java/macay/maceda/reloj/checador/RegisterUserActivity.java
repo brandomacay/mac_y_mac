@@ -448,7 +448,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", photoFile);
+                Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + "0", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                  uri);
                  //       Uri.fromFile(photoFile));
@@ -467,7 +467,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         File storageDir = new File (mCurrentPhotoPath);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
+                "0",         /* suffix */
                 storageDir      /* directory */
         );
 
