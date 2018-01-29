@@ -47,9 +47,6 @@ public class AdminActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        //populate recyclerview
-        startviewuser(filter);
-
     }
     private void startviewuser(String filter){
         dbConnector = new DatabaseOpenHelper(this);
@@ -97,5 +94,12 @@ public class AdminActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startviewuser(filter);
+
     }
 }
