@@ -26,6 +26,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PERSON_AREA = "area";
     public static final String COLUMN_PERSON_STARTEDDATE = "started_date";
     public static final String COLUMN_PERSON_IMAGE = "image";
+    public static final String COLUMN_PERSON_PASSWORD = "password";
 
     public DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
@@ -44,7 +45,9 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 COLUMN_PERSON_ADDRESS + " TEXT NOT NULL, " +
                 COLUMN_PERSON_AREA + " TEXT NOT NULL, " +
                 COLUMN_PERSON_STARTEDDATE + " TEXT NOT NULL, " +
-                COLUMN_PERSON_IMAGE + " TEXT  NOT NULL);"
+                COLUMN_PERSON_IMAGE + " TEXT  NOT NULL, " +
+                COLUMN_PERSON_PASSWORD + " NUMBER NOT NULL);"
+
         );
 
     }
@@ -69,6 +72,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(COLUMN_PERSON_AREA, person.getArea());
         values.put(COLUMN_PERSON_STARTEDDATE, person.getDatework());
         values.put(COLUMN_PERSON_IMAGE, person.getImage());
+        values.put(COLUMN_PERSON_PASSWORD, person.getPassword());
 
         // insert
         db.insert(TABLE_NAME,null, values);
@@ -106,6 +110,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 person.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_ADDRESS)));
                 person.setDatework(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_STARTEDDATE)));
                 person.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_IMAGE)));
+                person.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_PASSWORD)));
+
                 personLinkedList.add(person);
             } while (cursor.moveToNext());
         }
@@ -135,6 +141,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             receivedPerson.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_ADDRESS)));
             receivedPerson.setDatework(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_STARTEDDATE)));
             receivedPerson.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_IMAGE)));
+            receivedPerson.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_PASSWORD)));
         }
         return receivedPerson;
     }
@@ -162,6 +169,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 "', address ='" + updatedperson.getAddress()+
                 "', occupation ='" + updatedperson.getOccupation()+
                 "', area ='"+ updatedperson.getArea() +
+                "', password ='"+ updatedperson.getPassword() +
                 "', started_date ='"+ updatedperson.getDatework() +
                 "'  WHERE _id='" + personId + "'");
         Toast.makeText(context, "Datos actualizados!", Toast.LENGTH_SHORT).show();

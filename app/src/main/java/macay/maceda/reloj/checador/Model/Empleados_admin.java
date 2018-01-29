@@ -19,13 +19,14 @@ public class Empleados_admin {
     private String address;
     private String datework;
     private String image;
+    private String password;
 
 
     public Empleados_admin() {
     }
 
     public Empleados_admin(String name,String lastname, String number_phone, String occupation,
-                           String area,String email,String birthday,String address,String datework,String image) {
+                           String area,String email,String birthday,String address,String datework,String image, String password) {
         this.name = name;
         this.lastname = lastname;
         this.number_phone = number_phone;
@@ -36,6 +37,7 @@ public class Empleados_admin {
         this.address = address;
         this.datework = datework;
         this.image = image;
+        this.password = password;
     }
 
 
@@ -119,5 +121,13 @@ public class Empleados_admin {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

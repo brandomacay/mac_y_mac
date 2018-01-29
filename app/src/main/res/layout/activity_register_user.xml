@@ -60,6 +60,13 @@
             </LinearLayout>
         </LinearLayout>
         <EditText
+            android:id="@+id/register_user_password_et"
+
+            android:hint="Pin o contraseña"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
             android:id="@+id/register_user_email_et"
 
             android:hint="Correo electronico"

@@ -30,7 +30,7 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 
 public class EditUser extends AppCompatActivity {
     private EditText eName,eLastName,eEmail,ePhone,eAddress,eOccupation,eArea;
-    private TextView eBirthday,eDateWork;
+    private TextView eBirthday,eDateWork, ePassword;
     private ImageView photoUser;
 
     private DatabaseOpenHelper dbHelper;
@@ -55,6 +55,7 @@ public class EditUser extends AppCompatActivity {
         eOccupation = (EditText) findViewById(R.id.cargo);
         eArea = (EditText) findViewById(R.id.area);
         eDateWork = (TextView) findViewById(R.id.trabajo);
+        ePassword = (EditText) findViewById(R.id.password);
         dbHelper = new DatabaseOpenHelper(this);
 
         photoUser.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +101,7 @@ public class EditUser extends AppCompatActivity {
         eOccupation.setText(receivedPerson.getOccupation());
         eArea.setText(receivedPerson.getArea());
         eDateWork.setText(receivedPerson.getDatework());
+        ePassword.setText(receivedPerson.getPassword());
         mCurrentPhotoPath = receivedPerson.getImage();
 
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(photoUser);
@@ -134,6 +136,7 @@ public class EditUser extends AppCompatActivity {
         String occupation = eOccupation.getText().toString().trim();
         String area = eArea.getText().toString().trim();
         String datawork = eDateWork.getText().toString().trim();
+        String passwd = ePassword.getText().toString().trim();
 
 
 
@@ -149,11 +152,29 @@ public class EditUser extends AppCompatActivity {
             Toast.makeText(this, "You must enter an occupation", Toast.LENGTH_SHORT).show();
         }
 
-        Empleados_admin updatedPerson = new Empleados_admin(name, lastname,cellphone,occupation,area,email, birthday,address,datawork,mCurrentPhotoPath);
+        if (passwd.isEmpty() ||
+                passwd.length() < 4 ) {
+            ePassword.setError("Agrege al menos 4 numeros");
+        }
 
-        dbHelper.updatePerson(receivedPersonId, this, updatedPerson);
+        if (!name.isEmpty() && !lastname.isEmpty()
+                 && !passwd.isEmpty()) {
 
-        finish();
+            if (passwd.length() < 4 ) {
+                ePassword.setError("Agrege al menos 4 numeros");
+
+            }
+            else {
+                Empleados_admin updatedPerson = new Empleados_admin(name, lastname,cellphone,occupation,area,email, birthday,address,datawork,mCurrentPhotoPath, passwd);
+
+                dbHelper.updatePerson(receivedPersonId, this, updatedPerson);
+
+                finish();
+            }
+
+        }
+
+
     }
 
     private File createImageFile() throws IOException {

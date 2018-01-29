@@ -47,7 +47,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     ImageView photo;
     //private String createUsers = "CREATE TABLE users (_id integer primary key autoincrement, name,"
     //      + " lastname, birthday, email, phone, address, ocupation, area, started_date, image);";
-    private EditText name, lastname, email, phone, address, ocupation, area;
+    private EditText name, lastname, email, phone, address, ocupation, area, password;
     private static TextView birthday, started_date;
     Bitmap bitmappost;
     boolean imageIsSet = false;
@@ -72,6 +72,8 @@ public class RegisterUserActivity extends AppCompatActivity {
         address = (EditText) findViewById(R.id.register_user_address_et);
         ocupation = (EditText) findViewById(R.id.register_user_ocupation_et);
         area = (EditText) findViewById(R.id.register_user_area_et);
+        password = (EditText) findViewById(R.id.register_user_password_et);
+
 
 
         birthday = (TextView) findViewById(R.id.register_user_birthday_tv);
@@ -279,6 +281,11 @@ public class RegisterUserActivity extends AppCompatActivity {
             name.setError("Nombre del usuario");
         }
 
+        if (password.getText().toString().trim().isEmpty() ||
+                password.getText().toString().trim().length() < 4 ) {
+            password.setError("Agrege al menos 4 numeros");
+        }
+
 
         if (lastname.getText().toString().trim().isEmpty()) {
             lastname.setError("Apellidos del usuario");
@@ -306,8 +313,14 @@ public class RegisterUserActivity extends AppCompatActivity {
         }
 
         if (!name.getText().toString().trim().isEmpty() && !name.getText().toString().trim().isEmpty()
-                 && birthday_picked && started_picked) {
-            save_user();
+                 && birthday_picked && started_picked && !password.getText().toString().trim().isEmpty()) {
+          if (password.getText().toString().trim().length() < 4 ) {
+              password.setError("Agrege al menos 4 numeros");
+
+          }
+          else {
+              save_user();
+          }
 
         }
 
@@ -323,7 +336,8 @@ public class RegisterUserActivity extends AppCompatActivity {
                         lastname.getText().toString(), phone.getText().toString(),
                         ocupation.getText().toString(), area.getText().toString(),
                         email.getText().toString(), birthday.getText().toString(),
-                        address.getText().toString(), started_date.getText().toString(),mCurrentPhotoPath);
+                        address.getText().toString(), started_date.getText().toString(),
+                        mCurrentPhotoPath, password.getText().toString().trim());
                 dbHelper.insertPerson(person);
 
                 return null;
@@ -360,6 +374,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         address.setText("");
         ocupation.setText("");
         area.setText("");
+        password.setText("");
         photo.setImageBitmap(null);
 
 
