@@ -72,6 +72,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
             opcionEdit.setOnClickListener(this);
             opcionView.setOnClickListener(this);
             opcionDelete.setOnClickListener(this);
+            personImage.setOnClickListener(this);
 
 
 
@@ -85,6 +86,52 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
                     goToUpdateActivity(person.getId());
                     break;
                 case R.id.view:
+
+                    break;
+
+                case R.id.fotouser:
+
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+                    builder.setNeutralButton("Editar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
+
+                            dialog.dismiss();
+                            Empleados_admin person = mEmpleados.get(getPosition());
+                            goToUpdateActivity(person.getId());
+                        }
+                    });
+
+
+                    builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                          //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
+
+                            dialog.dismiss();
+                        }
+                    });
+
+
+
+
+                    LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                   // LayoutInflater inflater = getLayoutInflater();
+                    View dialoglayout = li.inflate(R.layout.image_dialog, null);
+
+                    ImageView imv = (ImageView) dialoglayout.findViewById(R.id.user_dialog_imageView);
+                    String path = personImage.getTag().toString();
+                    Picasso.with(mContext).load(new File(path)).placeholder(R.mipmap.ic_launcher).into(imv);
+
+
+
+
+                    builder.setView(dialoglayout);
+                    builder.show();
+
 
                     break;
                 case R.id.delete:
@@ -176,6 +223,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
 
         if (!person.getImage().isEmpty()) {
             Picasso.with(mContext).load(new File(person.getImage())).placeholder(R.mipmap.ic_launcher).into(holder.personImage);
+            holder.personImage.setTag(person.getImage());
 
         }
 
