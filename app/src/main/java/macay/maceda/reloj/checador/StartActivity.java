@@ -1,9 +1,14 @@
 package macay.maceda.reloj.checador;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.Image;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.Time;
@@ -84,6 +89,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         btn_admin.setOnClickListener(this);
         btn_user.setOnClickListener(this);
         getSupportActionBar().hide();
+        isStoragePermissionGranted();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 9);
+        }
     }
     public void onClick(View v) {
         switch (v.getId()) {
@@ -219,4 +229,24 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+    public boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (this.checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+               // Log.v(TAG, "Permission is granted");
+            //    isGPSPermissionGranted();
+                return true;
+            } else {
+              //  Log.v(TAG, "Permission is revoked");
+                // context.startActivity(new Intent(context, ProfileActivity.class));
+              //  isGPSPermissionGranted();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+          //  Log.v(TAG, "Permission is granted");
+            return true;
+        }
+    }
+
 }
