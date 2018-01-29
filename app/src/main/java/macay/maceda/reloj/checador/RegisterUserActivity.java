@@ -325,8 +325,6 @@ public class RegisterUserActivity extends AppCompatActivity {
 
             }
 
-
-
                 };
         insertTask.execute();
 
