@@ -6,8 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 import java.util.List;
 
 import macay.maceda.reloj.checador.AdminActivity;
@@ -33,7 +37,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         public TextView personBirthday;
         public TextView personAddress;
         public TextView personStartWork;
-        //public ImageView personImage;
+        public ImageView personImage;
 
 
         public View layout;
@@ -50,7 +54,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
             personAddress = (TextView) v.findViewById(R.id.direccion);
             personStartWork = (TextView) v.findViewById(R.id.iniciotrabajo);
 
-            //  personImage = (ImageView) v.findViewById(R.id.foto);
+            personImage = (ImageView) v.findViewById(R.id.fotouser);
 
 
 
@@ -105,7 +109,12 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         holder.personBirthday.setText(person.getBirthday());
         holder.personAddress.setText(person.getAddress());
         holder.personStartWork.setText(person.getDatework());
-        //Picasso.with(mContext).load(person.getImage()).placeholder(R.mipmap.ic_launcher).into(holder.personImageImgV);
+
+        if (!person.getImage().isEmpty()) {
+            Picasso.with(mContext).load(new File(person.getImage())).placeholder(R.mipmap.ic_launcher).into(holder.personImage);
+
+        }
+
 
         //listen to single view layout click
         holder.layout.setOnClickListener(new View.OnClickListener() {
