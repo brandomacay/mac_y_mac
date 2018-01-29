@@ -8,20 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
 
 public class EditUser extends AppCompatActivity {
-    private EditText eName,eLastName,eBirthday,eEmail,ePhone,eAddress,eOccupation,eArea,eDateWork;
+    private EditText eName,eLastName,eEmail,ePhone,eAddress,eOccupation,eArea;
+    private TextView eBirthday,eDateWork;
     private ImageView photoUser;
 
     private DatabaseOpenHelper dbHelper;
     private long receivedPersonId;
 
 
-    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +30,13 @@ public class EditUser extends AppCompatActivity {
         photoUser = (ImageView) findViewById(R.id.foto);
         eName = (EditText) findViewById(R.id.nombres);
         eLastName = (EditText) findViewById(R.id.apellidos);
-        eBirthday = (EditText) findViewById(R.id.fecha_nacimiento);
+        eBirthday = (TextView) findViewById(R.id.fecha_nacimiento);
         eEmail = (EditText) findViewById(R.id.correo);
         ePhone = (EditText) findViewById(R.id.numero_celular);
         eAddress = (EditText) findViewById(R.id.direccion);
         eOccupation = (EditText) findViewById(R.id.cargo);
         eArea = (EditText) findViewById(R.id.area);
-        eDateWork = (EditText) findViewById(R.id.trabajo);
+        eDateWork = (TextView) findViewById(R.id.trabajo);
         dbHelper = new DatabaseOpenHelper(this);
         try {
             receivedPersonId = getIntent().getLongExtra("USER_ID", 1);
@@ -45,6 +46,7 @@ public class EditUser extends AppCompatActivity {
         Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
         eName.setText(receivedPerson.getName());
         eLastName.setText(receivedPerson.getLastname());
+        eBirthday.setText(receivedPerson.getBirthday());
         eEmail.setText(receivedPerson.getEmail());
         ePhone.setText(receivedPerson.getNumber_phone());
         eAddress.setText(receivedPerson.getAddress());
@@ -66,7 +68,6 @@ public class EditUser extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.save) {
-
             validate_update_user();
             return true;
         }

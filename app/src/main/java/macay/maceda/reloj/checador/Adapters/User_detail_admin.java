@@ -1,11 +1,15 @@
 package macay.maceda.reloj.checador.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,9 +19,12 @@ import java.io.File;
 import java.util.List;
 
 import macay.maceda.reloj.checador.AdminActivity;
+import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.EditUser;
+import macay.maceda.reloj.checador.MainActivity;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
 import macay.maceda.reloj.checador.R;
+import macay.maceda.reloj.checador.StartActivity;
 
 /**
  * Created by Vlover on 28/01/2018.
@@ -28,7 +35,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
     private Context mContext;
     private RecyclerView mRecyclerV;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView personName;
         public TextView personPhone;
         public TextView personOcupation;
@@ -38,6 +45,10 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         public TextView personAddress;
         public TextView personStartWork;
         public ImageView personImage;
+        public ImageView opcionEdit;
+        public ImageView opcionView;
+        public ImageView opcionDelete;
+
 
 
         public View layout;
@@ -53,9 +64,65 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
             personBirthday = (TextView) v.findViewById(R.id.nacimiento);
             personAddress = (TextView) v.findViewById(R.id.direccion);
             personStartWork = (TextView) v.findViewById(R.id.iniciotrabajo);
-
             personImage = (ImageView) v.findViewById(R.id.fotouser);
+            opcionEdit = (ImageView) v.findViewById(R.id.edit);
+            opcionView = (ImageView) v.findViewById(R.id.view);
+            opcionDelete = (ImageView) v.findViewById(R.id.delete);
 
+            opcionEdit.setOnClickListener(this);
+            opcionView.setOnClickListener(this);
+            opcionDelete.setOnClickListener(this);
+
+
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.edit:
+                    Empleados_admin person = mEmpleados.get(getPosition());
+                    goToUpdateActivity(person.getId());
+                    break;
+                case R.id.view:
+
+                    break;
+                case R.id.delete:
+                    deletUser();
+                    break;
+            }
+
+        }
+        private void goToUpdateActivity(long personId){
+            Intent goToUpdate = new Intent(mContext, EditUser.class);
+            goToUpdate.putExtra("USER_ID",personId);
+            mContext.startActivity(goToUpdate);
+        }
+        private void deletUser(){
+            AlertDialog.Builder myBulid = new AlertDialog.Builder(mContext).setCancelable(false);
+            myBulid.setMessage("En verdad deseas eliminar a esta persona?");
+            myBulid.setIcon(R.mipmap.ic_launcher);
+            myBulid.setTitle("Eliminar Usuario");
+            myBulid.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(mContext);
+                    Empleados_admin person = mEmpleados.get(getPosition());
+                    dbHelper.deletePerson(person.getId(), mContext);
+                    mEmpleados.remove(getPosition());
+                    mRecyclerV.removeViewAt(getPosition());
+                    notifyItemRemoved(getPosition());
+                    notifyItemRangeChanged(getPosition(), mEmpleados.size());
+                    notifyDataSetChanged();                }
+            });
+            myBulid.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = myBulid.create();
+            dialog.show();
         }
     }
 

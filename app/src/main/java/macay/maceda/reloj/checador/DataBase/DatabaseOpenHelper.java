@@ -39,7 +39,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 COLUMN_PERSON_LASTNAME + " TEXT  NOT NULL, " +
                 COLUMN_PERSON_BIRTHDAY + " TEXT NOT NULL, " +
                 COLUMN_PERSON_EMAIL + " TEXT NOT NULL, " +
-                COLUMN_PERSON_PHONE + " TEXT NOT NULL, " +
+                COLUMN_PERSON_PHONE + " NUMBER NOT NULL, " +
                 COLUMN_PERSON_OCCUPATION + " TEXT NOT NULL, " +
                 COLUMN_PERSON_ADDRESS + " TEXT NOT NULL, " +
                 COLUMN_PERSON_AREA + " TEXT NOT NULL, " +
