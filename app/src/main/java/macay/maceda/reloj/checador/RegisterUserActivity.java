@@ -82,16 +82,27 @@ public class RegisterUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                image_chooser_dialog();
-                /*
+                //image_chooser_dialog();
+                File filex = new File("");
+
+                try {
+                    filex = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+                    Toast.makeText(RegisterUserActivity.this,
+                            "Error creando el archivo", Toast.LENGTH_LONG).show();
+                }
+
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setCropMenuCropButtonTitle("Elegir")
                         .setCropShape(CropImageView.CropShape.RECTANGLE)
                         .setOutputCompressFormat(Bitmap.CompressFormat.JPEG)
                         .setOutputCompressQuality(75)
+
+                        .setOutputUri(Uri.fromFile(filex))
                         .start(RegisterUserActivity.this);
-                        */
+
             }
         });
         birthday.setOnClickListener(new View.OnClickListener() {
@@ -173,6 +184,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 try {
                     bitmappost = MediaStore.Images.Media.getBitmap(this.getContentResolver(), resultUri);
                     photo.setImageBitmap(bitmappost);
+                    mCurrentPhotoPath = resultUri.getPath();
                     imageIsSet = true;
 
                 } catch (IOException e) {
