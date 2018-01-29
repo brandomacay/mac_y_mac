@@ -56,9 +56,6 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
 
             personImage = (ImageView) v.findViewById(R.id.fotouser);
 
-
-
-
         }
     }
 
