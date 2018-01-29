@@ -1,5 +1,6 @@
 package macay.maceda.reloj.checador.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,24 +37,24 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
     private RecyclerView mRecyclerV;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView personName;
-        public TextView personPhone;
-        public TextView personOcupation;
-        public TextView personArea;
-        public TextView personEmail;
-        public TextView personBirthday;
-        public TextView personAddress;
-        public TextView personStartWork;
-        public ImageView personImage;
-        public ImageView opcionEdit;
-        public ImageView opcionView;
-        public ImageView opcionDelete;
+        TextView personName;
+        TextView personPhone;
+        TextView personOcupation;
+        TextView personArea;
+        TextView personEmail;
+        TextView personBirthday;
+        TextView personAddress;
+        TextView personStartWork;
+        ImageView personImage;
+        ImageView opcionEdit;
+        ImageView opcionView;
+        ImageView opcionDelete;
 
 
 
         public View layout;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             layout = v;
             personName = (TextView) v.findViewById(R.id.nombres);
@@ -120,20 +121,15 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
 
                     LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                    // LayoutInflater inflater = getLayoutInflater();
-                    View dialoglayout = li.inflate(R.layout.image_dialog, null);
+                    @SuppressLint("InflateParams") View dialoglayout = li != null ? li.inflate(R.layout.image_dialog, null) : null;
 
-                    ImageView imv = (ImageView) dialoglayout.findViewById(R.id.user_dialog_imageView);
+                    ImageView imv = (ImageView) (dialoglayout != null ? dialoglayout.findViewById(R.id.user_dialog_imageView) : null);
                     String path = personImage.getTag().toString();
                     Picasso.with(mContext).load(new File(path)).placeholder(R.mipmap.ic_launcher).into(imv);
-
-
-
-
                     builder.setView(dialoglayout);
                     builder.show();
-
-
                     break;
+
                 case R.id.delete:
                     deletUser();
                     break;
@@ -206,6 +202,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
