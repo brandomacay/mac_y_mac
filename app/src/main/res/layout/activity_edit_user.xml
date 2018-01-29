@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:id="@+id/foto"
+                    android:id="@+id/user_edit_foto"
                     app:srcCompat="@drawable/ic_account_circle"
                     android:layout_gravity="start"
                     android:adjustViewBounds="true"
