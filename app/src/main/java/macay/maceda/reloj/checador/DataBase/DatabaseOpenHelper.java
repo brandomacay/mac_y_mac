@@ -141,7 +141,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
 
     /**delete record**/
-    public void deletePersonRecord(long id, Context context) {
+    public void deletePerson(long id, Context context) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.execSQL("DELETE FROM "+TABLE_NAME+" WHERE _id='"+id+"'");
@@ -150,10 +150,17 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     /**update record**/
-    public void updatePersonRecord(long personId, Context context, Empleados_admin updatedperson) {
+    public void updatePerson(long personId, Context context, Empleados_admin updatedperson) {
         SQLiteDatabase db = this.getWritableDatabase();
         //you can use the constants above instead of typing the column names
-        db.execSQL("UPDATE  "+TABLE_NAME+" SET name ='"+ updatedperson.getName() + "', age ='" + updatedperson.getLastname()+ "', occupation ='"+ updatedperson.getOccupation() + "', image ='"+ updatedperson.getImage() + "'  WHERE _id='" + personId + "'");
+        db.execSQL("UPDATE  "+TABLE_NAME+
+                " SET name ='"+ updatedperson.getName() +
+                "', lastname ='" + updatedperson.getLastname()+
+                "', age ='" + updatedperson.getLastname()+
+
+                "', occupation ='"+ updatedperson.getOccupation() +
+                "', image ='"+ updatedperson.getImage() +
+                "'  WHERE _id='" + personId + "'");
         Toast.makeText(context, "Updated successfully.", Toast.LENGTH_SHORT).show();
 
 

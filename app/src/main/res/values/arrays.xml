@@ -4,5 +4,6 @@
     <string-array name="filterOptions">
         <item>Name</item>
         <item>Occupation</item>
+        <item>Started_date</item>
     </string-array>
 </resources>
