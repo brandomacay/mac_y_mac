@@ -1,6 +1,7 @@
 package macay.maceda.reloj.checador;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -10,13 +11,17 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,11 +29,18 @@ import android.widget.Toast;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
 
 public class RegisterUserActivity extends AppCompatActivity {
 
@@ -43,6 +55,8 @@ public class RegisterUserActivity extends AppCompatActivity {
     private static boolean started_picked = false;
     private static int mYear, mMonth, mDay;
     private DatabaseOpenHelper dbHelper;
+    private String mCurrentPhotoPath = "";
+    private String path = "/sdcard/relojchecador/fotos/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +81,9 @@ public class RegisterUserActivity extends AppCompatActivity {
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                image_chooser_dialog();
+                /*
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setCropMenuCropButtonTitle("Elegir")
@@ -74,6 +91,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                         .setOutputCompressFormat(Bitmap.CompressFormat.JPEG)
                         .setOutputCompressQuality(75)
                         .start(RegisterUserActivity.this);
+                        */
             }
         });
         birthday.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +113,58 @@ public class RegisterUserActivity extends AppCompatActivity {
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        switch (requestCode) {
+
+            case 1: {
+                if (resultCode == Activity.RESULT_OK) {
+                    //	handleBigCameraPhoto();
+                    //show_toast(mCurrentPhotoPath);
+
+                    Picasso.with(this)
+                            .load(new File(mCurrentPhotoPath))
+                            .fit()
+                            //.resize(600,6000)
+                            .centerInside()
+                            //.placeholder(R.drawable.agregar_imagen)
+                            //.error(R.drawable.vlover)
+                            //.networkPolicy(NetworkPolicy.NO_STORE)
+                            //.memoryPolicy(MemoryPolicy.NO_STORE)
+                            .into(photo);
+
+                     galleryAddPic();
+                }
+
+                break;
+            } // ACTION_TAKE_PHOTO_B
+
+            case 2: {
+                if (resultCode == Activity.RESULT_OK) {
+
+                    String curFileName = data.getStringExtra("GetFileName");
+                    String curPath = data.getStringExtra("GetPath");
+                    //String edittext.setText(curPath+curFileName);
+                    //	show_toast(curPath+curFileName);
+
+                    //	show_toast(rfrag.getTag());
+
+                    //rfrag.setChangeableText(data.getDataString());0
+                    mCurrentPhotoPath = curPath + curFileName;
+                    Picasso.with(this)
+                            .load(new File(mCurrentPhotoPath))
+                            .fit()
+                            //.resize(600,6000)
+                            .centerInside()
+                            //.placeholder(R.drawable.agregar_imagen)
+                            //.error(R.drawable.vlover)
+                            //.networkPolicy(NetworkPolicy.NO_STORE)
+                            //.memoryPolicy(MemoryPolicy.NO_STORE)
+                            .into(photo);
+                    // setPic();
+                }
+                break;
+            }
+        }
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
@@ -241,7 +311,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                         lastname.getText().toString(), phone.getText().toString(),
                         ocupation.getText().toString(), area.getText().toString(),
                         email.getText().toString(), birthday.getText().toString(),
-                        address.getText().toString(), started_date.getText().toString(),"imagen");
+                        address.getText().toString(), started_date.getText().toString(),mCurrentPhotoPath);
                 dbHelper.insertPerson(person);
 
                 return null;
@@ -280,8 +350,162 @@ public class RegisterUserActivity extends AppCompatActivity {
         address.setText("");
         ocupation.setText("");
         area.setText("");
+        photo.setImageBitmap(null);
 
 
     }
+
+    private void image_chooser_dialog ()
+    {
+        //((MainActivity)getActivity()).show_toast(a);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setCancelable(true);
+        builder.setTitle("Obtener desde...");
+        //	alert.setMessage(R.string.confirmMessage);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View vi = (inflater.inflate(R.layout.chooser_image_dialog, null));
+        builder.setView(vi);
+
+
+		/*
+		builder.setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					//Toda la diversion ocurre en el custom listener :)
+					((MainActivity)getActivity()).show_toast("mamadas");
+
+				}
+			});
+			*/
+
+
+       ImageButton dialog_camera_btn = (ImageButton) vi.findViewById(R.id.photo_camera);
+        ImageButton dialog_file_btn = (ImageButton) vi.findViewById(R.id.photo_file);
+        //AlertDialog ad = builder.create();
+        //ad.show();
+        //		load_spin_movs();
+        //getButton(ad.BUTTON_POSITIVE)
+        //	Button theButton = ad.getButton(DialogInterface.BUTTON_POSITIVE);
+        //theButton.setOnClickListener(new CustomListenerPhoto(ad));
+
+        final AlertDialog dialog = builder.create();
+
+        dialog_camera_btn .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //	((MainActivity)getActivity()).show_toast("Camara");
+                imageFromCamera();
+                dialog.dismiss();
+            }
+        });
+
+        dialog_file_btn .setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //	((MainActivity)getActivity()).show_toast("Galeria");
+                imageFromGallery();
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+    private void imageFromGallery () {
+	/*
+	Intent intent = new Intent();
+	intent.setType("image/*");
+	intent.setAction(Intent.ACTION_GET_CONTENT);
+	startActivityForResult(Intent.createChooser(intent, "Select Picture"), 2);
+	*/
+
+        Intent chooseFile = new Intent (this, FileChooser.class);
+
+        chooseFile.putExtra("option", 5);
+        startActivityForResult(chooseFile, 2);
+    }
+
+    private void imageFromCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(this.getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(RegisterUserActivity.this,
+                          "Error creando el archivo", Toast.LENGTH_LONG).show();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID + ".provider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                 uri);
+                 //       Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, 1);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        mCurrentPhotoPath = getPhotoPathDirectory();
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        //File storageDir = Environment.getExternalStoragePublicDirectory(
+        //        Environment.DIRECTORY_PICTURES);
+        File storageDir = new File (mCurrentPhotoPath);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        // mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    private String getPhotoPathDirectory () {
+
+
+
+
+        File f = new File(path);
+        f.getAbsolutePath();
+
+        if(f.mkdirs()) {
+            //se ha creado bien
+            //string.replace(" ", "\\ ");
+            Toast.makeText(RegisterUserActivity.this,
+                    "Carpeta creada", Toast.LENGTH_LONG).show();
+
+
+        }
+        else {
+            if (f.exists()) {
+                //	show_toast("La carpeta ya existe");
+            }
+            else
+                Toast.makeText(RegisterUserActivity.this,
+                        "Carpeta o SD no encontrada", Toast.LENGTH_LONG).show();
+
+        }
+
+
+        return path;
+    }
+
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(mCurrentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
+
+    }
+
+
 
 }
