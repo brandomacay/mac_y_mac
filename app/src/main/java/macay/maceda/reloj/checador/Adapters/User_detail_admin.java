@@ -38,6 +38,8 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         public TextView personAddress;
         public TextView personStartWork;
         public ImageView personImage;
+
+
         public View layout;
 
         public ViewHolder(View v) {

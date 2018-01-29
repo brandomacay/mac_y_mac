@@ -20,13 +20,13 @@
 
             <ImageView
                 android:id="@+id/fotouser"
-                android:layout_width="80dp"
+                android:layout_width="4dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/ic_account_circle" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="195dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -38,28 +38,25 @@
                     android:text="Nombres"
                     android:textColor="@android:color/black"
                     android:textSize="24sp" />
+
                 <TextView
                     android:id="@+id/celular"
-                    android:drawableTint="@color/colorAccent"
-                    android:drawablePadding="4dp"
-                    android:drawableStart="@drawable/ic_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_view"
+                    android:drawablePadding="4dp"
+                    android:drawableStart="@drawable/ic_phone"
+                    android:drawableTint="@color/colorAccent"
                     android:text="0989101248"
-                    android:textSize="18sp"
-                    android:drawableLeft="@drawable/ic_view" />
+                    android:textSize="18sp" />
+
                 <TextView
                     android:id="@+id/cargo"
-                    android:text="ocupation"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="ocupation" />
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_view" />
         </LinearLayout>
         <TextView
             android:id="@+id/area"
@@ -86,6 +83,44 @@
             android:text="startWork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:tint="#F44336"
+                app:srcCompat="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="8dp" />
+
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_edit"
+                android:tint="@color/colorAccent"
+                android:layout_marginRight="50dp" />
+            <ImageView
+                android:id="@+id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="95dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_view"
+                android:tint="@color/colorAccent"
+                android:layout_marginRight="95dp" />
+        </android.support.constraint.ConstraintLayout>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>

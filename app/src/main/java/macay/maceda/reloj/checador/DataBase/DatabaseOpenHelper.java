@@ -39,7 +39,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 COLUMN_PERSON_LASTNAME + " TEXT  NOT NULL, " +
                 COLUMN_PERSON_BIRTHDAY + " TEXT NOT NULL, " +
                 COLUMN_PERSON_EMAIL + " TEXT NOT NULL, " +
-                COLUMN_PERSON_PHONE + " NUMBER NOT NULL, " +
+                COLUMN_PERSON_PHONE + " TEXT NOT NULL, " +
                 COLUMN_PERSON_OCCUPATION + " TEXT NOT NULL, " +
                 COLUMN_PERSON_ADDRESS + " TEXT NOT NULL, " +
                 COLUMN_PERSON_AREA + " TEXT NOT NULL, " +
@@ -116,7 +116,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     /**Query only 1 record
      * @param id**/
-    public Empleados_admin getPerson(String id){
+    public Empleados_admin getPerson(long id){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT  * FROM " + TABLE_NAME + " WHERE _id="+ id;
         Cursor cursor = db.rawQuery(query, null);
@@ -156,12 +156,15 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE  "+TABLE_NAME+
                 " SET name ='"+ updatedperson.getName() +
                 "', lastname ='" + updatedperson.getLastname()+
-                "', age ='" + updatedperson.getLastname()+
-
-                "', occupation ='"+ updatedperson.getOccupation() +
-                "', image ='"+ updatedperson.getImage() +
+                "', image ='" + updatedperson.getImage()+
+                "', email ='" + updatedperson.getEmail()+
+                "', phone ='" + updatedperson.getNumber_phone()+
+                "', address ='" + updatedperson.getAddress()+
+                "', occupation ='" + updatedperson.getOccupation()+
+                "', area ='"+ updatedperson.getArea() +
+                "', started_date ='"+ updatedperson.getDatework() +
                 "'  WHERE _id='" + personId + "'");
-        Toast.makeText(context, "Updated successfully.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Datos actualizados!", Toast.LENGTH_SHORT).show();
 
 
     }
