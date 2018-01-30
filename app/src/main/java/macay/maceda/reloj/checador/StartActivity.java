@@ -4,18 +4,18 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.Image;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.text.InputType;
 import android.text.format.Time;
 import android.util.Log;
+
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,8 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
@@ -123,6 +121,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
               //  overridePendingTransition(0,0);
 
                 user_login_dialog();
+
+
+                //startActivity(new Intent(StartActivity.this,UserPanelActivity.class));
+                //overridePendingTransition(0,0);
 
                 break;
         }
