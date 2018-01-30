@@ -309,6 +309,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(StartActivity.this,
                                 "ID o PIN incorrectos",
                                 Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                     }else{
                         dialog.dismiss();
                         Toast.makeText(StartActivity.this,

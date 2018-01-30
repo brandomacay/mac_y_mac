@@ -13,7 +13,9 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "relojchecador";
-    private static final int DATABASE_VERSION = 3 ;
+    private static final int DATABASE_VERSION = 1;
+
+    //Tabla para los usuarios
     public static final String TABLE_NAME = "users";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_PERSON_NAME = "name";
@@ -27,6 +29,25 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PERSON_STARTEDDATE = "started_date";
     public static final String COLUMN_PERSON_IMAGE = "image";
     public static final String COLUMN_PERSON_PASSWORD = "password";
+
+    //Tabla para checar asistencia
+    public static final String TABLE_CLOCKING_NAME = "clocking";
+    public static final String COLUMN_CLOCKING_ID = "_id";
+    public static final String COLUMN_CLOCKING_USERID = "userid";
+    public static final String COLUMN_CLOCKING_DATE = "date";
+    public static final String COLUMN_CLOCKING_IN = "workin";
+    public static final String COLUMN_CLOCKING_OUT = "workout";
+    public static final String COLUMN_CLOCKING_BREAKIN = "breakin";
+    public static final String COLUMN_CLOCKING_BREAKOUT = "breakout";
+
+
+
+
+
+
+
+
+
 
     public DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
@@ -47,6 +68,16 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 COLUMN_PERSON_STARTEDDATE + " TEXT NOT NULL, " +
                 COLUMN_PERSON_IMAGE + " TEXT  NOT NULL, " +
                 COLUMN_PERSON_PASSWORD + " NUMBER NOT NULL);"
+
+        );
+        db.execSQL(" CREATE TABLE " + TABLE_CLOCKING_NAME + " (" +
+                COLUMN_CLOCKING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_CLOCKING_USERID + " NUMBER NOT NULL, " +
+                //COLUMN_CLOCKING_DATE + " DATE NOT NULL, " +
+                COLUMN_CLOCKING_IN + " DATETIME NOT NULL, " +
+                COLUMN_CLOCKING_OUT + " DATETIME NOT NULL, " +
+                COLUMN_CLOCKING_BREAKIN + " DATETIME NOT NULL, " +
+                COLUMN_CLOCKING_BREAKOUT + " DATETIME NOT NULL);"
 
         );
 
@@ -202,6 +233,31 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         Toast.makeText(context, "Datos actualizados!", Toast.LENGTH_SHORT).show();
 
 
+    }
+
+    //insertar entradas y salidas por fecha
+    public void insert_user_assistance(String userid, String today) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CLOCKING_ID, userid);
+        values.put(COLUMN_CLOCKING_IN, today);
+        /*
+        values.put(COLUMN_PERSON_BIRTHDAY, person.getBirthday());
+        values.put(COLUMN_PERSON_EMAIL, person.getEmail());
+        values.put(COLUMN_PERSON_PHONE, person.getNumber_phone());
+        values.put(COLUMN_PERSON_OCCUPATION, person.getOccupation());
+        values.put(COLUMN_PERSON_ADDRESS, person.getAddress());
+        values.put(COLUMN_PERSON_AREA, person.getArea());
+        values.put(COLUMN_PERSON_STARTEDDATE, person.getDatework());
+        values.put(COLUMN_PERSON_IMAGE, person.getImage());
+        values.put(COLUMN_PERSON_PASSWORD, person.getPassword());
+        */
+
+        // insert
+        db.insert(TABLE_CLOCKING_NAME,null, values);
+        db.close();
     }
 }
 
