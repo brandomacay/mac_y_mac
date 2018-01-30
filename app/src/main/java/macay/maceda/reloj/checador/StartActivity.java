@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
+import macay.maceda.reloj.checador.Adapters.User_detail_admin;
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
 
@@ -301,21 +302,32 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                     user_password.setError("Ingrese su pin de clave");
                 }else {
                     Empleados_admin receivedPerson = dbHelper.getEmpleado(user_id.getText().toString(), user_password.getText().toString());
+                    Empleados_admin idReceived = dbHelper.getPerson(Long.parseLong(user_id.getText().toString().trim()));
+
                     //Long longValue = null;
                     if (receivedPerson == null){
                         Toast.makeText(StartActivity.this,
                                 "ID o PIN incorrectos",
                                 Toast.LENGTH_SHORT).show();
                     }else{
+                        dialog.dismiss();
                         Toast.makeText(StartActivity.this,
-                                "Bienvenido: " + receivedPerson.getName()+" " + receivedPerson.getLastname() ,
+                                "Bienvenido " + receivedPerson.getName()+" " + receivedPerson.getLastname() ,
                                 Toast.LENGTH_SHORT).show();
-                        //si lo hay
+                        goToUpdateUser(Long.parseLong(user_id.getText().toString()));
                     }
+
                 }
 
             }
         });
+
+
     }
 
+    private void goToUpdateUser(long personId){
+        Intent goToUpdate = new Intent(StartActivity.this, UserPanelActivity.class);
+        goToUpdate.putExtra("USER_ID", personId);
+        startActivity(goToUpdate);
+    }
 }
