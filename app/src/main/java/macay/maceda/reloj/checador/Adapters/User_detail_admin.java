@@ -37,6 +37,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
     private RecyclerView mRecyclerV;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView personId;
         TextView personName;
         TextView personPhone;
         TextView personOcupation;
@@ -57,6 +58,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         ViewHolder(View v) {
             super(v);
             layout = v;
+            personId =  (TextView) v.findViewById(R.id.user_id);
             personName = (TextView) v.findViewById(R.id.nombres);
             personPhone = (TextView) v.findViewById(R.id.celular);
             personEmail = (TextView) v.findViewById(R.id.correo);
@@ -91,43 +93,55 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
                     break;
 
                 case R.id.fotouser:
-
-
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-
-                    builder.setNeutralButton("Editar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
-
-                            dialog.dismiss();
-                            Empleados_admin person = mEmpleados.get(getPosition());
-                            goToUpdateActivity(person.getId());
-                        }
-                    });
-
-
-                    builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                          //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
-
-                            dialog.dismiss();
-                        }
-                    });
+                    Empleados_admin person1 = mEmpleados.get(getPosition());
 
 
 
 
-                    LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                   // LayoutInflater inflater = getLayoutInflater();
-                    @SuppressLint("InflateParams") View dialoglayout = li != null ? li.inflate(R.layout.image_dialog, null) : null;
+                    if (person1.getImage().isEmpty()) {
+                       // Empleados_admin person = mEmpleados.get(getPosition());
+                        goToUpdateActivity(person1.getId());
 
-                    ImageView imv = (ImageView) (dialoglayout != null ? dialoglayout.findViewById(R.id.user_dialog_imageView) : null);
-                    String path = personImage.getTag().toString();
-                    Picasso.with(mContext).load(new File(path)).placeholder(R.mipmap.ic_launcher).into(imv);
-                    builder.setView(dialoglayout);
-                    builder.show();
+                    }
+                    else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+
+                        builder.setNeutralButton("Editar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
+
+                                dialog.dismiss();
+                                Empleados_admin person = mEmpleados.get(getPosition());
+                                goToUpdateActivity(person.getId());
+                            }
+                        });
+
+
+                        builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
+
+                                dialog.dismiss();
+                            }
+                        });
+
+
+                        LayoutInflater li = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        // LayoutInflater inflater = getLayoutInflater();
+                        @SuppressLint("InflateParams") View dialoglayout = li != null ? li.inflate(R.layout.image_dialog, null) : null;
+
+                        ImageView imv = (ImageView) (dialoglayout != null ? dialoglayout.findViewById(R.id.user_dialog_imageView) : null);
+                        String path = personImage.getTag().toString();
+                        Picasso.with(mContext).load(new File(path)).placeholder(R.mipmap.ic_launcher).into(imv);
+                        builder.setView(dialoglayout);
+                        builder.show();
+                    }
+
+
+
+
                     break;
 
                 case R.id.delete:
@@ -217,6 +231,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         holder.personBirthday.setText(person.getBirthday());
         holder.personAddress.setText(person.getAddress());
         holder.personStartWork.setText(person.getDatework());
+        holder.personId.setText("ID empleado: " +person.getId());
 
         if (!person.getImage().isEmpty()) {
             Picasso.with(mContext).load(new File(person.getImage())).placeholder(R.mipmap.ic_launcher).into(holder.personImage);

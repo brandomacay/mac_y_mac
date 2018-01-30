@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +26,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
+import macay.maceda.reloj.checador.Model.Empleados_admin;
+
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView vhour,vpuntos,vminutes,vppmm,datte;
     boolean isShowed = false;
+    private DatabaseOpenHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +99,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 9);
         }
+
+        dbHelper = new DatabaseOpenHelper(this);
     }
     public void onClick(View v) {
         switch (v.getId()) {
@@ -112,8 +119,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                      }
                 break;
             case R.id.user:
-                startActivity(new Intent(StartActivity.this,MainActivity.class));
-                overridePendingTransition(0,0);
+              //  startActivity(new Intent(StartActivity.this,MainActivity.class));
+              //  overridePendingTransition(0,0);
+
+                user_login_dialog();
+
                 break;
         }
     }
@@ -247,6 +257,74 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
           //  Log.v(TAG, "Permission is granted");
             return true;
         }
+    }
+
+    private void user_login_dialog () {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(StartActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_admin, null);
+        final EditText user_id = (EditText) mView.findViewById(R.id.pass);
+        final EditText user_password = (EditText) mView.findViewById(R.id.repeatpass);
+        TextView tv = (TextView) mView.findViewById(R.id.textView);
+        //  tv.setVisibility(View.GONE);
+        tv.setText("Empleado");
+        user_id.setHint("ID empleado");
+        user_password.setHint("Pin de acceso");
+
+        user_id.setInputType(InputType.TYPE_CLASS_NUMBER);
+        user_password.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+
+
+        Button cancel = (Button) mView.findViewById(R.id.cancel);
+        Button user_login = (Button) mView.findViewById(R.id.login);
+
+        mBuilder.setView(mView);
+        //mBuilder.setTitle("Crear una contraseña");
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        user_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                if (!user_id.getText().toString().isEmpty()
+                        && !user_password.getText().toString().isEmpty()) {
+
+                    Empleados_admin receivedPerson = dbHelper.getEmpleado(user_id.getText().toString(), user_password.getText().toString());
+                    //Long longValue = null;
+
+
+                    if (receivedPerson == null){
+                        Toast.makeText(StartActivity.this,
+                                "ID o PIN incorrectos",
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }else{
+                        Long _id = receivedPerson.getId();
+
+                        Toast.makeText(StartActivity.this,
+                                "Funcionando..." + receivedPerson.getName(),
+                                Toast.LENGTH_SHORT).show();
+                        //si lo hay
+                    }
+
+
+                } else {
+                    Toast.makeText(StartActivity.this,
+                            "Ingresa todos los campos",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
 }

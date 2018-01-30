@@ -146,6 +146,33 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return receivedPerson;
     }
 
+    //Query only 1 record by id and password
+
+    public Empleados_admin getEmpleado(String id, String password){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT  * FROM " + TABLE_NAME + " WHERE _id="+ id + " AND password=" + password;
+        Cursor cursor = db.rawQuery(query, null);
+
+        Empleados_admin receivedPerson = new Empleados_admin();
+        if(cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            receivedPerson.setName(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_NAME)));
+            receivedPerson.setLastname(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_LASTNAME)));
+            receivedPerson.setNumber_phone(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_PHONE)));
+            receivedPerson.setOccupation(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_OCCUPATION)));
+            receivedPerson.setArea(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_AREA)));
+            receivedPerson.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_EMAIL)));
+            receivedPerson.setBirthday(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_BIRTHDAY)));
+            receivedPerson.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_ADDRESS)));
+            receivedPerson.setDatework(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_STARTEDDATE)));
+            receivedPerson.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_IMAGE)));
+            receivedPerson.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_PASSWORD)));
+            return receivedPerson;
+        }
+        return null;
+    }
+
 
     /**delete record**/
     public void deletePerson(long id, Context context) {
