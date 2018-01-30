@@ -382,7 +382,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 
     private void image_chooser_dialog ()
     {
-        //((MainActivity)getActivity()).show_toast(a);
+        //((UserPanelActivity)getActivity()).show_toast(a);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setCancelable(true);
@@ -397,7 +397,7 @@ public class RegisterUserActivity extends AppCompatActivity {
 		builder.setNegativeButton("Cancelar", null).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
 					//Toda la diversion ocurre en el custom listener :)
-					((MainActivity)getActivity()).show_toast("mamadas");
+					((UserPanelActivity)getActivity()).show_toast("mamadas");
 
 				}
 			});
@@ -418,7 +418,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         dialog_camera_btn .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //	((MainActivity)getActivity()).show_toast("Camara");
+                //	((UserPanelActivity)getActivity()).show_toast("Camara");
                 imageFromCamera();
                 dialog.dismiss();
             }
@@ -427,7 +427,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         dialog_file_btn .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //	((MainActivity)getActivity()).show_toast("Galeria");
+                //	((UserPanelActivity)getActivity()).show_toast("Galeria");
                 imageFromGallery();
                 dialog.dismiss();
             }

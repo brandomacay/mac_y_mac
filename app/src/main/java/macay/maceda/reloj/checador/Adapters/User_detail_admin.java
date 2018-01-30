@@ -5,27 +5,23 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
 
-import macay.maceda.reloj.checador.AdminActivity;
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.EditUser;
-import macay.maceda.reloj.checador.MainActivity;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
 import macay.maceda.reloj.checador.R;
-import macay.maceda.reloj.checador.StartActivity;
 
 /**
  * Created by Vlover on 28/01/2018.
@@ -229,7 +225,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(mContext, "Imagen: "+person.getImage(), Toast.LENGTH_LONG).show();
             }
         });
 

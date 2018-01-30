@@ -22,7 +22,7 @@
     <include layout="@layout/content_admin" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/view_recycler"
-        android:background="@android:color/white"
+        android:background="#F4F4F4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
