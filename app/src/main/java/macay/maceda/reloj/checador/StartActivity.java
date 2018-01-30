@@ -294,34 +294,24 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onClick(View view) {
 
-
-
-                if (!user_id.getText().toString().isEmpty()
-                        && !user_password.getText().toString().isEmpty()) {
-
+                if (user_id.getText().toString().trim().isEmpty()){
+                    user_id.setError("Ingresa tu id");
+                }
+                if (user_password.getText().toString().trim().isEmpty()){
+                    user_password.setError("Ingrese su pin de clave");
+                }else {
                     Empleados_admin receivedPerson = dbHelper.getEmpleado(user_id.getText().toString(), user_password.getText().toString());
                     //Long longValue = null;
-
-
                     if (receivedPerson == null){
                         Toast.makeText(StartActivity.this,
                                 "ID o PIN incorrectos",
                                 Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
                     }else{
-                        Long _id = receivedPerson.getId();
-
                         Toast.makeText(StartActivity.this,
-                                "Funcionando..." + receivedPerson.getName(),
+                                "Bienvenido: " + receivedPerson.getName()+" " + receivedPerson.getLastname() ,
                                 Toast.LENGTH_SHORT).show();
                         //si lo hay
                     }
-
-
-                } else {
-                    Toast.makeText(StartActivity.this,
-                            "Ingresa todos los campos",
-                            Toast.LENGTH_SHORT).show();
                 }
 
             }
