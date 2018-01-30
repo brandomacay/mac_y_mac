@@ -122,7 +122,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
                 user_login_dialog();
 
-
                 //startActivity(new Intent(StartActivity.this,UserPanelActivity.class));
                 //overridePendingTransition(0,0);
 
