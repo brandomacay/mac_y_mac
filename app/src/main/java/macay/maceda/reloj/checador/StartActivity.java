@@ -273,7 +273,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         user_password.setHint("Pin de acceso");
 
         user_id.setInputType(InputType.TYPE_CLASS_NUMBER);
-        user_password.setInputType(InputType.TYPE_CLASS_NUMBER);
+        user_password.setInputType(InputType.TYPE_CLASS_NUMBER |InputType.TYPE_NUMBER_VARIATION_PASSWORD);
 
 
 

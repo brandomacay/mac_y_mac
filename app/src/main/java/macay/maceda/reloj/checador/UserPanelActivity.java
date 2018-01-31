@@ -1,5 +1,6 @@
 package macay.maceda.reloj.checador;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +24,11 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 public class UserPanelActivity extends AppCompatActivity {
     private long receivedPersonId;
     private DatabaseOpenHelper dbHelper;
-    private ImageButton workin;
+    private ImageButton workin, workout;
     CircleImageView imagen;
-    TextView nombres, textViewin;
+    TextView nombres, textViewin, textViewout;
     private String mCurrentPhotoPath = "";
+    private String mWorkin;
 
 
     @Override
@@ -38,7 +40,11 @@ public class UserPanelActivity extends AppCompatActivity {
         imagen = (CircleImageView) findViewById(R.id.avatar);
         nombres = (TextView) findViewById(R.id.my_name);
         textViewin = (TextView) findViewById(R.id.textViewin);
+        textViewout = (TextView) findViewById(R.id.textViewout);
+
         workin = (ImageButton) findViewById(R.id.working_button);
+        workout = (ImageButton) findViewById(R.id.workout_button);
+
 
         try {
             receivedPersonId = getIntent().getLongExtra("USER_ID", 1);
@@ -49,14 +55,33 @@ public class UserPanelActivity extends AppCompatActivity {
         mCurrentPhotoPath = receivedPerson.getImage();
         nombres.setText(receivedPerson.getName()+" "+ receivedPerson.getLastname());
 
-        if (dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex())) {
+        Cursor cursor = dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex() );
+
+        if(cursor.getCount() > 0) {
+
+
             workin.setVisibility(View.GONE);
             textViewin.setVisibility(View.GONE);
+            workout.setVisibility(View.VISIBLE);
+            textViewout.setVisibility(View.VISIBLE);
+            if (cursor.moveToFirst()) {// data?
+                mWorkin = cursor.getString(cursor.getColumnIndex("workin"));
+
+                //cursor.getString(0)
+
+                Toast.makeText(UserPanelActivity.this,
+                        "ENTRADA: " + mWorkin,
+                        Toast.LENGTH_SHORT).show();
+            }
+
 
         }
         else {
+            workout.setVisibility(View.GONE);
+            textViewout.setVisibility(View.GONE);
             workin.setVisibility(View.VISIBLE);
-            textViewin.setVisibility(View.GONE);
+            textViewin.setVisibility(View.VISIBLE);
+
 
         }
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
@@ -68,17 +93,40 @@ public class UserPanelActivity extends AppCompatActivity {
                   //      "userid=" + String.valueOf(receivedPersonId) + " date=" +datex(),
                     //    Toast.LENGTH_SHORT).show();
 
-                if (dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex() )) {
+                Cursor cursor = dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex() );
+
+                if(cursor.getCount() > 0) {
 
                     Toast.makeText(UserPanelActivity.this,
                             "La entrada fue registrada anteriormente",
                             Toast.LENGTH_SHORT).show();
+                  //  mWorkin = cursor.getString(cursor.getColumnIndex("workin"));
                 } else {
-                    dbHelper.insert_user_assistance(receivedPersonId, datex(), datetimex());
+                    dbHelper.insert_user_workin(receivedPersonId, datex(), datetimex());
+
+                    Toast.makeText(UserPanelActivity.this,
+                            "La entrada fue registrada correctamente",
+                            Toast.LENGTH_LONG).show();
+                    finish();
                 }
             }
         });
+
+
+        workout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Toast.makeText(UserPanelActivity.this,
+                //      "userid=" + String.valueOf(receivedPersonId) + " date=" +datex(),
+                //    Toast.LENGTH_SHORT).show();
+
+               dbHelper.insert_user_workout(String.valueOf(receivedPersonId), mWorkin, datetimex(), UserPanelActivity.this );
+            }
+        });
     }
+
+
+
 
     @Override
     protected void onResume() {

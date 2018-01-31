@@ -237,7 +237,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     //insertar entradas y salidas por fecha
-    public void insert_user_assistance(long userid, String today, String datetimex) {
+    public void insert_user_workin(long userid, String today, String datetimex) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -262,19 +262,31 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public boolean already_workin_today(String id, String date){
+    //insertar entradas y salidas por fecha
+    /**update record**/
+    public void insert_user_workout (String user_id, String workin, String workout, Context context) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //you can use the constants above instead of typing the column names
+        db.execSQL("UPDATE  "+TABLE_CLOCKING_NAME+
+                " SET workout ='" + workout +
+                "'  WHERE userid='" + user_id + "' AND workin='" + workin +
+                "'");
+        Toast.makeText(context, "Salida registrada", Toast.LENGTH_LONG).show();
+
+
+    }
+
+    public Cursor already_workin_today(String id, String date){
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT  * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ id + " AND date='" + date + "'";
         Cursor cursor = db.rawQuery(query, null);
 
         //Empleados_admin receivedPerson = new Empleados_admin();
-        if(cursor.getCount() > 0) {
+       // if(cursor.getCount() > 0) {
 
-            return true;
-        }
-        else {
-            return false;
-        }
+
+            return cursor;
+
 
     }
 
