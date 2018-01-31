@@ -39,8 +39,6 @@ public class UserPanelActivity extends AppCompatActivity {
         nombres = (TextView) findViewById(R.id.my_name);
         workin = (ImageButton) findViewById(R.id.working_button);
 
-
-
         try {
             receivedPersonId = getIntent().getLongExtra("USER_ID", 1);
         } catch (Exception e) {
