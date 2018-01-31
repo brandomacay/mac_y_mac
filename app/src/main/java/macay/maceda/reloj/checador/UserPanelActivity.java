@@ -28,7 +28,7 @@ public class UserPanelActivity extends AppCompatActivity {
     CircleImageView imagen;
     TextView nombres, textViewin, textViewout;
     private String mCurrentPhotoPath = "";
-    private String mWorkin;
+    private String mWorkin, mWorkout;
 
 
     @Override
@@ -60,18 +60,43 @@ public class UserPanelActivity extends AppCompatActivity {
         if(cursor.getCount() > 0) {
 
 
-            workin.setVisibility(View.GONE);
-            textViewin.setVisibility(View.GONE);
-            workout.setVisibility(View.VISIBLE);
-            textViewout.setVisibility(View.VISIBLE);
+
             if (cursor.moveToFirst()) {// data?
                 mWorkin = cursor.getString(cursor.getColumnIndex("workin"));
+                mWorkout = cursor.getString(cursor.getColumnIndex("workout"));
 
                 //cursor.getString(0)
 
                 Toast.makeText(UserPanelActivity.this,
                         "ENTRADA: " + mWorkin,
                         Toast.LENGTH_SHORT).show();
+                if (mWorkout == null) {
+
+                    workin.setVisibility(View.GONE);
+                    textViewin.setVisibility(View.GONE);
+                    workout.setVisibility(View.VISIBLE);
+                    textViewout.setVisibility(View.VISIBLE);
+
+
+                    Toast.makeText(UserPanelActivity.this,
+                            "Salida aun no registrada: ",
+                            Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    workout.setVisibility(View.GONE);
+                    textViewout.setVisibility(View.GONE);
+                    workin.setVisibility(View.VISIBLE);
+                    textViewin.setVisibility(View.VISIBLE);
+
+
+                    Toast.makeText(UserPanelActivity.this,
+                            "La salida ya fue registrada previamente",
+                            Toast.LENGTH_SHORT).show();
+
+
+                }
+
             }
 
 
@@ -120,7 +145,9 @@ public class UserPanelActivity extends AppCompatActivity {
                 //      "userid=" + String.valueOf(receivedPersonId) + " date=" +datex(),
                 //    Toast.LENGTH_SHORT).show();
 
-               dbHelper.insert_user_workout(String.valueOf(receivedPersonId), mWorkin, datetimex(), UserPanelActivity.this );
+               dbHelper.insert_user_workout(String.valueOf(receivedPersonId), mWorkin, datetimex(),
+                       UserPanelActivity.this );
+               finish();
             }
         });
     }
@@ -195,7 +222,7 @@ public class UserPanelActivity extends AppCompatActivity {
     public static String datex () {
         Date date = Calendar.getInstance().getTime();
 
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String today = formatter.format(date);
 
         return today;
