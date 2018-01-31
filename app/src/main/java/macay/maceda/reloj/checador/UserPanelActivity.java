@@ -66,7 +66,7 @@ public class UserPanelActivity extends AppCompatActivity {
     }
 
 
-    public String diferenciaFechas(String inicio, String llegada){
+   /* public String diferenciaFechas(String inicio, String llegada){
 
         Date fechaInicio = null;
         Date fechaLlegada = null;
@@ -123,7 +123,7 @@ public class UserPanelActivity extends AppCompatActivity {
         // devolvemos el resultado en un string
         return String.valueOf(diffHoras + "H " + restominutos + "m ");
     }
-
+*/
 
 
 }
