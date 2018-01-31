@@ -58,7 +58,6 @@ public class UserPanelActivity extends AppCompatActivity {
         nombres.setText(receivedPerson.getName()+" "+ receivedPerson.getLastname());
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
 
-
     }
 
     @Override
