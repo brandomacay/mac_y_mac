@@ -25,7 +25,7 @@ public class UserPanelActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbHelper;
     private ImageButton workin;
     CircleImageView imagen;
-    TextView nombres;
+    TextView nombres, textViewin;
     private String mCurrentPhotoPath = "";
 
 
@@ -37,6 +37,7 @@ public class UserPanelActivity extends AppCompatActivity {
         dbHelper = new DatabaseOpenHelper(this);
         imagen = (CircleImageView) findViewById(R.id.avatar);
         nombres = (TextView) findViewById(R.id.my_name);
+        textViewin = (TextView) findViewById(R.id.textViewin);
         workin = (ImageButton) findViewById(R.id.working_button);
 
         try {
@@ -47,14 +48,25 @@ public class UserPanelActivity extends AppCompatActivity {
         final Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
         mCurrentPhotoPath = receivedPerson.getImage();
         nombres.setText(receivedPerson.getName()+" "+ receivedPerson.getLastname());
+
+        if (dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex())) {
+            workin.setVisibility(View.GONE);
+            textViewin.setVisibility(View.GONE);
+
+        }
+        else {
+            workin.setVisibility(View.VISIBLE);
+            textViewin.setVisibility(View.GONE);
+
+        }
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
 
         workin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UserPanelActivity.this,
-                        "userid=" + String.valueOf(receivedPersonId) + " date=" +datex(),
-                        Toast.LENGTH_SHORT).show();
+                //Toast.makeText(UserPanelActivity.this,
+                  //      "userid=" + String.valueOf(receivedPersonId) + " date=" +datex(),
+                    //    Toast.LENGTH_SHORT).show();
 
                 if (dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex() )) {
 
