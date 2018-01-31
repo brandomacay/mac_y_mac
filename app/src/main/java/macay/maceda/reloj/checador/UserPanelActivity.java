@@ -93,8 +93,6 @@ public class UserPanelActivity extends AppCompatActivity {
                     Toast.makeText(UserPanelActivity.this,
                             "La salida ya fue registrada previamente",
                             Toast.LENGTH_SHORT).show();
-
-
                 }
 
             }
