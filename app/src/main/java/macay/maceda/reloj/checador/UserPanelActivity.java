@@ -2,6 +2,8 @@ package macay.maceda.reloj.checador;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 public class UserPanelActivity extends AppCompatActivity {
     private long receivedPersonId;
     private DatabaseOpenHelper dbHelper;
+    private ImageButton workin;
     CircleImageView imagen;
     TextView nombres;
     private String mCurrentPhotoPath = "";
@@ -32,6 +35,18 @@ public class UserPanelActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         imagen = (CircleImageView) findViewById(R.id.avatar);
         nombres = (TextView) findViewById(R.id.my_name);
+        workin = (ImageButton) findViewById(R.id.working_button);
+        workin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(UserPanelActivity.this,
+                        "Entrada registrada",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         dbHelper = new DatabaseOpenHelper(this);
         try {
             receivedPersonId = getIntent().getLongExtra("USER_ID", 1);
