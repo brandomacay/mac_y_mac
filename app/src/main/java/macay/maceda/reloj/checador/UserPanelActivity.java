@@ -118,6 +118,8 @@ public class UserPanelActivity extends AppCompatActivity {
                   //      "userid=" + String.valueOf(receivedPersonId) + " date=" +datex(),
                     //    Toast.LENGTH_SHORT).show();
 
+                /*
+
                 Cursor cursor = dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex() );
 
                 if(cursor.getCount() > 0) {
@@ -134,6 +136,12 @@ public class UserPanelActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     finish();
                 }
+                */
+                dbHelper.insert_user_workin(receivedPersonId, datex(),  datetimex());
+                Toast.makeText(UserPanelActivity.this,
+                        "La entrada fue registrada correctamente",
+                        Toast.LENGTH_LONG).show();
+                finish();
             }
         });
 
