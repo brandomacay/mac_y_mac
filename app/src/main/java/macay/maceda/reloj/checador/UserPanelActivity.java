@@ -99,7 +99,6 @@ public class UserPanelActivity extends AppCompatActivity {
 
             }
 
-
         }
         else {
             workout.setVisibility(View.GONE);
