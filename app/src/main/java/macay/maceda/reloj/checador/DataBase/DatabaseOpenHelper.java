@@ -70,14 +70,15 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 COLUMN_PERSON_PASSWORD + " NUMBER NOT NULL);"
 
         );
+
         db.execSQL(" CREATE TABLE " + TABLE_CLOCKING_NAME + " (" +
                 COLUMN_CLOCKING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_CLOCKING_USERID + " NUMBER NOT NULL, " +
-                //COLUMN_CLOCKING_DATE + " DATE NOT NULL, " +
-                COLUMN_CLOCKING_IN + " DATETIME NOT NULL, " +
-                COLUMN_CLOCKING_OUT + " DATETIME NOT NULL, " +
-                COLUMN_CLOCKING_BREAKIN + " DATETIME NOT NULL, " +
-                COLUMN_CLOCKING_BREAKOUT + " DATETIME NOT NULL);"
+                COLUMN_CLOCKING_DATE + " DATE NOT NULL, " +
+                COLUMN_CLOCKING_IN + " DATETIME , " +
+                COLUMN_CLOCKING_OUT + " DATETIME , " +
+                COLUMN_CLOCKING_BREAKIN + " DATETIME , " +
+                COLUMN_CLOCKING_BREAKOUT + " DATETIME );"
 
         );
 
@@ -236,13 +237,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     //insertar entradas y salidas por fecha
-    public void insert_user_assistance(String userid, String today) {
+    public void insert_user_assistance(long userid, String today, String datetimex) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COLUMN_CLOCKING_ID, userid);
-        values.put(COLUMN_CLOCKING_IN, today);
+        values.put(COLUMN_CLOCKING_USERID, userid);
+        values.put(COLUMN_CLOCKING_DATE, today);
+        values.put(COLUMN_CLOCKING_IN, datetimex);
         /*
         values.put(COLUMN_PERSON_BIRTHDAY, person.getBirthday());
         values.put(COLUMN_PERSON_EMAIL, person.getEmail());
@@ -259,5 +261,22 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.insert(TABLE_CLOCKING_NAME,null, values);
         db.close();
     }
+
+    public boolean already_workin_today(String id, String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT  * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ id + " AND date='" + date + "'";
+        Cursor cursor = db.rawQuery(query, null);
+
+        //Empleados_admin receivedPerson = new Empleados_admin();
+        if(cursor.getCount() > 0) {
+
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+
 }
 

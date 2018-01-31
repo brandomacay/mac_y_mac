@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,31 +34,40 @@ public class UserPanelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_panel);
         getSupportActionBar().hide();
+        dbHelper = new DatabaseOpenHelper(this);
         imagen = (CircleImageView) findViewById(R.id.avatar);
         nombres = (TextView) findViewById(R.id.my_name);
         workin = (ImageButton) findViewById(R.id.working_button);
-        workin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(UserPanelActivity.this,
-                        "Entrada registrada",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
-        dbHelper = new DatabaseOpenHelper(this);
+
         try {
             receivedPersonId = getIntent().getLongExtra("USER_ID", 1);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
+        final Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
         mCurrentPhotoPath = receivedPerson.getImage();
         nombres.setText(receivedPerson.getName()+" "+ receivedPerson.getLastname());
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
 
+        workin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(UserPanelActivity.this,
+                        "userid=" + String.valueOf(receivedPersonId) + " date=" +datex(),
+                        Toast.LENGTH_SHORT).show();
+
+                if (dbHelper.already_workin_today(String.valueOf(receivedPersonId), datex() )) {
+
+                    Toast.makeText(UserPanelActivity.this,
+                            "La entrada fue registrada anteriormente",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    dbHelper.insert_user_assistance(receivedPersonId, datex(), datetimex());
+                }
+            }
+        });
     }
 
     @Override
@@ -66,7 +76,7 @@ public class UserPanelActivity extends AppCompatActivity {
     }
 
 
-   /* public String diferenciaFechas(String inicio, String llegada){
+    public String diferenciaFechas(String inicio, String llegada){
 
         Date fechaInicio = null;
         Date fechaLlegada = null;
@@ -123,7 +133,33 @@ public class UserPanelActivity extends AppCompatActivity {
         // devolvemos el resultado en un string
         return String.valueOf(diffHoras + "H " + restominutos + "m ");
     }
-*/
+
+    public static String datex () {
+        Date date = Calendar.getInstance().getTime();
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String today = formatter.format(date);
+
+        return today;
+    }
+
+    public static String datetimex () {
+        Date date = Calendar.getInstance().getTime();
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        String today = formatter.format(date);
+
+        return today;
+    }
+    public static String timex () {
+        Date date = Calendar.getInstance().getTime();
+
+        DateFormat formatter = new SimpleDateFormat("hh:mm:ss");
+        String today = formatter.format(date);
+
+        return today;
+    }
+
 
 
 }
