@@ -61,7 +61,7 @@ public class UserPanelActivity extends AppCompatActivity {
 
 
 
-            if (cursor.moveToFirst()) {// data?
+            if (cursor.moveToLast()) {// data?
                 mWorkin = cursor.getString(cursor.getColumnIndex("workin"));
                 mWorkout = cursor.getString(cursor.getColumnIndex("workout"));
 
@@ -127,7 +127,7 @@ public class UserPanelActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                   //  mWorkin = cursor.getString(cursor.getColumnIndex("workin"));
                 } else {
-                    dbHelper.insert_user_workin(receivedPersonId, datex(), datetimex());
+                    dbHelper.insert_user_workin(receivedPersonId, datex(), timex(), datetimex());
 
                     Toast.makeText(UserPanelActivity.this,
                             "La entrada fue registrada correctamente",

@@ -35,6 +35,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CLOCKING_ID = "_id";
     public static final String COLUMN_CLOCKING_USERID = "userid";
     public static final String COLUMN_CLOCKING_DATE = "date";
+    public static final String COLUMN_CLOCKING_TIME = "time";
     public static final String COLUMN_CLOCKING_IN = "workin";
     public static final String COLUMN_CLOCKING_OUT = "workout";
     public static final String COLUMN_CLOCKING_BREAKIN = "breakin";
@@ -75,6 +76,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 COLUMN_CLOCKING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_CLOCKING_USERID + " NUMBER NOT NULL, " +
                 COLUMN_CLOCKING_DATE + " DATE NOT NULL, " +
+                COLUMN_CLOCKING_TIME + " TIME NOT NULL, " +
                 COLUMN_CLOCKING_IN + " DATETIME , " +
                 COLUMN_CLOCKING_OUT + " DATETIME , " +
                 COLUMN_CLOCKING_BREAKIN + " DATETIME , " +
@@ -237,13 +239,14 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     //insertar entradas y salidas por fecha
-    public void insert_user_workin(long userid, String today, String datetimex) {
+    public void insert_user_workin(long userid, String today, String time,  String datetimex) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_CLOCKING_USERID, userid);
         values.put(COLUMN_CLOCKING_DATE, today);
+        values.put(COLUMN_CLOCKING_TIME, time);
         values.put(COLUMN_CLOCKING_IN, datetimex);
         /*
         values.put(COLUMN_PERSON_BIRTHDAY, person.getBirthday());
