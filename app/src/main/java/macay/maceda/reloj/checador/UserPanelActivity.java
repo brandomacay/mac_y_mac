@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +31,7 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 public class UserPanelActivity extends AppCompatActivity {
     private long receivedPersonId;
     private DatabaseOpenHelper dbHelper;
-    private ImageButton workin, workout;
+    private CardView workin, workout,workback;
     CircleImageView imagen;
     TextView nombres, textViewin, textViewout;
     private String mCurrentPhotoPath = "";
@@ -48,8 +49,10 @@ public class UserPanelActivity extends AppCompatActivity {
         textViewin = (TextView) findViewById(R.id.textViewin);
         textViewout = (TextView) findViewById(R.id.textViewout);
 
-        workin = (ImageButton) findViewById(R.id.working_button);
-        workout = (ImageButton) findViewById(R.id.workout_button);
+        workin = (CardView) findViewById(R.id.inicio_trabajo);
+        workout = (CardView) findViewById(R.id.salida_trabajo);
+        workback = (CardView) findViewById(R.id.regreso_trabajo);
+
 
 
         try {

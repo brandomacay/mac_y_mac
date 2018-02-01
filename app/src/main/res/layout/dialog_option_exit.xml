@@ -30,7 +30,7 @@
 
     <ImageView
         android:id="@+id/culminate"
-        android:tint="@color/colorAccent"
+        android:tint="@android:color/holo_red_light"
         android:layout_gravity="center_horizontal"
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -52,7 +52,7 @@
     <ImageView
         android:layout_gravity="center_horizontal"
         android:id="@+id/food"
-        android:tint="@color/colorAccent"
+        android:tint="@color/colorPrimary"
         android:layout_width="120dp"
         android:layout_height="120dp"
         app:srcCompat="@drawable/ic_restaurant" />
@@ -65,6 +65,7 @@
         android:text="Comida" />
     </LinearLayout>
     </LinearLayout>
+
 
 
 </LinearLayout>
