@@ -133,6 +133,7 @@
 
                 <ImageButton
                     android:id="@+id/working_button"
+                    android:clickable="false"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
@@ -170,6 +171,7 @@
 
                 <ImageButton
                     android:id="@+id/workout_button"
+                    android:clickable="false"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
@@ -204,6 +206,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:clickable="false"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"

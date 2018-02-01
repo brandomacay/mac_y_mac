@@ -33,7 +33,7 @@ public class UserPanelActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbHelper;
     private CardView workin, workout,workback;
     CircleImageView imagen;
-    TextView nombres, textViewin, textViewout;
+    TextView nombres;
     private String mCurrentPhotoPath = "";
     private String mWorkin, mWorkout;
 
@@ -46,8 +46,7 @@ public class UserPanelActivity extends AppCompatActivity {
         dbHelper = new DatabaseOpenHelper(this);
         imagen = (CircleImageView) findViewById(R.id.avatar);
         nombres = (TextView) findViewById(R.id.my_name);
-        textViewin = (TextView) findViewById(R.id.textViewin);
-        textViewout = (TextView) findViewById(R.id.textViewout);
+
 
         workin = (CardView) findViewById(R.id.inicio_trabajo);
         workout = (CardView) findViewById(R.id.salida_trabajo);
@@ -82,9 +81,7 @@ public class UserPanelActivity extends AppCompatActivity {
                 if (mWorkout == null) {
 
                     workin.setVisibility(View.GONE);
-                    textViewin.setVisibility(View.GONE);
                     workout.setVisibility(View.VISIBLE);
-                    textViewout.setVisibility(View.VISIBLE);
 
 
                     Toast.makeText(UserPanelActivity.this,
@@ -94,9 +91,7 @@ public class UserPanelActivity extends AppCompatActivity {
 
                 } else {
                     workout.setVisibility(View.GONE);
-                    textViewout.setVisibility(View.GONE);
                     workin.setVisibility(View.VISIBLE);
-                    textViewin.setVisibility(View.VISIBLE);
 
 
                     Toast.makeText(UserPanelActivity.this,
@@ -109,9 +104,7 @@ public class UserPanelActivity extends AppCompatActivity {
         }
         else {
             workout.setVisibility(View.GONE);
-            textViewout.setVisibility(View.GONE);
             workin.setVisibility(View.VISIBLE);
-            textViewin.setVisibility(View.VISIBLE);
 
 
         }
