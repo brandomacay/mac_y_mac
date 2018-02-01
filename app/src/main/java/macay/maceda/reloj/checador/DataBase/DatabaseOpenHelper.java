@@ -264,6 +264,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
     //insertar entradas y salidas por fecha
     /**update record**/
     public void insert_user_workout (String user_id, String workin, String workout, Context context) {
@@ -275,6 +276,17 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 "'");
         Toast.makeText(context, "Salida registrada", Toast.LENGTH_LONG).show();
 
+
+    }
+
+    public void insert_user_breakout (String user_id, String workin, String breakout, Context context) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //you can use the constants above instead of typing the column names
+        db.execSQL("UPDATE  "+TABLE_CLOCKING_NAME+
+                " SET breakout ='" + breakout +
+                "'  WHERE userid='" + user_id + "' AND workin='" + workin +
+                "'");
+        Toast.makeText(context, "Salida registrada", Toast.LENGTH_LONG).show();
 
     }
 
@@ -291,6 +303,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
 
     }
+
+
 
 }
 

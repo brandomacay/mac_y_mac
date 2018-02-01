@@ -31,7 +31,7 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 public class UserPanelActivity extends AppCompatActivity {
     private long receivedPersonId;
     private DatabaseOpenHelper dbHelper;
-    private CardView workin, workout,workback;
+    private CardView workin, workout, workback;
     TextView chekin_tv, checkout_tv, breakin_tv, breakout_tv;
     CircleImageView imagen;
     TextView nombres;
@@ -210,6 +210,10 @@ public class UserPanelActivity extends AppCompatActivity {
         person_food.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                dbHelper.insert_user_breakout(String.valueOf(receivedPersonId), mWorkin, datetimex(),
+                        UserPanelActivity.this );
+
                 Toast.makeText(UserPanelActivity.this,"Hora de comida",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
                 finish();
