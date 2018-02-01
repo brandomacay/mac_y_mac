@@ -86,30 +86,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="TITLE TEXT"
+                    android:text="Actividad"
                     android:textSize="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/checkin_tv"
                     android:textSize="@dimen/fab_margin"
-                    android:text="TEXTO: texto"
+                    android:text=""
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
                 <TextView
+                    android:id="@+id/checkout_tv"
                     android:textSize="@dimen/fab_margin"
-                    android:text="TEXTO: texto"
+                    android:text=""
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
                 <TextView
+                    android:id="@+id/breakout_tv"
                     android:textSize="@dimen/fab_margin"
-                    android:text="TEXTO: texto"
+                    android:text=""
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
                 <TextView
+                    android:id="@+id/breakin_tv"
                     android:textSize="@dimen/fab_margin"
-                    android:text="TEXTO: texto"
+                    android:text=""
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
 
 
             </LinearLayout>

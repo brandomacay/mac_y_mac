@@ -32,6 +32,7 @@ public class UserPanelActivity extends AppCompatActivity {
     private long receivedPersonId;
     private DatabaseOpenHelper dbHelper;
     private CardView workin, workout,workback;
+    TextView chekin_tv, checkout_tv, breakin_tv, breakout_tv;
     CircleImageView imagen;
     TextView nombres;
     private String mCurrentPhotoPath = "";
@@ -51,6 +52,14 @@ public class UserPanelActivity extends AppCompatActivity {
         workin = (CardView) findViewById(R.id.inicio_trabajo);
         workout = (CardView) findViewById(R.id.salida_trabajo);
         workback = (CardView) findViewById(R.id.regreso_trabajo);
+
+        chekin_tv = (TextView) findViewById(R.id.checkin_tv);
+        checkout_tv = (TextView) findViewById(R.id.checkout_tv);
+        breakin_tv = (TextView) findViewById(R.id.breakin_tv);
+        breakout_tv = (TextView) findViewById(R.id.breakout_tv);
+
+
+
 
 
 
@@ -78,25 +87,35 @@ public class UserPanelActivity extends AppCompatActivity {
                 Toast.makeText(UserPanelActivity.this,
                         "ENTRADA: " + mWorkin,
                         Toast.LENGTH_SHORT).show();
+                chekin_tv.setVisibility(View.VISIBLE);
+                chekin_tv.setText("ENTRADA: " +mWorkin);
+
                 if (mWorkout == null) {
 
                     workin.setVisibility(View.GONE);
                     workout.setVisibility(View.VISIBLE);
+                    checkout_tv.setVisibility(View.GONE);
 
 
+                    /*
                     Toast.makeText(UserPanelActivity.this,
                             "Salida aun no registrada: ",
                             Toast.LENGTH_SHORT).show();
+                            */
 
 
                 } else {
                     workout.setVisibility(View.GONE);
                     workin.setVisibility(View.VISIBLE);
+                    checkout_tv.setVisibility(View.VISIBLE);
+                    checkout_tv.setText("SALIDA: " + mWorkout);
 
 
+                    /*
                     Toast.makeText(UserPanelActivity.this,
                             "La salida ya fue registrada previamente",
                             Toast.LENGTH_SHORT).show();
+                            */
                 }
 
             }
