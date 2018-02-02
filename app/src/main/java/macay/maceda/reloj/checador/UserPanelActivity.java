@@ -155,7 +155,7 @@ public class UserPanelActivity extends AppCompatActivity {
                     finish();
                 }
                 */
-                dbHelper.insert_user_workin(receivedPersonId, datex(),  datetimex());
+                dbHelper.insert_user_workin(receivedPersonId,  datetimex());
                 Toast.makeText(UserPanelActivity.this,
                         "La entrada fue registrada correctamente",
                         Toast.LENGTH_LONG).show();
