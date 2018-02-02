@@ -89,11 +89,15 @@ public class AdminActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.setting) {
-            startActivity(new Intent(AdminActivity.this,SettingsActivity.class));
+            startActivity(new Intent(AdminActivity.this,SettingActivity.class));
             overridePendingTransition(0,0);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void edit_pin_dialog(){
+
     }
 
     @Override

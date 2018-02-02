@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.squareup.picasso.Picasso;
 
@@ -33,6 +35,7 @@ public class UserPanelActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbHelper;
     private CardView workin, workout, workback;
     TextView chekin_tv, checkout_tv, breakin_tv, breakout_tv;
+    Button bt;
     CircleImageView imagen;
     TextView nombres;
     private String mCurrentPhotoPath = "";
@@ -47,8 +50,13 @@ public class UserPanelActivity extends AppCompatActivity {
         dbHelper = new DatabaseOpenHelper(this);
         imagen = (CircleImageView) findViewById(R.id.avatar);
         nombres = (TextView) findViewById(R.id.my_name);
-
-
+        bt = (Button) findViewById(R.id.b_edit);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                edit_pin_dialog();
+            }
+        });
         workin = (CardView) findViewById(R.id.inicio_trabajo);
         workout = (CardView) findViewById(R.id.salida_trabajo);
         workback = (CardView) findViewById(R.id.regreso_trabajo);
@@ -57,11 +65,6 @@ public class UserPanelActivity extends AppCompatActivity {
         checkout_tv = (TextView) findViewById(R.id.checkout_tv);
         breakin_tv = (TextView) findViewById(R.id.breakin_tv);
         breakout_tv = (TextView) findViewById(R.id.breakout_tv);
-
-
-
-
-
 
         try {
             receivedPersonId = getIntent().getLongExtra("USER_ID", 1);
@@ -173,7 +176,7 @@ public class UserPanelActivity extends AppCompatActivity {
 
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
 
-        workin.setOnClickListener(new View.OnClickListener() {
+        workin.setOnClickListener(  new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(UserPanelActivity.this,
@@ -255,7 +258,46 @@ public class UserPanelActivity extends AppCompatActivity {
         });
     }
 
+    private void edit_pin_dialog() {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(UserPanelActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_admin,null);
+        final EditText password = (EditText) mView.findViewById(R.id.pass);
+        final EditText repeatpassword = (EditText) mView.findViewById(R.id.repeatpass);
+        password.setInputType(InputType.TYPE_CLASS_NUMBER);
+        repeatpassword.setInputType(InputType.TYPE_CLASS_NUMBER |InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        password.setHint("new pin");
+        repeatpassword.setHint("repeat pin");
+        TextView tv = (TextView) mView.findViewById(R.id.textView);
+        //  tv.setVisibility(View.GONE);
+        tv.setText("Cambiar Pin");
+        Button cancel = (Button) mView.findViewById(R.id.cancel);
+        Button register = (Button) mView.findViewById(R.id.login);
 
+        mBuilder.setView(mView);
+        //mBuilder.setTitle("Crear una contraseña");
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
+                Empleados_admin updatedPerson = new Empleados_admin(receivedPerson.getName(),
+                        receivedPerson.getLastname(),receivedPerson.getNumber_phone(),
+                        receivedPerson.getOccupation(),receivedPerson.getArea(),
+                        receivedPerson.getEmail(), receivedPerson.getBirthday(),receivedPerson.getAddress(),
+                        receivedPerson.getDatework(),mCurrentPhotoPath, password.getText().toString().trim());
+                dbHelper.updatePasswordPerson(receivedPersonId, UserPanelActivity.this, updatedPerson);
+                dialog.dismiss();
+            }
+        });
+    }
 
 
     @Override

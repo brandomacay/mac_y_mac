@@ -5,7 +5,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +17,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserPanelActivity"
-            android:theme="@style/FullScreen"/>
+        <activity
+            android:name=".UserPanelActivity"
+            android:theme="@style/FullScreen" />
         <activity
             android:name=".StartActivity"
             android:theme="@style/FullScreen">
@@ -29,25 +33,15 @@
             android:name=".AdminActivity"
             android:label="@string/title_activity_admin"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".AdminActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="macay.maceda.reloj.checador.AdminActivity" />
-        </activity>
         <activity android:name=".RegisterUserActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/FullScreen" />
-        <activity android:name=".EditUser"></activity>
-
+        <activity android:name=".EditUser" />
         <activity
             android:name=".FileChooser"
-            android:label="@string/app_name">
+            android:label="@string/app_name"></activity>
 
-        </activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -55,8 +49,13 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".SettingActivity"
+            android:label="Configuraciones"
+            >
+        </activity>
     </application>
 
 </manifest>

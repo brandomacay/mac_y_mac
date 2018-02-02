@@ -235,6 +235,25 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
 
     }
+    public void updatePasswordPerson(long personId, Context context, Empleados_admin updatedperson) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //you can use the constants above instead of typing the column names
+        db.execSQL("UPDATE  "+TABLE_NAME+
+                " SET name ='"+ updatedperson.getName() +
+                "', lastname ='" + updatedperson.getLastname()+
+                "', image ='" + updatedperson.getImage()+
+                "', email ='" + updatedperson.getEmail()+
+                "', phone ='" + updatedperson.getNumber_phone()+
+                "', address ='" + updatedperson.getAddress()+
+                "', occupation ='" + updatedperson.getOccupation()+
+                "', area ='"+ updatedperson.getArea() +
+                "', password ='"+ updatedperson.getPassword() +
+                "', started_date ='"+ updatedperson.getDatework() +
+                "'  WHERE _id='" + personId + "'");
+        Toast.makeText(context, "Pin cambiado exitosamente!!", Toast.LENGTH_SHORT).show();
+
+
+    }
 
     //insertar entradas y salidas por fecha
     public void insert_user_workin(long userid, String datetimex) {
