@@ -3,6 +3,7 @@ package macay.maceda.reloj.checador;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class UserPanelActivity extends AppCompatActivity {
     TextView nombres;
     private String mCurrentPhotoPath = "";
     private String mWorkin, mWorkout, mBreakin, mBreakout;
+    private Handler _handler;
 
 
     @Override
@@ -258,10 +260,10 @@ public class UserPanelActivity extends AppCompatActivity {
 
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
+
+
+
+
 
     private void options_exit () {
 
