@@ -289,6 +289,18 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    public void insert_user_breakin (String user_id, String workin, String breakin, Context context) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //you can use the constants above instead of typing the column names
+        db.execSQL("UPDATE  "+ TABLE_CLOCKING_NAME +
+                " SET breakin ='" + breakin +
+                "'  WHERE userid='" + user_id + "' AND workin='" + workin +
+                "'");
+
+        Toast.makeText(context, "REGRESO DE COMIDA registrada", Toast.LENGTH_LONG).show();
+
+    }
+
     public Cursor already_workin_today(String id, String date){
         SQLiteDatabase db = this.getWritableDatabase();
 

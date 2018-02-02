@@ -36,7 +36,7 @@ public class UserPanelActivity extends AppCompatActivity {
     CircleImageView imagen;
     TextView nombres;
     private String mCurrentPhotoPath = "";
-    private String mWorkin, mWorkout;
+    private String mWorkin, mWorkout, mBreakin, mBreakout;
 
 
     @Override
@@ -81,6 +81,9 @@ public class UserPanelActivity extends AppCompatActivity {
             if (cursor.moveToLast()) {// data?
                 mWorkin = cursor.getString(cursor.getColumnIndex("workin"));
                 mWorkout = cursor.getString(cursor.getColumnIndex("workout"));
+                mBreakin = cursor.getString(cursor.getColumnIndex("breakin"));
+                mBreakout = cursor.getString(cursor.getColumnIndex("breakout"));
+
 
                 //cursor.getString(0)
 
@@ -118,6 +121,33 @@ public class UserPanelActivity extends AppCompatActivity {
                             */
                 }
 
+                if (mBreakout == null) {
+
+
+                }
+                else {
+                    breakout_tv.setVisibility(View.VISIBLE);
+                    breakout_tv.setText("SALIDA A COMER: " +mBreakout);
+                    workout.setVisibility(View.GONE);
+                    workin.setVisibility(View.VISIBLE);
+                }
+
+                if (mBreakin == null) {
+
+                    Toast.makeText(UserPanelActivity.this,
+                            "La llegada de comer aun no esta registrada",
+                            Toast.LENGTH_SHORT).show();
+
+
+
+                }
+                else {
+                    breakin_tv.setVisibility(View.VISIBLE);
+                    breakin_tv.setText("ENTRADA DE COMIDA: " +mBreakin);
+                    workin.setVisibility(View.GONE);
+                    workout.setVisibility(View.VISIBLE);
+                }
+
             }
 
         }
@@ -127,6 +157,8 @@ public class UserPanelActivity extends AppCompatActivity {
 
 
         }
+
+
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
 
         workin.setOnClickListener(new View.OnClickListener() {
@@ -154,12 +186,26 @@ public class UserPanelActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                     finish();
                 }
+
+
                 */
-                dbHelper.insert_user_workin(receivedPersonId,  datetimex());
-                Toast.makeText(UserPanelActivity.this,
-                        "La entrada fue registrada correctamente",
-                        Toast.LENGTH_LONG).show();
-                finish();
+
+                if (mBreakout == null) {
+                    dbHelper.insert_user_workin(receivedPersonId, datetimex());
+                    Toast.makeText(UserPanelActivity.this,
+                            "La entrada fue registrada correctamente",
+                            Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                else {
+                    dbHelper.insert_user_breakin(String.valueOf(receivedPersonId), mWorkin, datetimex(), UserPanelActivity.this);
+                    finish();
+                   /*
+                    Toast.makeText(UserPanelActivity.this,
+                            "La entrada fue registrada correctamente",
+                            Toast.LENGTH_LONG).show();
+                            */
+                }
             }
         });
 
