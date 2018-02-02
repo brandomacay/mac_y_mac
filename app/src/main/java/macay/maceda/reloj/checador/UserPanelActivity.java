@@ -136,7 +136,7 @@ public class UserPanelActivity extends AppCompatActivity {
                     breakout_tv.setVisibility(View.VISIBLE);
                     breakout_tv.setText("SALIDA A COMER: " +mBreakout);
                     workout.setVisibility(View.GONE);
-                    workin.setVisibility(View.VISIBLE);
+                    workback.setVisibility(View.VISIBLE);
                 }
 
                 if (mBreakin == null) {
@@ -157,10 +157,12 @@ public class UserPanelActivity extends AppCompatActivity {
                     if (mWorkout == null) {
                         workin.setVisibility(View.GONE);
                         workout.setVisibility(View.VISIBLE);
+                        workback.setVisibility(View.GONE);
                     }
                     else {
                         workout.setVisibility(View.GONE);
                         workin.setVisibility(View.VISIBLE);
+                        workback.setVisibility(View.GONE);
                     }
 
                 }
@@ -177,6 +179,17 @@ public class UserPanelActivity extends AppCompatActivity {
 
 
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
+
+        workback.setOnClickListener(  new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbHelper.insert_user_breakin(String.valueOf(receivedPersonId), mWorkin, datetimex(), UserPanelActivity.this);
+                finish();
+
+            }
+
+
+        });
 
         workin.setOnClickListener(  new View.OnClickListener() {
             @Override
@@ -215,11 +228,7 @@ public class UserPanelActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    if (mWorkout == null) {
-                        dbHelper.insert_user_breakin(String.valueOf(receivedPersonId), mWorkin, datetimex(), UserPanelActivity.this);
-                        finish();
-                    }
-                    else {
+
                         dbHelper.insert_user_workin(receivedPersonId, datetimex());
                         Toast.makeText(UserPanelActivity.this,
                                 "La entrada fue registrada correctamente",
@@ -232,7 +241,7 @@ public class UserPanelActivity extends AppCompatActivity {
                             "La entrada fue registrada correctamente",
                             Toast.LENGTH_LONG).show();
                             */
-                }
+
             }
         });
 
@@ -323,7 +332,7 @@ public class UserPanelActivity extends AppCompatActivity {
             public void onClick(View view) {
                 dbHelper.insert_user_workout(String.valueOf(receivedPersonId), mWorkin, datetimex(),
                     UserPanelActivity.this );
-                Toast.makeText(UserPanelActivity.this,"Cuminacion de trabajo exitosa!",Toast.LENGTH_LONG).show();
+                Toast.makeText(UserPanelActivity.this,"Culminacion de trabajo exitosa!",Toast.LENGTH_LONG).show();
                 dialog.dismiss();
                 finish();
             }
