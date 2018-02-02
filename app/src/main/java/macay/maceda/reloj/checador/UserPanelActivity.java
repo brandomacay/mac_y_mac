@@ -87,9 +87,11 @@ public class UserPanelActivity extends AppCompatActivity {
 
                 //cursor.getString(0)
 
+                /*
                 Toast.makeText(UserPanelActivity.this,
                         "ENTRADA: " + mWorkin,
                         Toast.LENGTH_SHORT).show();
+                        */
                 chekin_tv.setVisibility(View.VISIBLE);
                 chekin_tv.setText("ENTRADA: " +mWorkin);
 
@@ -134,9 +136,11 @@ public class UserPanelActivity extends AppCompatActivity {
 
                 if (mBreakin == null) {
 
+                    /*
                     Toast.makeText(UserPanelActivity.this,
                             "La llegada de comer aun no esta registrada",
                             Toast.LENGTH_SHORT).show();
+                            */
 
 
 
@@ -144,8 +148,16 @@ public class UserPanelActivity extends AppCompatActivity {
                 else {
                     breakin_tv.setVisibility(View.VISIBLE);
                     breakin_tv.setText("ENTRADA DE COMIDA: " +mBreakin);
-                    workin.setVisibility(View.GONE);
-                    workout.setVisibility(View.VISIBLE);
+
+                    if (mWorkout == null) {
+                        workin.setVisibility(View.GONE);
+                        workout.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        workout.setVisibility(View.GONE);
+                        workin.setVisibility(View.VISIBLE);
+                    }
+
                 }
 
             }
@@ -198,8 +210,18 @@ public class UserPanelActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    dbHelper.insert_user_breakin(String.valueOf(receivedPersonId), mWorkin, datetimex(), UserPanelActivity.this);
-                    finish();
+                    if (mWorkout == null) {
+                        dbHelper.insert_user_breakin(String.valueOf(receivedPersonId), mWorkin, datetimex(), UserPanelActivity.this);
+                        finish();
+                    }
+                    else {
+                        dbHelper.insert_user_workin(receivedPersonId, datetimex());
+                        Toast.makeText(UserPanelActivity.this,
+                                "La entrada fue registrada correctamente",
+                                Toast.LENGTH_LONG).show();
+                        finish();
+                    }
+
                    /*
                     Toast.makeText(UserPanelActivity.this,
                             "La entrada fue registrada correctamente",
@@ -218,7 +240,17 @@ public class UserPanelActivity extends AppCompatActivity {
                 //    Toast.LENGTH_SHORT).show();
 
 
-                options_exit();
+                if (mBreakin == null) {
+                    options_exit();
+                }
+                else {
+                    dbHelper.insert_user_workout(String.valueOf(receivedPersonId), mWorkin, datetimex(),
+                            UserPanelActivity.this );
+                    Toast.makeText(UserPanelActivity.this,"Cuminacion de trabajo exitosa!",Toast.LENGTH_LONG).show();
+                   // dialog.dismiss();
+                    finish();
+                }
+
             }
         });
     }
