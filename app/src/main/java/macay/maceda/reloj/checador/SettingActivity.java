@@ -52,6 +52,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         cv_pdf = (CardView) findViewById(R.id.pdf_share);
         cv_pdf.setOnClickListener(this);
         setupActionBar();
+
         dbHelper = new DatabaseOpenHelper(this);
 
 
