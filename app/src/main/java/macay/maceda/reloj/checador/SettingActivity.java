@@ -24,6 +24,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -266,8 +267,13 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     CSVWriter writer = new CSVWriter(new FileWriter(f));
 
 
-                    final String[] columnNames = result.getColumnNames();
+                    String[] columnNames = result.getColumnNames();
+
                    // Log.d(TAG, "column names: " + Arrays.asList(columnNames));
+
+                    columnNames = deleteElement("password", columnNames);
+
+
                     writer.writeNext(columnNames);
                     // Write rows
                     result.moveToFirst();
@@ -307,8 +313,32 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         final int columnCount = cursor.getColumnCount();
         final String[] result = new String[columnCount];
         for (int i = 0; i < columnCount; i++) {
-            result[i] = cursor.getString(i);
+
+            // cursor = 11 is the column password, so i must delete that one
+            if (i != 11) {
+                result[i] = cursor.getString(i);
+            }
         }
+        return result;
+    }
+    private static String[] deleteElement(String stringToDelete, String[] array) {
+        String[] result = new String[array.length];
+        int index = 0;
+
+        ArrayList<String> rm = new ArrayList<String>();
+
+        for(int i = 0; i < array.length; i++) {
+            rm.add(array[i]);
+        }
+        for(int i = 0; i < array.length; i++) {
+            if(array[i].equals(stringToDelete)) {
+                index = i;
+            }
+        }
+        rm.remove(index);
+
+        result = rm.toArray(new String[rm.size()]);
+
         return result;
     }
 
