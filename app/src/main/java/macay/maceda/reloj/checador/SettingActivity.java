@@ -17,19 +17,24 @@ import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView cv;
+    CardView cv,cv_pdf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         cv = (CardView) findViewById(R.id.edit_pass);
         cv.setOnClickListener(this);
+        cv_pdf = (CardView) findViewById(R.id.pdf_share);
+        cv_pdf.setOnClickListener(this);
         setupActionBar();
     }
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.edit_pass:
                 edit_password_dialog();
+                break;
+            case R.id.pdf_share:
+                Toast.makeText(SettingActivity.this, "PDF SHARE!!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
