@@ -2,9 +2,12 @@ package macay.maceda.reloj.checador;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NavUtils;
@@ -38,6 +41,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     CardView cv,cv_pdf;
     ProgressDialog pd;
     private DatabaseOpenHelper dbHelper;
+    File f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,6 +230,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         {
 
 
+
             boolean sdDisponible = false;
             boolean sdAccesoEscritura = false;
 
@@ -257,7 +262,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     String	date = getCurrDate();
                     String filename = "empleados_" + date;
 
-                    File f = new File("/sdcard/relojchecador/archivos/",
+                     f = new File("/sdcard/relojchecador/archivos/",
                             filename.toString().replace("/","")
                                     .replace(" ", "_")
                                     .replace(",", "")
@@ -272,6 +277,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                    // Log.d(TAG, "column names: " + Arrays.asList(columnNames));
 
                     columnNames = deleteElement("password", columnNames);
+                    columnNames = deleteElement("image", columnNames);
 
 
                     writer.writeNext(columnNames);
@@ -300,7 +306,41 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             //	lv.setAdapter(adapter);
             dbHelper.close();
             result.close();
+
+            AlertDialog.Builder builder;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                builder = new AlertDialog.Builder(SettingActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+            } else {
+                builder = new AlertDialog.Builder(SettingActivity.this);
+            }
+            builder.setTitle("Compartir")
+                    .setCancelable(false)
+                    .setMessage("Compartir o guardar el archivo")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                            //sharingIntent.setType("text/comma_separated_values/csv");
+                            sharingIntent.setType("application/octet-stream");
+                            //sharingIntent.setData(csv);
+                            //sharingIntent.putExtra(Intent.EXTRA_STREAM, csv);
+                            sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +
+                                    f.getAbsolutePath().toString()) );
+                            startActivity(Intent.createChooser(sharingIntent, ""));
+                            //startActivity(Intent.createChooser(sharingIntent, getResources().getText(R.string.send_to)));
+
+                        }
+                    })
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // do nothing
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .show();
         }
+
+
     }
 
     public String getCurrDate() {
@@ -310,12 +350,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         return dt;
     }
     private String[] getFieldsAsStringArray(Cursor cursor) {
-        final int columnCount = cursor.getColumnCount();
+        int columnCount = cursor.getColumnCount();
+        //I remove 2 items, image and password.
+        columnCount = (columnCount - 2);
         final String[] result = new String[columnCount];
         for (int i = 0; i < columnCount; i++) {
 
-            // cursor = 11 is the column password, so i must delete that one
-            if (i != 11) {
+            // cursor = 11 is the column password, 10 = image so i must delete that one
+            if (i < 10) {
                 result[i] = cursor.getString(i);
             }
         }
