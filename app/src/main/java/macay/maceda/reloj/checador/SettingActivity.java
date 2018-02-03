@@ -8,12 +8,21 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import com.opencsv.CSVWriter;
+
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -34,7 +43,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 edit_password_dialog();
                 break;
             case R.id.pdf_share:
-                Toast.makeText(SettingActivity.this, "PDF SHARE!!", Toast.LENGTH_SHORT).show();
+
+                createCSV();
+
+
+
+                Toast.makeText(SettingActivity.this, "PDF CREADO!!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -109,5 +123,38 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    private void createCSV () {
+        try {
+            String path = "sdcard/relojchecador/archivos/";
+            String fileName = "Listaempleados";
+            String content = "Alejandro, Jorge, Brandon";
+            File file = new File(path + fileName +".csv");
+            // if file doesnt exists, then create it
+            File f = new File(path);
+            f.getAbsolutePath();
+
+            if(f.mkdirs()) {
+                //se ha creado bien
+                //string.replace(" ", "\\ ");
+                Toast.makeText(SettingActivity.this,
+                        "Carpeta creada", Toast.LENGTH_LONG).show();
+
+
+            }
+
+            //file.mkdir();
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
