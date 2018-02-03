@@ -96,10 +96,6 @@ public class AdminActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void edit_pin_dialog(){
-
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
