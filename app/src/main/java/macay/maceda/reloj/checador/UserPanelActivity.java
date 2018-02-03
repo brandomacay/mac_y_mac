@@ -41,7 +41,8 @@ public class UserPanelActivity extends AppCompatActivity {
     TextView nombres;
     private String mCurrentPhotoPath = "";
     private String mWorkin, mWorkout, mBreakin, mBreakout;
-    private Handler _handler;
+    //private Handler _handler;
+    private static final Handler handler = new Handler();
 
 
     @Override
@@ -246,6 +247,9 @@ public class UserPanelActivity extends AppCompatActivity {
         });
 
 
+
+
+
         workout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -270,6 +274,8 @@ public class UserPanelActivity extends AppCompatActivity {
     }
 
     private void edit_pin_dialog() {
+        handler.removeCallbacks(textRunnable);
+
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(UserPanelActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_admin,null);
         final EditText password = (EditText) mView.findViewById(R.id.pass);
@@ -292,6 +298,8 @@ public class UserPanelActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                handler.postDelayed(textRunnable, 10000);
+
             }
         });
 
@@ -306,6 +314,8 @@ public class UserPanelActivity extends AppCompatActivity {
                         receivedPerson.getDatework(),mCurrentPhotoPath, password.getText().toString().trim());
                 dbHelper.updatePasswordPerson(receivedPersonId, UserPanelActivity.this, updatedPerson);
                 dialog.dismiss();
+                handler.postDelayed(textRunnable, 10000);
+
             }
         });
     }
@@ -437,6 +447,19 @@ public class UserPanelActivity extends AppCompatActivity {
         return today;
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        // put your code here...
+        handler.postDelayed(textRunnable, 10000);
 
+    }
+
+    private final Runnable textRunnable = new Runnable() {
+        @Override
+        public void run() {
+            finish();
+        }
+    };
 
 }
