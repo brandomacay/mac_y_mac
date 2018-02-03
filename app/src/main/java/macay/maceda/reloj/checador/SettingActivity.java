@@ -140,7 +140,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(SettingActivity.this,
                         "Carpeta creada", Toast.LENGTH_LONG).show();
 
-
             }
 
             //file.mkdir();
