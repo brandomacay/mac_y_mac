@@ -5,6 +5,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -25,6 +29,7 @@ import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import com.opencsv.CSVWriter;
+import android.print.PrintAttributes;
 
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 
@@ -67,14 +73,17 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.pdf_share:
 
 
-                exportdb();
+                createPdf();
+               // stringtopdf("Prueba de sonido\n Joder 123");
+               // exportdb();
 
 
                 //Toast.makeText(SettingActivity.this, "PDF CREADO!!", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.cvs_share:
-                Toast.makeText(SettingActivity.this, "CVS CREADO!!", Toast.LENGTH_SHORT).show();
+                exportdb();
+               // Toast.makeText(SettingActivity.this, "CVS CREADO!!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -389,6 +398,113 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         result = rm.toArray(new String[rm.size()]);
 
         return result;
+    }
+
+
+    private void createPdf(){
+        // create a new document
+        PdfDocument document = new PdfDocument();
+
+        // * PageInfo pageInfo = new PageInfo.Builder(new Rect(0, 0, 100, 100), 1).create();
+
+        // crate a page description
+        PdfDocument.PageInfo pageInfo =
+                new PdfDocument.PageInfo.Builder(595, 842, 1).create();
+
+        // start a page
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+
+
+
+
+        View content = this.findViewById(R.id.edit_pass);
+        Canvas can = new Canvas();
+        can.setDensity(240);
+
+        can = page.getCanvas();
+
+        content.draw(can);
+
+        Paint paint = new Paint();
+        // canvas.drawPaint(paint);
+        //paint.setColor(Color.BLACK);
+        paint.setTextSize(30);
+        can.drawText("mamadas", 20, 200, paint);
+
+        paint.setTextSize(16);
+
+        can.drawText("Joder, esto es muy trabajoso :(",
+                20 , 250, paint);
+
+        can.drawLine(0, 117, 596, 117, paint);
+        can.drawLine(0, 115, 596, 115, paint);
+
+       // can.drawRect(0, 50, 100, 100, paint);
+
+
+
+        // finish the page
+        document.finishPage(page);
+
+
+        // write the document content
+        String targetPdf = "/sdcard/relojchecador/archivos/reporte.pdf";
+        File filePath = new File(targetPdf);
+        try {
+            document.writeTo(new FileOutputStream(filePath));
+            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Something wrong: " + e.toString(),
+                    Toast.LENGTH_LONG).show();
+        }
+
+        // close the document
+        document.close();
+    }
+
+    public void stringtopdf(String data)  {
+        String extstoragedir = "/sdcard/relojchecador/archivos/";
+        File fol = new File(extstoragedir);
+        File folder=new File(fol,"pdf");
+        if(!folder.exists()) {
+            boolean bool = folder.mkdir();
+        }
+        try {
+            final File file = new File(folder, "sample.pdf");
+            file.createNewFile();
+            FileOutputStream fOut = new FileOutputStream(file);
+
+
+            PdfDocument document = new PdfDocument();
+
+
+            PdfDocument.PageInfo pageInfo = new
+                    PdfDocument.PageInfo.Builder(400, 400, 1).create();
+            PdfDocument.Page page = document.startPage(pageInfo);
+            Canvas canvas = page.getCanvas();
+            Paint paint = new Paint();
+           // canvas.drawPaint(paint);
+            //paint.setColor(Color.BLACK);
+            paint.setTextSize(16);
+            canvas.drawText(data, 10, 10, paint);
+
+            paint.setTextSize(12);
+
+            canvas.drawText("Joder, esto es muy trabajoso :(",
+                    10 , 30, paint);
+
+
+
+
+            document.finishPage(page);
+            document.writeTo(fOut);
+            document.close();
+
+        }catch (IOException e){
+            Log.i("error",e.getLocalizedMessage());
+        }
     }
 
 }
