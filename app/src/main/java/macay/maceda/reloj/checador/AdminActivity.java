@@ -1,5 +1,7 @@
 package macay.maceda.reloj.checador;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,12 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import macay.maceda.reloj.checador.Adapters.User_detail_admin;
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
@@ -26,7 +31,7 @@ public class AdminActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbConnector;
     private User_detail_admin adapter;
     private String filter = "";
-
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,14 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_menu, menu);
+
+
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(onQueryTextListener);
+
         MenuItem item = menu.findItem(R.id.filterSpinner);
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
 
@@ -79,10 +92,28 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-
         spinner.setAdapter(adapter);
-        return true;
+
+        return super.onCreateOptionsMenu(menu);
     }
+
+
+    private SearchView.OnQueryTextListener onQueryTextListener =
+            new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    Toast.makeText(AdminActivity.this,"TESTING1...",Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    Toast.makeText(AdminActivity.this,"TESTING2...",Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            };
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
