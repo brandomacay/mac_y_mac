@@ -414,10 +414,6 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         // start a page
         PdfDocument.Page page = document.startPage(pageInfo);
 
-
-
-
-
         View content = this.findViewById(R.id.edit_pass);
         Canvas can = new Canvas();
         can.setDensity(240);
@@ -439,6 +435,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         can.drawLine(0, 117, 596, 117, paint);
         can.drawLine(0, 115, 596, 115, paint);
+        can.drawLine(325, 400, 325, 600, paint);
+        //can.drawRect(120, 180, 400, 400, paint);
 
        // can.drawRect(0, 50, 100, 100, paint);
 
