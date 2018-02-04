@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://C:\Users\brand\Desktop\mac_y_mac\RelojChecador.iml" filepath="C:\Users\brand\Desktop\mac_y_mac\RelojChecador.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\brand\Desktop\mac_y_mac\app\app.iml" filepath="C:\Users\brand\Desktop\mac_y_mac\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mac_y_mac.iml" filepath="$PROJECT_DIR$/.idea/mac_y_mac.iml" />
       <module fileurl="file://C:\Users\brand\Desktop\RelojChecador\mac_y_mac.iml" filepath="C:\Users\brand\Desktop\RelojChecador\mac_y_mac.iml" />
     </modules>

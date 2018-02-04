@@ -35,7 +35,7 @@ import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView cv,cv_pdf;
+    CardView cv,cv_pdf,cv_cvs;
     ProgressDialog pd;
     private DatabaseOpenHelper dbHelper;
 
@@ -47,6 +47,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         cv.setOnClickListener(this);
         cv_pdf = (CardView) findViewById(R.id.pdf_share);
         cv_pdf.setOnClickListener(this);
+        cv_cvs = (CardView) findViewById(R.id.cvs_share);
+        cv_cvs.setOnClickListener(this);
         setupActionBar();
 
         dbHelper = new DatabaseOpenHelper(this);
@@ -65,6 +67,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 //Toast.makeText(SettingActivity.this, "PDF CREADO!!", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.cvs_share:
+                Toast.makeText(SettingActivity.this, "CVS CREADO!!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -89,7 +95,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        register.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(    new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
