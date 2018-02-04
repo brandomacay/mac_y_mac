@@ -31,7 +31,6 @@ public class AdminActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbConnector;
     private User_detail_admin adapter;
     private String filter = "";
-    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +62,6 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_menu, menu);
-
-
-        searchView = (SearchView) menu.findItem(R.id.action_search)
-                .getActionView();
-
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setOnQueryTextListener(onQueryTextListener);
-
         MenuItem item = menu.findItem(R.id.filterSpinner);
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
 
@@ -96,23 +87,6 @@ public class AdminActivity extends AppCompatActivity {
 
         return super.onCreateOptionsMenu(menu);
     }
-
-
-    private SearchView.OnQueryTextListener onQueryTextListener =
-            new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    Toast.makeText(AdminActivity.this,"TESTING1...",Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    Toast.makeText(AdminActivity.this,"TESTING2...",Toast.LENGTH_SHORT).show();
-                    return true;
-                }
-            };
-
 
 
     @Override
