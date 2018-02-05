@@ -41,15 +41,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CLOCKING_BREAKIN = "breakin";
     public static final String COLUMN_CLOCKING_BREAKOUT = "breakout";
 
-
-
-
-
-
-
-
-
-
     public DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
     }
@@ -113,6 +104,56 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
+
+    /**Query records, give options to filter results**/
+    public List<Empleados_admin> peopleList_by_search(String filter) {
+        String query;
+        if(filter.equals("")){
+            //regular query
+            query = "SELECT  * FROM " + TABLE_NAME;
+        }else{
+            //filter results by filter option provided
+          //  query = "SELECT  * FROM " + TABLE_NAME + " WHERE name LIKE '"+ filter + "%' OR lastname LIKE '"
+            //+ filter + "%'";
+            query = "SELECT  * FROM " + TABLE_NAME + " WHERE name LIKE '"+ filter + "%'";
+        }
+
+        List<Empleados_admin> personLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Empleados_admin person;
+
+        if (cursor.moveToFirst()) {
+            do {
+                person = new Empleados_admin();
+
+                person.setId(cursor.getLong(cursor.getColumnIndex(COLUMN_ID)));
+                person.setName(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_NAME)));
+                person.setLastname(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_LASTNAME)));
+                person.setNumber_phone(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_PHONE)));
+                person.setOccupation(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_OCCUPATION)));
+                person.setArea(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_AREA)));
+                person.setEmail(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_EMAIL)));
+                person.setBirthday(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_BIRTHDAY)));
+                person.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_ADDRESS)));
+                person.setDatework(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_STARTEDDATE)));
+                person.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_IMAGE)));
+                person.setPassword(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_PASSWORD)));
+
+                personLinkedList.add(person);
+            } while (cursor.moveToNext());
+
+            db.close();
+            cursor.close();
+        }
+
+
+        return personLinkedList;
+    }
+
+
+
     /**Query records, give options to filter results**/
     public List<Empleados_admin> peopleList(String filter) {
         String query;
@@ -148,6 +189,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
                 personLinkedList.add(person);
             } while (cursor.moveToNext());
+            db.close();
+            cursor.close();
         }
 
 

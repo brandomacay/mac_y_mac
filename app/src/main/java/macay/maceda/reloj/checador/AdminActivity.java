@@ -31,7 +31,6 @@ public class AdminActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbConnector;
     private User_detail_admin adapter;
     private String filter = "";
-    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class AdminActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         mRecyclerView = (RecyclerView) findViewById(R.id.view_recycler);
         setSupportActionBar(toolbar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,27 +50,6 @@ public class AdminActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                try {
-                    if (dy > 0 && fab.getVisibility() == View.VISIBLE) {
-                        fab.hide();
-                    } else if (dy < 0 && fab.getVisibility() != View.VISIBLE) {
-                        fab.show();
-                    } else {
-                        //Toast.makeText(AdminActivity.this, "error detectado en el fab", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(AdminActivity.this, "Error de fab: " + e, Toast.LENGTH_SHORT).show();
-
-                }
-
-            }
-        });
 
     }
     private void startviewuser(String filter){

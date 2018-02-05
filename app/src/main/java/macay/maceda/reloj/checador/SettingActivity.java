@@ -2,6 +2,7 @@ package macay.maceda.reloj.checador;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -73,9 +74,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.pdf_share:
 
 
-                createPdf();
+                //createPdf();
                // stringtopdf("Prueba de sonido\n Joder 123");
                // exportdb();
+                generateHtmlOnSD("prueba.html", create_html_report());
 
 
                 //Toast.makeText(SettingActivity.this, "PDF CREADO!!", Toast.LENGTH_SHORT).show();
@@ -503,6 +505,125 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }catch (IOException e){
             Log.i("error",e.getLocalizedMessage());
         }
+    }
+
+
+    public void generateHtmlOnSD(String sFileName, StringBuilder sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "/relojchecador/archivos/");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+            Toast.makeText(SettingActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private StringBuilder create_html_report () {
+
+        StringBuilder sb = new StringBuilder();
+      //  sb.append("<p> Joder, works </> \n");
+        //sb.append("<p> Mamadas pendejas </> \n");
+        //sb.append("");
+
+       sb.append("<!DOCTYPE html> \n");
+    sb.append("<html>");
+    sb.append("<head>");
+    sb.append("<style>");
+    sb.append("table {");
+    sb.append("width:100%;");
+    sb.append("}");
+    sb.append("table, th, td {");
+    sb.append("border: 1px solid black;");
+        sb.append("border-collapse: collapse;");
+        sb.append("}");
+        sb.append(" th, td {");
+        sb.append("padding: 5px;");
+        sb.append("text-align: left;");
+        sb.append(" }");
+        sb.append("table#t01 tr:nth-child(even) {");
+        sb.append("background-color: #eee;");
+        sb.append("}");
+        sb.append("table#t01 tr:nth-child(odd) {");
+        sb.append("background-color:#fff;");
+        sb.append("}");
+        sb.append("table#t01 th {");
+        sb.append("background-color: black;");
+        sb.append("color: white;");
+        sb.append("}");
+        sb.append("</style>");
+        sb.append("</head>");
+        sb.append("<body>");
+        sb.append("<table id=\"t01\">");
+        sb.append("<tr>");
+        sb.append("<th>Firstname</th>");
+        sb.append("<th>Lastname</th>");
+        sb.append("<th>Age</th>");
+        sb.append("</tr>");
+        sb.append("<tr>");
+        sb.append("<td>Jill</td>");
+        sb.append("<td>Smith</td>");
+        sb.append("<td>50</td>");
+        sb.append("</tr>");
+
+
+
+/*
+
+
+
+
+
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+<br>
+
+<table id="t01">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+
+</body>
+</html>
+*/
+
+
+
+
+        return sb;
     }
 
 }
