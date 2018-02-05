@@ -16,6 +16,7 @@ import android.text.format.Time;
 import android.util.Log;
 
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,6 +45,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         vpuntos = (TextView) findViewById(R.id.puntos);
         vminutes = (TextView) findViewById(R.id.minutos);
         vppmm = (TextView) findViewById(R.id.ppmm);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         Thread t = new Thread() {
             @Override
             public void run() {
