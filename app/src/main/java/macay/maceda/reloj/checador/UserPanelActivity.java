@@ -281,7 +281,7 @@ public class UserPanelActivity extends AppCompatActivity {
         View mView = getLayoutInflater().inflate(R.layout.dialog_admin,null);
         final EditText password = (EditText) mView.findViewById(R.id.pass);
         final EditText repeatpassword = (EditText) mView.findViewById(R.id.repeatpass);
-        password.setInputType(InputType.TYPE_CLASS_NUMBER);
+        password.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         repeatpassword.setInputType(InputType.TYPE_CLASS_NUMBER |InputType.TYPE_NUMBER_VARIATION_PASSWORD);
         password.setHint("new pin");
         repeatpassword.setHint("repeat pin");
@@ -308,14 +308,35 @@ public class UserPanelActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
-                Empleados_admin updatedPerson = new Empleados_admin(receivedPerson.getName(),
-                        receivedPerson.getLastname(),receivedPerson.getNumber_phone(),
-                        receivedPerson.getOccupation(),receivedPerson.getArea(),
-                        receivedPerson.getEmail(), receivedPerson.getBirthday(),receivedPerson.getAddress(),
-                        receivedPerson.getDatework(),mCurrentPhotoPath, password.getText().toString().trim());
-                dbHelper.updatePasswordPerson(receivedPersonId, UserPanelActivity.this, updatedPerson);
-                dialog.dismiss();
-                handler.postDelayed(textRunnable, 10000);
+
+                if (!password.getText().toString().isEmpty() && !repeatpassword.getText().toString().isEmpty()) {
+                    if (password.getText().toString().equals(repeatpassword.getText().toString())) {
+                        if (password.length() < 4 && repeatpassword.length() < 4){
+                            password.setError("Agrege al menos 4 numeros");
+                            repeatpassword.setError("Agrege al menos 4 numeros");
+                        }else {
+                            Empleados_admin updatedPerson = new Empleados_admin(receivedPerson.getName(),
+                                    receivedPerson.getLastname(),receivedPerson.getNumber_phone(),
+                                    receivedPerson.getOccupation(),receivedPerson.getArea(),
+                                    receivedPerson.getEmail(), receivedPerson.getBirthday(),receivedPerson.getAddress(),
+                                    receivedPerson.getDatework(),mCurrentPhotoPath, password.getText().toString().trim());
+                            dbHelper.updatePasswordPerson(receivedPersonId, UserPanelActivity.this, updatedPerson);
+                            dialog.dismiss();
+                            handler.postDelayed(textRunnable, 10000);
+                        }
+
+
+
+
+                    } else {
+                        repeatpassword.setError("Las contraseñas no coinciden");
+                    }
+                } else {
+                    Toast.makeText(UserPanelActivity.this,
+                            "Ingresa todos los campos",
+                            Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });

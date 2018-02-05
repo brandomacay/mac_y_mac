@@ -163,7 +163,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
                     Empleados_admin person = mEmpleados.get(getPosition());
                     dbHelper.deletePerson(person.getId(), mContext);
                     mEmpleados.remove(getPosition());
-                    mRecyclerV.removeViewAt(getPosition());
+                    //mRecyclerV.removeViewAt(getPosition());
                     notifyItemRemoved(getPosition());
                     notifyItemRangeChanged(getPosition(), mEmpleados.size());
                     notifyDataSetChanged();                }
@@ -240,7 +240,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Imagen: "+person.getImage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(mContext, "Imagen: "+person.getImage(), Toast.LENGTH_LONG).show();
             }
         });
 
