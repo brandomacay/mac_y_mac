@@ -1,7 +1,9 @@
 package macay.maceda.reloj.checador;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -15,6 +17,7 @@ import android.text.InputType;
 import android.text.format.Time;
 import android.util.Log;
 
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -24,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import macay.maceda.reloj.checador.Adapters.User_detail_admin;
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
@@ -38,6 +42,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        hide();
         ImageButton btn_admin = (ImageButton) findViewById(R.id.admin);
         ImageButton btn_user = (ImageButton) findViewById(R.id.user);
         datte = (TextView) findViewById(R.id.fecha);
@@ -131,6 +136,22 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
+
+    private void hide(){
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+       return false;
+    }
+
+   
 
     private void login_password_dialog () {
 
