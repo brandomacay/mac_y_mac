@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
+
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ public class AdminActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbConnector;
     private User_detail_admin adapter;
     private String filter = "";
+    private SearchView searchView = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +46,8 @@ public class AdminActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(AdminActivity.this,RegisterUserActivity.class));
-                overridePendingTransition(0,0);
+                startActivity(new Intent(AdminActivity.this, RegisterUserActivity.class));
+                overridePendingTransition(0, 0);
             }
         });
         mRecyclerView.setHasFixedSize(true);
@@ -52,9 +55,17 @@ public class AdminActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
     }
-    private void startviewuser(String filter){
+
+    private void startviewuser(String filter) {
         dbConnector = new DatabaseOpenHelper(this);
         adapter = new User_detail_admin(dbConnector.peopleList(filter), this, mRecyclerView);
+        mRecyclerView.setAdapter(adapter);
+
+    }
+    private void startviewuser_by_search(String filterx) {
+
+        dbConnector = new DatabaseOpenHelper(this);
+        adapter = new User_detail_admin(dbConnector.peopleList_by_search(filterx), this, mRecyclerView);
         mRecyclerView.setAdapter(adapter);
 
     }
@@ -62,6 +73,52 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+       // SearchManager searchManager = (SearchManager) AdminActivity.this.getSystemService(Context.SEARCH_SERVICE);
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+          //  assert searchManager != null;
+         //   searchView.setSearchableInfo(searchManager.getSearchableInfo(AdminActivity.this.getComponentName()));
+            searchView.setIconified(false);
+        }
+
+
+        //
+        //SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        final SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+      //  search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+
+                //loadHistory(query);
+                if (query.isEmpty()) {
+                    startviewuser(query);
+                }
+
+                return true;
+
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                startviewuser_by_search(query.trim());
+                Toast.makeText(AdminActivity.this, query, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+
+        });
+
+
         MenuItem item = menu.findItem(R.id.filterSpinner);
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
 
