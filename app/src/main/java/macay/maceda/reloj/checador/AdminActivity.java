@@ -85,7 +85,6 @@ public class AdminActivity extends AppCompatActivity {
             searchView.setIconified(false);
         }
 
-
         //
         //SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
