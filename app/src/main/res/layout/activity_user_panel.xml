@@ -46,18 +46,23 @@
             app:layout_constraintVertical_bias="0.529"
             android:layout_marginLeft="8dp" />
 
-        <Button
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/b_edit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Button"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_lock"
+            app:backgroundTint="@color/colorPrimary"
+            android:tint="@android:color/white"
+            app:rippleColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="8dp" />
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_height="wrap_content"
+            tools:ignore="RtlHardcoded" />
     </android.support.constraint.ConstraintLayout>
 
 

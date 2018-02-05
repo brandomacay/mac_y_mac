@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -36,7 +37,7 @@ public class UserPanelActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbHelper;
     private CardView workin, workout, workback;
     TextView chekin_tv, checkout_tv, breakin_tv, breakout_tv;
-    Button bt;
+    FloatingActionButton bt;
     CircleImageView imagen;
     TextView nombres;
     private String mCurrentPhotoPath = "";
@@ -53,7 +54,7 @@ public class UserPanelActivity extends AppCompatActivity {
         dbHelper = new DatabaseOpenHelper(this);
         imagen = (CircleImageView) findViewById(R.id.avatar);
         nombres = (TextView) findViewById(R.id.my_name);
-        bt = (Button) findViewById(R.id.b_edit);
+        bt = (FloatingActionButton) findViewById(R.id.b_edit);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
