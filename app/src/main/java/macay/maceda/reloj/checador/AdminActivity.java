@@ -32,6 +32,7 @@ public class AdminActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbConnector;
     private User_detail_admin adapter;
     private String filter = "";
+    private android.support.v7.widget.SearchView searchView = null;
 
 
     @Override
@@ -60,10 +61,62 @@ public class AdminActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
 
     }
+    private void startviewuser_by_search(String filterx) {
+
+        dbConnector = new DatabaseOpenHelper(this);
+        adapter = new User_detail_admin(dbConnector.peopleList_by_search(filterx), this, mRecyclerView);
+        mRecyclerView.setAdapter(adapter);
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.admin_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        // SearchManager searchManager = (SearchManager) AdminActivity.this.getSystemService(Context.SEARCH_SERVICE);
+        if (searchItem != null) {
+            searchView = (android.support.v7.widget.SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            //  assert searchManager != null;
+            //   searchView.setSearchableInfo(searchManager.getSearchableInfo(AdminActivity.this.getComponentName()));
+            searchView.setIconified(false);
+        }
+
+        //
+        //SearchManager manager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        final android.support.v7.widget.SearchView search = (android.support.v7.widget.SearchView) menu.findItem(R.id.action_search).getActionView();
+
+        //  search.setSearchableInfo(manager.getSearchableInfo(getComponentName()));
+
+        search.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+
+                //loadHistory(query);
+                if (query.isEmpty()) {
+                    startviewuser(query);
+                }
+
+                return true;
+
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                startviewuser_by_search(query.trim());
+                Toast.makeText(AdminActivity.this, query, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+
+        });
+
+
         MenuItem item = menu.findItem(R.id.filterSpinner);
         Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
 
