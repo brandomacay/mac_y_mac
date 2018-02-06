@@ -68,7 +68,6 @@ public class AdminActivity extends AppCompatActivity {
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(AdminActivity.this, "Error de fab: " + e, Toast.LENGTH_SHORT).show();
 
                 }
 
