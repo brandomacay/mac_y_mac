@@ -118,7 +118,6 @@ public class AdminActivity extends AppCompatActivity {
 
                 }else{
                     startviewuser_by_search(query.trim());
-
                 }
 
                 return true;
