@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.List;
 
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
+import macay.maceda.reloj.checador.DetailPersonActivity;
 import macay.maceda.reloj.checador.EditUser;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
 import macay.maceda.reloj.checador.R;
@@ -214,19 +215,19 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
     // Replace the contents of a view (invoked by the layout manager)
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
         final Empleados_admin person = mEmpleados.get(position);
-        holder.personName.setText(person.getName()+ " " + person.getLastname());
-        holder.personPhone.setText(person.getNumber_phone());
-        holder.personOcupation.setText(person.getOccupation());
-        holder.personArea.setText(person.getArea());
-        holder.personEmail.setText(person.getEmail());
-        holder.personBirthday.setText(person.getBirthday());
-        holder.personAddress.setText(person.getAddress());
-        holder.personStartWork.setText(person.getDatework());
+        holder.personName.setText("Nombres: "+person.getName()+ " " + person.getLastname());
+        holder.personPhone.setText("Numero celular: "+person.getNumber_phone());
+        holder.personOcupation.setText("Cargo/puesto: "+person.getOccupation());
+        holder.personArea.setText("Area de trabajo: "+person.getArea());
+        holder.personEmail.setText("Correo electronico: "+person.getEmail());
+        holder.personBirthday.setText("Fecha de nacimiento: "+person.getBirthday());
+        holder.personAddress.setText("Direccion: "+person.getAddress());
+        holder.personStartWork.setText("Fecha de contrato: "+person.getDatework());
         holder.personId.setText("ID empleado: " +person.getId());
 
         if (!person.getImage().isEmpty()) {
@@ -240,15 +241,15 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(mContext, "Imagen: "+person.getImage(), Toast.LENGTH_LONG).show();
+                goToDetailsPerson(Long.parseLong(""+person.getId()));
             }
         });
 
 
     }
 
-    private void goToUpdateUser(long personId){
-        Intent goToUpdate = new Intent(mContext, EditUser.class);
+    private void goToDetailsPerson(long personId){
+        Intent goToUpdate = new Intent(mContext, DetailPersonActivity.class);
         goToUpdate.putExtra("USER_ID", personId);
         mContext.startActivity(goToUpdate);
     }

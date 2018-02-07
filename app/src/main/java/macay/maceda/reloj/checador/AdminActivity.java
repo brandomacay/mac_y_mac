@@ -1,25 +1,19 @@
 package macay.maceda.reloj.checador;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.SearchView;
-import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import macay.maceda.reloj.checador.Adapters.User_detail_admin;
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
@@ -31,7 +25,7 @@ public class AdminActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private DatabaseOpenHelper dbConnector;
     private User_detail_admin adapter;
-    private String filter = "";
+    String filter = "started_date";
     private android.support.v7.widget.SearchView searchView = null;
     FloatingActionButton fab;
 
@@ -82,6 +76,7 @@ public class AdminActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
 
     }
+
     private void startviewuser_by_search(String filterx) {
 
         dbConnector = new DatabaseOpenHelper(this);
@@ -119,7 +114,11 @@ public class AdminActivity extends AppCompatActivity {
 
                 //loadHistory(query);
                 if (query.isEmpty()) {
-                    startviewuser(query);
+                    startviewuser(filter);
+
+                }else{
+                    startviewuser_by_search(query.trim());
+
                 }
 
                 return true;
@@ -128,38 +127,12 @@ public class AdminActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-
                 startviewuser_by_search(query.trim());
-                Toast.makeText(AdminActivity.this, query, Toast.LENGTH_SHORT).show();
-                return true;
+                return false;
             }
 
 
         });
-
-
-        MenuItem item = menu.findItem(R.id.filterSpinner);
-        Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
-
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.filterOptions, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String filter = parent.getSelectedItem().toString();
-                startviewuser(filter);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                startviewuser(filter);
-            }
-        });
-
-        spinner.setAdapter(adapter);
 
         return super.onCreateOptionsMenu(menu);
     }

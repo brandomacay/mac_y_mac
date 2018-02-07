@@ -2,16 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/filterSpinner"
-        android:title="Filter Spinner"
-        app:actionViewClass="android.widget.Spinner"
-        android:background="#fff"
-        app:showAsAction="always" />
-
     <item android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="Buscar..."
+        android:icon="@drawable/ic_search"
+        android:title="Buscar empleados"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom"
         />

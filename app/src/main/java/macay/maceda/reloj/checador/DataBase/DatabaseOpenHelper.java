@@ -11,6 +11,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import macay.maceda.reloj.checador.Model.Actividades_empleados;
 import macay.maceda.reloj.checador.Model.Empleados_admin;
 public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
@@ -116,7 +118,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
             //filter results by filter option provided
           //  query = "SELECT  * FROM " + TABLE_NAME + " WHERE name LIKE '"+ filter + "%' OR lastname LIKE '"
             //+ filter + "%'";
-            query = "SELECT  * FROM " + TABLE_NAME + " WHERE name LIKE '"+ filter + "%'";
+            query = "SELECT  * FROM " + TABLE_NAME + " WHERE name LIKE '"+ filter+ "%'" ;
         }
 
         List<Empleados_admin> personLinkedList = new LinkedList<>();
@@ -159,10 +161,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         String query;
         if(filter.equals("")){
             //regular query
-            query = "SELECT  * FROM " + TABLE_NAME;
+            query = "SELECT  * FROM " + TABLE_NAME ;
         }else{
             //filter results by filter option provided
-            query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY "+ filter;
+            query = "SELECT  * FROM " + TABLE_NAME + " ORDER BY "+ filter + " DESC";
         }
 
         List<Empleados_admin> personLinkedList = new LinkedList<>();
@@ -223,6 +225,42 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return receivedPerson;
     }
 
+
+
+    public List<Actividades_empleados> getActividades(String filter,long id) {
+        String query;
+        if(filter.equals("")){
+            query = "SELECT  * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ id + " ORDER BY " + filter + " DESC";
+        }else{
+
+            query = "SELECT  * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ id + " ORDER BY " + filter + " DESC";
+        }
+
+        List<Actividades_empleados> personLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Actividades_empleados person;
+
+        if (cursor.moveToFirst()) {
+            do {
+                person = new Actividades_empleados();
+
+                person.setId(cursor.getLong(cursor.getColumnIndex(COLUMN_CLOCKING_ID)));
+                person.setUserid(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_USERID)));
+                person.setWorking(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_IN)));
+                person.setWorkout(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_OUT)));
+                person.setBreaking(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_BREAKIN)));
+                person.setBreakout(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_BREAKOUT)));
+
+                personLinkedList.add(person);
+            } while (cursor.moveToNext());
+            db.close();
+            cursor.close();
+        }
+
+
+        return personLinkedList;
+    }
     //Query only 1 record by id and password
 
     public Empleados_admin getEmpleado(String id, String password){
