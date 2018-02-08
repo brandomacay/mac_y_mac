@@ -51,6 +51,8 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
             personBreaking = (TextView) v.findViewById(R.id.a_breaking);
             personBreakout = (TextView) v.findViewById(R.id.a_breakout);
 
+            personId.setVisibility(View.GONE);
+            personUserId.setVisibility(View.GONE);
         }
 
 

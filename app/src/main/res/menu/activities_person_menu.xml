@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/edit_user"
+        android:icon="@drawable/ic_edit"
+        android:title="Buscar empleados"
+        app:showAsAction="always"
+        android:orderInCategory="1"
+
+        tools:targetApi="o" />
+    <item
+        android:id="@+id/delete_person"
+        android:icon="@drawable/ic_delete"
+        android:title="Buscar empleados"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="2"
+
+        tools:targetApi="o" />
+
+</menu>

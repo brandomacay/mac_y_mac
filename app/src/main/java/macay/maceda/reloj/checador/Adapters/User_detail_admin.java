@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.DetailPersonActivity;
 import macay.maceda.reloj.checador.EditUser;
@@ -43,7 +44,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         TextView personBirthday;
         TextView personAddress;
         TextView personStartWork;
-        ImageView personImage;
+        CircleImageView personImage;
         ImageView opcionEdit;
         ImageView opcionView;
         ImageView opcionDelete;
@@ -64,10 +65,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
             personBirthday = (TextView) v.findViewById(R.id.nacimiento);
             personAddress = (TextView) v.findViewById(R.id.direccion);
             personStartWork = (TextView) v.findViewById(R.id.iniciotrabajo);
-            personImage = (ImageView) v.findViewById(R.id.fotouser);
-            opcionEdit = (ImageView) v.findViewById(R.id.edit);
-            opcionView = (ImageView) v.findViewById(R.id.view);
-            opcionDelete = (ImageView) v.findViewById(R.id.delete);
+            personImage = (CircleImageView) v.findViewById(R.id.fotouser);
 
             opcionEdit.setOnClickListener(this);
             opcionView.setOnClickListener(this);
@@ -81,13 +79,6 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.edit:
-                    Empleados_admin person = mEmpleados.get(getPosition());
-                    goToUpdateActivity(person.getId());
-                    break;
-                case R.id.view:
-
-                    break;
 
                 case R.id.fotouser:
                     Empleados_admin person1 = mEmpleados.get(getPosition());
@@ -141,9 +132,6 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
 
                     break;
 
-                case R.id.delete:
-                    deletUser();
-                    break;
             }
 
         }
@@ -152,32 +140,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
             goToUpdate.putExtra("USER_ID",personId);
             mContext.startActivity(goToUpdate);
         }
-        private void deletUser(){
-            AlertDialog.Builder myBulid = new AlertDialog.Builder(mContext).setCancelable(false);
-            myBulid.setMessage("En verdad deseas eliminar a esta persona?");
-            myBulid.setIcon(R.mipmap.ic_launcher);
-            myBulid.setTitle("Eliminar Usuario");
-            myBulid.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(mContext);
-                    Empleados_admin person = mEmpleados.get(getPosition());
-                    dbHelper.deletePerson(person.getId(), mContext);
-                    mEmpleados.remove(getPosition());
-                    //mRecyclerV.removeViewAt(getPosition());
-                    notifyItemRemoved(getPosition());
-                    notifyItemRangeChanged(getPosition(), mEmpleados.size());
-                    notifyDataSetChanged();                }
-            });
-            myBulid.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            AlertDialog dialog = myBulid.create();
-            dialog.show();
-        }
+
     }
 
     public void add(int position, Empleados_admin empleados_admin) {

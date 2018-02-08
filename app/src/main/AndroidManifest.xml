@@ -36,7 +36,7 @@
         </activity>
         <activity
             android:name=".AdminActivity"
-            android:label="@string/title_activity_admin"
+            android:label="Administrador"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -70,7 +70,12 @@
         <activity
             android:name=".SettingActivity"
             android:label="Configuraciones" />
-        <activity android:name=".DetailPersonActivity"></activity>
+        <activity
+            android:name=".DetailPersonActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

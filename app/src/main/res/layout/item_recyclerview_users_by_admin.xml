@@ -11,18 +11,18 @@
         android:background="@drawable/custom_ripple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="7dp"
         android:orientation="vertical">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/fotouser"
-                android:layout_width="4dp"
-                android:layout_height="80dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_account_circle" />
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/ic_account_circle" />
 
             <LinearLayout
                 android:layout_width="195dp"
@@ -34,7 +34,6 @@
                     android:id="@+id/nombres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nombres"
                     android:textColor="@android:color/black"
                     android:textSize="24sp" />
 
@@ -42,95 +41,42 @@
                     android:id="@+id/celular"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_view"
                     android:drawablePadding="4dp"
-                    android:drawableStart="@drawable/ic_phone"
-                    android:drawableTint="@color/colorAccent"
-                    android:text="0989101248"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/cargo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="ocupation" />
+                     />
             </LinearLayout>
 
         </LinearLayout>
         <TextView
             android:id="@+id/user_id"
-            android:text="area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/area"
-            android:text="area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/correo"
-            android:text="email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/nacimiento"
-            android:text="birthday"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/direccion"
-            android:text="address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/iniciotrabajo"
-            android:text="startWork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:tint="#F44336"
-                app:srcCompat="@drawable/ic_delete"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginRight="8dp" />
-
-            <ImageView
-                android:id="@+id/edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="50dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_edit"
-                android:tint="@color/colorAccent"
-                android:layout_marginRight="50dp" />
-            <ImageView
-                android:id="@+id/view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="95dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/ic_view"
-                android:tint="@color/colorAccent"
-                android:layout_marginRight="95dp" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_actividades"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </android.support.v7.widget.CardView>
