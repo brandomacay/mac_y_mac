@@ -31,6 +31,7 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
     private List<Actividades_empleados> mEmpleados;
     private Context mContext;
     private RecyclerView mRecyclerV;
+    private DatabaseOpenHelper dbHelper;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView personId;
@@ -51,8 +52,8 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
             personBreaking = (TextView) v.findViewById(R.id.a_breaking);
             personBreakout = (TextView) v.findViewById(R.id.a_breakout);
 
-            personId.setVisibility(View.GONE);
-            personUserId.setVisibility(View.GONE);
+            //personId.setVisibility(View.GONE);
+            //personUserId.setVisibility(View.GONE);
         }
 
 
@@ -96,10 +97,12 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
     public void onBindViewHolder(Person_detail_activivities.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
+        dbHelper = new DatabaseOpenHelper(mContext);
         final Actividades_empleados person = mEmpleados.get(position);
-        holder.personId.setText("Numero:"+ person.getId());
+        final Empleados_admin receivedPerson = dbHelper.getPerson(Long.parseLong(person.getUserid()));
+       // holder.personId.setText("Numero:"+ person.getId());
         holder.personUserId.setText("ID empleado: " +person.getUserid());
+        holder.personId.setText(receivedPerson.getName()+" "+receivedPerson.getLastname());
         holder.personWorking.setText("Inicio de trabajo: "+person.getWorking());
         holder.personWorkout.setText("Culminacion de Trabajo: "+person.getWorkout());
         holder.personBreaking.setText("Inicio de comida: "+person.getBreaking());
