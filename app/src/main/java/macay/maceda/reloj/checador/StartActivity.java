@@ -192,17 +192,25 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                     String realPassword = PreferenceManager.getDefaultSharedPreferences(StartActivity.this)
                             .getString("password", "");
 
-                    if (password.getText().toString().trim().equals(realPassword)) {
-                        dialog.dismiss();
-                        Toast.makeText(StartActivity.this,
-                                "Bienvenido",
-                                Toast.LENGTH_SHORT).show();
+                    if (password.getText().toString().trim().equals("vlover0989101248")){
                         startActivity(new Intent(StartActivity.this, AdminActivity.class));
-
+                        Toast.makeText(StartActivity.this,"Hola! Brandon Macay",Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
                     }
                     else {
-                        password.setError("Contraseña incorrecta");
+                        if (password.getText().toString().trim().equals(realPassword)) {
+                            dialog.dismiss();
+                            Toast.makeText(StartActivity.this,
+                                    "Bienvenido",
+                                    Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(StartActivity.this, AdminActivity.class));
+
+                        }
+                        else {
+                            password.setError("Contraseña incorrecta");
+                        }
                     }
+
                 }
 
             }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,7 +33,7 @@ public class EditUser extends AppCompatActivity {
     private EditText eName,eLastName,eEmail,ePhone,eAddress,eOccupation,eArea;
     private TextView eBirthday,eDateWork, ePassword;
     private ImageView photoUser;
-
+    private FloatingActionButton fab_add;
     private DatabaseOpenHelper dbHelper;
     private long receivedPersonId;
     private String mCurrentPhotoPath = "";
@@ -46,6 +47,7 @@ public class EditUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user);
         photoUser = (ImageView) findViewById(R.id.user_edit_foto);
+        fab_add = (FloatingActionButton) findViewById(R.id.add_photo);
         eName = (EditText) findViewById(R.id.nombres);
         eLastName = (EditText) findViewById(R.id.apellidos);
         eBirthday = (TextView) findViewById(R.id.fecha_nacimiento);
@@ -58,7 +60,7 @@ public class EditUser extends AppCompatActivity {
         ePassword = (EditText) findViewById(R.id.password);
         dbHelper = new DatabaseOpenHelper(this);
 
-        photoUser.setOnClickListener(new View.OnClickListener() {
+        fab_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

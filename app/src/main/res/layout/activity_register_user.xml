@@ -21,13 +21,30 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/foto"
-            app:srcCompat="@drawable/ic_account_circle"
-            android:layout_gravity="start"
-            android:adjustViewBounds="true"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
+            <RelativeLayout
+                android:layout_width="150dp"
+                android:layout_height="150dp">
+                <ImageView
+                    android:id="@+id/foto"
+                    android:background="@drawable/ic_account_circle"
+                    android:adjustViewBounds="true"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/add_photo_r"
+                    android:layout_width="50dp"
+                    android:layout_height="189dp"
+                    android:layout_margin="7dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:clickable="true"
+                    android:tint="@android:color/white"
+                    app:fabSize="mini"
+                    app:srcCompat="@drawable/ic_add_a_photo"
+                    tools:targetApi="o" />
+
+            </RelativeLayout>
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"

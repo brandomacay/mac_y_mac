@@ -39,6 +39,7 @@ public class DetailPersonActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        dbConnector = new DatabaseOpenHelper(this);
 
         try {
             receivedPersonId = getIntent().getLongExtra("USER_ID", 1);
@@ -47,7 +48,8 @@ public class DetailPersonActivity extends AppCompatActivity {
         }
 
         //toolbar.setTitle("Hola que hace");
-        getSupportActionBar().setTitle("Id de empleado: "+ receivedPersonId);
+        final Empleados_admin person = dbConnector.getPerson(receivedPersonId);
+        getSupportActionBar().setTitle(""+receivedPersonId+"-"+person.getName()+" "+person.getLastname());
         toolbar.setTitleTextColor(getResources().getColor(R.color.negro));
         startviewuser("_id",receivedPersonId);
 

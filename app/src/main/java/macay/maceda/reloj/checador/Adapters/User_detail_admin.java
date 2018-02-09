@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 import macay.maceda.reloj.checador.DetailPersonActivity;
 import macay.maceda.reloj.checador.EditUser;
@@ -44,10 +43,8 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         TextView personBirthday;
         TextView personAddress;
         TextView personStartWork;
-        CircleImageView personImage;
-        ImageView opcionEdit;
-        ImageView opcionView;
-        ImageView opcionDelete;
+        ImageView personImage;
+
 
 
 
@@ -65,11 +62,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
             personBirthday = (TextView) v.findViewById(R.id.nacimiento);
             personAddress = (TextView) v.findViewById(R.id.direccion);
             personStartWork = (TextView) v.findViewById(R.id.iniciotrabajo);
-            personImage = (CircleImageView) v.findViewById(R.id.fotouser);
-
-            opcionEdit.setOnClickListener(this);
-            opcionView.setOnClickListener(this);
-            opcionDelete.setOnClickListener(this);
+            personImage = (ImageView) v.findViewById(R.id.fotouser);
             personImage.setOnClickListener(this);
 
 
@@ -183,7 +176,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         // - replace the contents of the view with that element
 
         final Empleados_admin person = mEmpleados.get(position);
-        holder.personName.setText("Nombres: "+person.getName()+ " " + person.getLastname());
+        holder.personName.setText(person.getName()+ " " + person.getLastname());
         holder.personPhone.setText("Numero celular: "+person.getNumber_phone());
         holder.personOcupation.setText("Cargo/puesto: "+person.getOccupation());
         holder.personArea.setText("Area de trabajo: "+person.getArea());
@@ -210,6 +203,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
 
 
     }
+
 
     private void goToDetailsPerson(long personId){
         Intent goToUpdate = new Intent(mContext, DetailPersonActivity.class);

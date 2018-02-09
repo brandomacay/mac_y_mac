@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -57,7 +58,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     private DatabaseOpenHelper dbHelper;
     private String mCurrentPhotoPath = "";
     private String path = "/sdcard/relojchecador/fotos/";
-
+    private FloatingActionButton photo_register;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +81,8 @@ public class RegisterUserActivity extends AppCompatActivity {
         started_date = (TextView) findViewById(R.id.register_user_started_date_tv);
 
         photo = (ImageView) findViewById(R.id.foto);
-        photo.setOnClickListener(new View.OnClickListener() {
+        photo_register = (FloatingActionButton) findViewById(R.id.add_photo_r);
+        photo_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
