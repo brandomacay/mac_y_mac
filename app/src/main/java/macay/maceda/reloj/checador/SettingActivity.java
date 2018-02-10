@@ -87,6 +87,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 exportdb();
                // Toast.makeText(SettingActivity.this, "CVS CREADO!!", Toast.LENGTH_SHORT).show();
                 break;
+
+
         }
     }
     private void edit_password_dialog () {
@@ -159,6 +161,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             finish();
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
     private void createCSV () {

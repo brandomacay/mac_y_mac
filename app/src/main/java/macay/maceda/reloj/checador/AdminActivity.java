@@ -146,6 +146,11 @@ public class AdminActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
             return true;
         }
+        if (id == R.id.timeline){
+            startActivity(new Intent(AdminActivity.this,AllRegistersActivity.class));
+            overridePendingTransition(0,0);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

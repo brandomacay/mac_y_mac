@@ -261,6 +261,41 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
         return personLinkedList;
     }
+
+    public List<Actividades_empleados> getAllActividades(String filter) {
+        String query;
+        if(filter.equals("")){
+            query = "SELECT  * FROM " + TABLE_CLOCKING_NAME + "ORDER BY " + filter + " DESC";
+        }else{
+
+            query = "SELECT  * FROM " + TABLE_CLOCKING_NAME +" ORDER BY " + filter + " DESC";
+        }
+
+        List<Actividades_empleados> personLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Actividades_empleados person;
+
+        if (cursor.moveToFirst()) {
+            do {
+                person = new Actividades_empleados();
+
+                person.setId(cursor.getLong(cursor.getColumnIndex(COLUMN_CLOCKING_ID)));
+                person.setUserid(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_USERID)));
+                person.setWorking(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_IN)));
+                person.setWorkout(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_OUT)));
+                person.setBreaking(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_BREAKIN)));
+                person.setBreakout(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_BREAKOUT)));
+
+                personLinkedList.add(person);
+            } while (cursor.moveToNext());
+            db.close();
+            cursor.close();
+        }
+
+
+        return personLinkedList;
+    }
     //Query only 1 record by id and password
 
     public Empleados_admin getEmpleado(String id, String password){

@@ -6,12 +6,18 @@
         android:icon="@drawable/ic_search"
         android:title="Buscar empleados"
         app:actionViewClass="android.support.v7.widget.SearchView"
-        app:showAsAction="collapseActionView|ifRoom"
+        app:showAsAction="ifRoom|collapseActionView"
         />
 
     <item
         android:id="@+id/setting"
         android:title="Configuraciones"
         android:orderInCategory="0" />
+
+    <item android:id="@+id/timeline"
+        android:icon="@drawable/ic_timeline"
+        android:title="Todos los registros"
+        app:showAsAction="always"
+        />
 
 </menu>
