@@ -287,45 +287,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         }
         return null;
     }
-    public List<Empleados_admin> getSearchPerson() {
-        String[] columns = {
-                COLUMN_ID,
-                COLUMN_PERSON_NAME,
-                COLUMN_PERSON_LASTNAME
-        };
-        // sorting orders
-        String sortOrder =
-                COLUMN_PERSON_NAME + " ASC";
-        List<Empleados_admin> beneficiaryList = new ArrayList<Empleados_admin>();
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-
-        Cursor cursor = db.query(TABLE_NAME, //Table to query
-                columns,    //columns to return
-                null,        //columns for the WHERE clause
-                null,        //The values for the WHERE clause
-                null,       //group the rows
-                null,
-                //filter by row groups
-                sortOrder); //The sort order
-
-
-        if (cursor.moveToFirst()) {
-            do {
-                Empleados_admin beneficiary = new Empleados_admin();
-                beneficiary.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_ID))));
-                beneficiary.setName(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_NAME)));
-                beneficiary.setLastname(cursor.getString(cursor.getColumnIndex(COLUMN_PERSON_LASTNAME)));
-               // Adding user record to list
-                beneficiaryList.add(beneficiary);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-
-        return beneficiaryList;
-    }
 
     /**delete record**/
     public void deletePerson(long id, Context context) {
@@ -437,7 +398,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 "'  WHERE userid='" + user_id + "' AND workin='" + workin +
                 "'");
 
-        Toast.makeText(context, "REGRESO DE COMIDA registrada", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "De vuelta al trabajo,registrada!", Toast.LENGTH_LONG).show();
 
     }
 
