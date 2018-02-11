@@ -177,12 +177,43 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
 
         final Empleados_admin person = mEmpleados.get(position);
         holder.personName.setText(person.getName()+ " " + person.getLastname());
-        holder.personPhone.setText("Numero celular: "+person.getNumber_phone());
-        holder.personOcupation.setText("Cargo/puesto: "+person.getOccupation());
-        holder.personArea.setText("Area de trabajo: "+person.getArea());
-        holder.personEmail.setText("Correo electronico: "+person.getEmail());
-        holder.personBirthday.setText("Fecha de nacimiento: "+person.getBirthday());
-        holder.personAddress.setText("Direccion: "+person.getAddress());
+        if(person.getNumber_phone().equals("")){
+            holder.personPhone.setVisibility(View.GONE);
+        }else{
+            holder.personPhone.setText("Numero celular: "+person.getNumber_phone());
+
+        }
+
+        if (person.getOccupation().equals("")){
+            holder.personOcupation.setVisibility(View.GONE);
+        }else{
+            holder.personOcupation.setText("Cargo/puesto: "+person.getOccupation());
+
+        }
+        if (person.getArea().equals("")){
+            holder.personArea.setVisibility(View.GONE);
+        }else{
+            holder.personArea.setText("Area de trabajo: "+person.getArea());
+
+        }
+        if (person.getEmail().equals("")){
+            holder.personEmail.setVisibility(View.GONE);
+        }else{
+            holder.personEmail.setText("Correo electronico: "+person.getEmail());
+
+        }
+        if (person.getBirthday().equals("")){
+            holder.personBirthday.setVisibility(View.GONE);
+        }else{
+            holder.personBirthday.setText("Fecha de nacimiento: "+person.getBirthday());
+
+        }
+        if (person.getAddress().equals("")){
+            holder.personAddress.setVisibility(View.GONE);
+        }else{
+            holder.personAddress.setText("Direccion: "+person.getAddress());
+
+        }
         holder.personStartWork.setText("Fecha de contrato: "+person.getDatework());
         holder.personId.setText("ID empleado: " +person.getId());
 

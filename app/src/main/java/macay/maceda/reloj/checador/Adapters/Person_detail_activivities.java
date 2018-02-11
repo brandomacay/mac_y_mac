@@ -5,16 +5,24 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.hardware.camera2.params.BlackLevelPattern;
+import android.support.annotation.ColorRes;
+import android.support.annotation.FloatRange;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.text.StringCharacterIterator;
 import java.util.List;
 
 import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
@@ -40,6 +48,7 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
         TextView personWorkout;
         TextView personBreaking;
         TextView personBreakout;
+        TextView totalidad;
         public View layout;
 
         ViewHolder(View v) {
@@ -51,7 +60,7 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
             personWorkout = (TextView) v.findViewById(R.id.a_workout);
             personBreaking = (TextView) v.findViewById(R.id.a_breaking);
             personBreakout = (TextView) v.findViewById(R.id.a_breakout);
-
+            totalidad = (TextView) v.findViewById(R.id.calculo_total);
             //personId.setVisibility(View.GONE);
             //personUserId.setVisibility(View.GONE);
         }
@@ -92,7 +101,7 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
     }
 
     // Replace the contents of a view (invoked by the layout manager)
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     @Override
     public void onBindViewHolder(Person_detail_activivities.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
@@ -103,10 +112,25 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
        // holder.personId.setText("Numero:"+ person.getId());
         holder.personUserId.setText("ID empleado: " +person.getUserid());
         holder.personId.setText(receivedPerson.getName()+" "+receivedPerson.getLastname());
+        holder.personId.setTextSize(20);
         holder.personWorking.setText("Inicio de trabajo: "+person.getWorking());
-        holder.personWorkout.setText("Culminacion de Trabajo: "+person.getWorkout());
-        holder.personBreaking.setText("Inicio de comida: "+person.getBreaking());
-        holder.personBreakout.setText("Salida de comida: "+person.getBreakout());
+        if (person.getWorkout() == null ){
+            holder.personWorkout.setVisibility(View.GONE);
+        }else{
+            holder.personWorkout.setText("Culminacion de Trabajo: "+person.getWorkout());
+        }
+        if (person.getBreaking() == null){
+            holder.personBreakout.setVisibility(View.GONE);
+        }else{
+            holder.personBreakout.setText("Regreso al trabajo: "+person.getBreaking());
+
+        }
+        if (person.getBreakout() == null){
+            holder.personBreaking.setVisibility(View.GONE);
+        }else{
+            holder.personBreaking.setText("Salida a comer: "+person.getBreakout());
+
+        }
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
