@@ -80,7 +80,7 @@ public class EditUser extends AppCompatActivity {
                     alertDialogBuilder
                             .setMessage("El usuario no podra acceder")
                             .setCancelable(false)
-                            .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                            .setPositiveButton("Bloquear",new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,int id) {
                                     // if this button is clicked, close
                                     // current activity
