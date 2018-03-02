@@ -2,18 +2,22 @@ package macay.maceda.reloj.checador;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,8 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 
 public class EditUser extends AppCompatActivity {
     private EditText eName,eLastName,eEmail,ePhone,eAddress,eOccupation,eArea;
+    int blocked = 0;
+    private Switch blocked_sw;
     private TextView eBirthday,eDateWork, ePassword;
     private ImageView photoUser;
     private FloatingActionButton fab_add;
@@ -57,7 +63,57 @@ public class EditUser extends AppCompatActivity {
         eOccupation = (EditText) findViewById(R.id.cargo);
         eArea = (EditText) findViewById(R.id.area);
         eDateWork = (TextView) findViewById(R.id.trabajo);
+        blocked_sw = (Switch) findViewById(R.id.user_blocked_switch);
+        blocked_sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    //  blocked_sw.setText("Only Today's");  //To change the text near to switch
+                    // Log.d("You are :", "Checked");
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            EditUser.this);
+
+                    // set title
+                    alertDialogBuilder.setTitle("Bloquear usuario");
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setMessage("El usuario no podra acceder")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // if this button is clicked, close
+                                    // current activity
+                                    blocked_sw.setChecked(true);
+                                    blocked = 1;
+                                }
+                            })
+                            .setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // if this button is clicked, just close
+                                    // the dialog box and do nothing
+                                    blocked_sw.setChecked(false);
+                                    blocked = 0;
+                                }
+                            });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+                }
+                else {
+                    //    blocked_sw.setText("All List");  //To change the text near to switch
+                    // Log.d("You are :", " Not Checked");
+                    blocked = 0;
+                }
+            }
+        });
+
         ePassword = (EditText) findViewById(R.id.password);
+
+
         dbHelper = new DatabaseOpenHelper(this);
 
         fab_add.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +159,13 @@ public class EditUser extends AppCompatActivity {
         eOccupation.setText(receivedPerson.getOccupation());
         eArea.setText(receivedPerson.getArea());
         eDateWork.setText(receivedPerson.getDatework());
+        blocked = receivedPerson.getBlocked();
+        if (blocked == 0) {
+            blocked_sw.setChecked(false);
+        }
+        else {
+            blocked_sw.setChecked(true);
+        }
         ePassword.setText(receivedPerson.getPassword());
         mCurrentPhotoPath = receivedPerson.getImage();
 
@@ -167,7 +230,7 @@ public class EditUser extends AppCompatActivity {
 
             }
             else {
-                Empleados_admin updatedPerson = new Empleados_admin(name, lastname,cellphone,occupation,area,email, birthday,address,datawork,mCurrentPhotoPath, 0, passwd);
+                Empleados_admin updatedPerson = new Empleados_admin(name, lastname,cellphone,occupation,area,email, birthday,address,datawork,mCurrentPhotoPath, blocked, passwd);
 
                 dbHelper.updatePerson(receivedPersonId, this, updatedPerson);
 

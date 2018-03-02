@@ -52,6 +52,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     //private String createUsers = "CREATE TABLE users (_id integer primary key autoincrement, name,"
     //      + " lastname, birthday, email, phone, address, ocupation, area, started_date, image);";
     private EditText name, lastname, email, phone, address, ocupation, area, password;
+    int blocked = 0;
     private Switch blocked_sw;
     private static TextView birthday, started_date;
     Bitmap bitmappost;
@@ -99,13 +100,15 @@ public class RegisterUserActivity extends AppCompatActivity {
                                     // if this button is clicked, close
                                     // current activity
                                     blocked_sw.setChecked(true);
+                                    blocked = 1;
                                 }
                             })
-                            .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            .setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,int id) {
                                     // if this button is clicked, just close
                                     // the dialog box and do nothing
                                     blocked_sw.setChecked(false);
+                                    blocked = 0;
                                 }
                             });
 
@@ -118,22 +121,11 @@ public class RegisterUserActivity extends AppCompatActivity {
                 else {
                 //    blocked_sw.setText("All List");  //To change the text near to switch
                    // Log.d("You are :", " Not Checked");
+                    blocked = 0;
                 }
             }
         });
-        /*
-        blocked_sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
-                if (isChecked) {
-                    // do something when check is selected
-                } else {
-                    //do something when unchecked
-                }
-            }
-        });
-        */
+
         password = (EditText) findViewById(R.id.register_user_password_et);
 
 
@@ -401,7 +393,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                         ocupation.getText().toString(), area.getText().toString(),
                         email.getText().toString(), birthday.getText().toString(),
                         address.getText().toString(), started_date.getText().toString(),
-                        mCurrentPhotoPath, 0, password.getText().toString().trim());
+                        mCurrentPhotoPath, blocked, password.getText().toString().trim());
                 dbHelper.insertPerson(person);
 
                 return null;
