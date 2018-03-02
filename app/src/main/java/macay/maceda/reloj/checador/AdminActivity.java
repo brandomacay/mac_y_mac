@@ -175,18 +175,17 @@ public class AdminActivity extends AppCompatActivity {
         final EditText cominicado_a = (EditText) promptUserView.findViewById(R.id.comunicado_edit);
 
         alertDialogBuilder.setTitle("Comunicado para los empleados");
-
+        String comuni = PreferenceManager.getDefaultSharedPreferences(AdminActivity.this)
+                .getString("comunicado", "");
+        cominicado_a.setText(comuni);
         alertDialogBuilder.setPositiveButton("Enviar",new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                if (cominicado_a.getText().toString().equals("")){
-                    cominicado_a.setError("Agrega el mensaje");
-                }else{
-                    PreferenceManager.getDefaultSharedPreferences(AdminActivity.this)
-                            .edit()
-                            .putBoolean("mensaje", true)
-                            .putString("comunicado", cominicado_a.getText().toString().trim())
-                            .apply();
-                }
+                PreferenceManager.getDefaultSharedPreferences(AdminActivity.this)
+                        .edit()
+                        .putBoolean("mensaje", true)
+                        .putString("comunicado", cominicado_a.getText().toString().trim())
+                        .apply();
+
             }
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
