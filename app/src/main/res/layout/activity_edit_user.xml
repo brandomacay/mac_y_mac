@@ -7,8 +7,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="macay.maceda.reloj.checador.RegisterUserActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/ss"
+        android:layout_height="wrap_content">
+        <Switch
+            android:id="@+id/switch_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:switchPadding="@dimen/fab_margin"
+            android:text="Bloqueado" />
+    </LinearLayout>
     <ScrollView
         android:scrollbars="vertical"
+        android:layout_below="@+id/ss"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -53,7 +68,7 @@
                     <EditText
                         android:id="@+id/nombres"
                         android:hint="Nombres"
-                        android:inputType="textPersonName"
+                        android:inputType="textCapSentences"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -65,7 +80,8 @@
                         android:layout_below="@+id/floatingActionButton"
                         android:layout_marginTop="11dp"
                         android:hint="Apellidos"
-                        android:inputType="textPersonName" />
+                        android:inputType="textCapSentences"
+                        />
                     <TextView
                         android:id="@+id/fecha_nacimiento"
                         android:layout_width="match_parent"
@@ -100,20 +116,20 @@
             <EditText
                 android:id="@+id/direccion"
                 android:hint="Direccion"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/cargo"
                 android:hint="Cargo en la empresa"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/area"
 
                 android:hint="Departamento o area"
-                android:inputType="text"
+                android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView

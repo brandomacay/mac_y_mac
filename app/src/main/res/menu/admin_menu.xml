@@ -19,5 +19,12 @@
         android:title="Todos los registros"
         app:showAsAction="always"
         />
+    <item
+        android:id="@+id/mensaje"
+        android:title="Comunicado"
+        android:icon="@drawable/ic_message"
+        android:orderInCategory="2"
+        app:showAsAction="always"
+        />
 
 </menu>

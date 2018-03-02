@@ -1,15 +1,21 @@
 package macay.maceda.reloj.checador;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.LinkedList;
@@ -146,15 +152,45 @@ public class AdminActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
             return true;
         }
-
         if (id == R.id.timeline){
             startActivity(new Intent(AdminActivity.this,AllRegistersActivity.class));
             overridePendingTransition(0,0);
             return true;
         }
-
+        if (id== R.id.mensaje){
+            editarcomunicado();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
+
+    public void editarcomunicado(){
+        LayoutInflater layoutinflater = LayoutInflater.from(this);
+        @SuppressLint("InflateParams") View promptUserView = layoutinflater.inflate(R.layout.alert_comunicado, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder.setView(promptUserView);
+
+        final EditText cominicado_a = (EditText) promptUserView.findViewById(R.id.comunicado_edit);
+
+        alertDialogBuilder.setTitle("Comunicado para los empleados");
+
+        alertDialogBuilder.setPositiveButton("Enviar",new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (cominicado_a.getText().toString().equals("")){
+                    cominicado_a.setError("Agrega el mensaje");
+                }else{
+                    PreferenceManager.getDefaultSharedPreferences(AdminActivity.this)
+                            .edit()
+                            .putBoolean("isPasswordSet", true)
+                            .putString("comunicado", cominicado_a.getText().toString().trim())
+                            .apply();
+                }
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();    }
 
     @Override
     protected void onResume() {
