@@ -59,14 +59,14 @@
             <EditText
                 android:id="@+id/register_user_name_et"
                 android:hint="Nombres"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
                 <EditText
                     android:id="@+id/register_user_lastname_et"
 
                     android:hint="Apellidos"
-                    android:inputType="textPersonName"
+                    android:inputType="textCapSentences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -78,6 +78,7 @@
                     android:text="Fecha de nacimiento"
                     android:layout_gravity="center"
                     android:textSize="16dp"
+
                     android:padding="10dp"
                     android:layout_marginTop="0dp"
                     />
@@ -106,23 +107,23 @@
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/register_user_address_et"
+            android:inputType="textCapSentences"
 
             android:hint="Direccion"
-            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/register_user_ocupation_et"
 
             android:hint="Cargo en la empresa"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/register_user_area_et"
 
             android:hint="Departamento o area"
-            android:inputType="text"
+            android:inputType="textCapSentences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
