@@ -19,6 +19,7 @@ public class Empleados_admin {
     private String address;
     private String datework;
     private String image;
+    private int blocked;
     private String password;
 
 
@@ -26,7 +27,8 @@ public class Empleados_admin {
     }
 
     public Empleados_admin(String name,String lastname, String number_phone, String occupation,
-                           String area,String email,String birthday,String address,String datework,String image, String password) {
+                           String area,String email,String birthday,String address,String datework,
+                           String image, int blocked, String password) {
         this.name = name;
         this.lastname = lastname;
         this.number_phone = number_phone;
@@ -37,6 +39,7 @@ public class Empleados_admin {
         this.address = address;
         this.datework = datework;
         this.image = image;
+        this.blocked = blocked;
         this.password = password;
     }
 
@@ -118,6 +121,14 @@ public class Empleados_admin {
     public String getImage() {
         return image;
     }
+
+    public void setBlocked(int blocked) {
+        this.blocked = blocked;
+    }
+    public int getBlocked() {
+        return blocked;
+    }
+
 
     public void setImage(String image) {
         this.image = image;
