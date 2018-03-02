@@ -333,8 +333,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                     user_password.setError("Ingrese su pin de clave");
                 }else {
                     Empleados_admin receivedPerson = dbHelper.getEmpleado(user_id.getText().toString(), user_password.getText().toString());
-                    Empleados_admin idReceived = dbHelper.getPerson(Long.parseLong(user_id.getText().toString().trim()));
-
                     //Long longValue = null;
                     if (receivedPerson == null){
                         Toast.makeText(StartActivity.this,
@@ -343,10 +341,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                         dialog.dismiss();
                     }else{
                         dialog.dismiss();
-                        Toast.makeText(StartActivity.this,
-                                "Bienvenido " + receivedPerson.getName()+" " + receivedPerson.getLastname() ,
-                                Toast.LENGTH_SHORT).show();
-                        goToUpdateUser(Long.parseLong(user_id.getText().toString()));
+                        if (receivedPerson.getBlocked() == 0){
+                            goToUpdateUser(Long.parseLong(user_id.getText().toString()));
+                        }else{
+
+                        }
                     }
 
                 }
@@ -361,5 +360,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         Intent goToUpdate = new Intent(StartActivity.this, UserPanelActivity.class);
         goToUpdate.putExtra("USER_ID", personId);
         startActivity(goToUpdate);
+
     }
 }

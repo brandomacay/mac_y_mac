@@ -35,7 +35,7 @@ import macay.maceda.reloj.checador.Model.Empleados_admin;
 
 public class EditUser extends AppCompatActivity {
     private EditText eName,eLastName,eEmail,ePhone,eAddress,eOccupation,eArea;
-    int blocked = 0;
+    int blocked =0;
     private Switch blocked_sw;
     private TextView eBirthday,eDateWork, ePassword;
     private ImageView photoUser;
@@ -64,53 +64,7 @@ public class EditUser extends AppCompatActivity {
         eArea = (EditText) findViewById(R.id.area);
         eDateWork = (TextView) findViewById(R.id.trabajo);
         blocked_sw = (Switch) findViewById(R.id.user_blocked_switch);
-        blocked_sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    //  blocked_sw.setText("Only Today's");  //To change the text near to switch
-                    // Log.d("You are :", "Checked");
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                            EditUser.this);
-
-                    // set title
-                    alertDialogBuilder.setTitle("Bloquear usuario");
-
-                    // set dialog message
-                    alertDialogBuilder
-                            .setMessage("El usuario no podra acceder")
-                            .setCancelable(false)
-                            .setPositiveButton("Bloquear",new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
-                                    // if this button is clicked, close
-                                    // current activity
-                                    blocked_sw.setChecked(true);
-                                    blocked = 1;
-                                }
-                            })
-                            .setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
-                                    // if this button is clicked, just close
-                                    // the dialog box and do nothing
-                                    blocked_sw.setChecked(false);
-                                    blocked = 0;
-                                }
-                            });
-
-                    // create alert dialog
-                    AlertDialog alertDialog = alertDialogBuilder.create();
-
-                    // show it
-                    alertDialog.show();
-                }
-                else {
-                    //    blocked_sw.setText("All List");  //To change the text near to switch
-                    // Log.d("You are :", " Not Checked");
-                    blocked = 0;
-                }
-            }
-        });
-
+        blocked_sw.setChecked(false);
         ePassword = (EditText) findViewById(R.id.password);
 
 
@@ -149,7 +103,7 @@ public class EditUser extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
+        final Empleados_admin receivedPerson = dbHelper.getPerson(receivedPersonId);
         eName.setText(receivedPerson.getName());
         eLastName.setText(receivedPerson.getLastname());
         eBirthday.setText(receivedPerson.getBirthday());
@@ -161,18 +115,84 @@ public class EditUser extends AppCompatActivity {
         eDateWork.setText(receivedPerson.getDatework());
         blocked = receivedPerson.getBlocked();
         if (blocked == 0) {
-            blocked_sw.setChecked(false);
+           // blocked_sw.setChecked(false);
         }
-        else {
-            blocked_sw.setChecked(true);
+        if (blocked == 1){
+            dialogo_este_men_esta_bloqueado();
+           // blocked_sw.setChecked(true);
         }
+        blocked_sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked) {
+                        if (blocked == 1){
+                            blocked_sw.setChecked(true);
+                        }else{
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                    EditUser.this);
+                            alertDialogBuilder.setTitle("Bloquear usuario");
+                            alertDialogBuilder
+                                    .setMessage("El usuario no podra acceder")
+                                    .setCancelable(false)
+                                    .setPositiveButton("Bloquear",new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            // if this button is clicked, close
+                                            // current activity
+                                            blocked_sw.setChecked(true);
+                                            blocked = 1;
+                                        }
+                                    })
+                                    .setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog,int id) {
+                                            blocked_sw.setChecked(false);
+                                            blocked = 0;
+                                        }
+                                    });
+
+                            AlertDialog alertDialog = alertDialogBuilder.create();
+
+                            // show it
+                            alertDialog.show();
+                        }
+
+                    }
+                    else {
+                        //    blocked_sw.setText("All List");  //To change the text near to switch
+                        // Log.d("You are :", " Not Checked");
+                        blocked = 0;
+                    }
+
+
+            }
+        });
         ePassword.setText(receivedPerson.getPassword());
         mCurrentPhotoPath = receivedPerson.getImage();
 
         Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(photoUser);
 
+    }
 
-
+    public void dialogo_este_men_esta_bloqueado(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                EditUser.this);
+        alertDialogBuilder.setTitle("Este empleado esta bloqueado");
+        alertDialogBuilder
+                .setMessage("Deseas desbloquearlo?")
+                .setCancelable(false)
+                .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        blocked_sw.setChecked(false);
+                        blocked = 0;
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        blocked_sw.setChecked(true);
+                        blocked = 1;
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
