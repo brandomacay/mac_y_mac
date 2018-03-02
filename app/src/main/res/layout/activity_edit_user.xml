@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Switch
-                android:id="@+id/switch_state"
+                android:id="@+id/user_blocked_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -61,9 +61,11 @@
                     <EditText
                         android:id="@+id/nombres"
                         android:hint="Nombres"
-                        android:inputType="textCapSentences"
+                        android:inputType="textCapWords"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+
+                        />
 
                     <EditText
                         android:id="@+id/apellidos"

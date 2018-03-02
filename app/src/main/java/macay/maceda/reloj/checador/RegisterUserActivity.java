@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -20,10 +21,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +52,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     //private String createUsers = "CREATE TABLE users (_id integer primary key autoincrement, name,"
     //      + " lastname, birthday, email, phone, address, ocupation, area, started_date, image);";
     private EditText name, lastname, email, phone, address, ocupation, area, password;
+    private Switch blocked_sw;
     private static TextView birthday, started_date;
     Bitmap bitmappost;
     boolean imageIsSet = false;
@@ -73,7 +77,65 @@ public class RegisterUserActivity extends AppCompatActivity {
         address = (EditText) findViewById(R.id.register_user_address_et);
         ocupation = (EditText) findViewById(R.id.register_user_ocupation_et);
         area = (EditText) findViewById(R.id.register_user_area_et);
+        blocked_sw = (Switch) findViewById(R.id.user_blocked_switch);
+        blocked_sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                  //  blocked_sw.setText("Only Today's");  //To change the text near to switch
+                   // Log.d("You are :", "Checked");
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            RegisterUserActivity.this);
+
+                    // set title
+                    alertDialogBuilder.setTitle("Bloquear usuario");
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setMessage("El usuario no podra acceder")
+                            .setCancelable(false)
+                            .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // if this button is clicked, close
+                                    // current activity
+                                    blocked_sw.setChecked(true);
+                                }
+                            })
+                            .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // if this button is clicked, just close
+                                    // the dialog box and do nothing
+                                    blocked_sw.setChecked(false);
+                                }
+                            });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+                }
+                else {
+                //    blocked_sw.setText("All List");  //To change the text near to switch
+                   // Log.d("You are :", " Not Checked");
+                }
+            }
+        });
+        /*
+        blocked_sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                if (isChecked) {
+                    // do something when check is selected
+                } else {
+                    //do something when unchecked
+                }
+            }
+        });
+        */
         password = (EditText) findViewById(R.id.register_user_password_et);
+
 
 
 
@@ -334,13 +396,12 @@ public class RegisterUserActivity extends AppCompatActivity {
                 new AsyncTask<Object, Object, Cursor>() {
             @Override
             protected Cursor doInBackground(Object... params) {
-                int a = 0;
                 Empleados_admin person = new Empleados_admin(name.getText().toString(),
                         lastname.getText().toString(), phone.getText().toString(),
                         ocupation.getText().toString(), area.getText().toString(),
                         email.getText().toString(), birthday.getText().toString(),
                         address.getText().toString(), started_date.getText().toString(),
-                        mCurrentPhotoPath,a, password.getText().toString().trim());
+                        mCurrentPhotoPath, 0, password.getText().toString().trim());
                 dbHelper.insertPerson(person);
 
                 return null;

@@ -315,12 +315,11 @@ public class UserPanelActivity extends AppCompatActivity {
                             password.setError("Agrege al menos 4 numeros");
                             repeatpassword.setError("Agrege al menos 4 numeros");
                         }else {
-                            int a =0;
                             Empleados_admin updatedPerson = new Empleados_admin(receivedPerson.getName(),
                                     receivedPerson.getLastname(),receivedPerson.getNumber_phone(),
                                     receivedPerson.getOccupation(),receivedPerson.getArea(),
                                     receivedPerson.getEmail(), receivedPerson.getBirthday(),receivedPerson.getAddress(),
-                                    receivedPerson.getDatework(),mCurrentPhotoPath,a, password.getText().toString().trim());
+                                    receivedPerson.getDatework(),mCurrentPhotoPath, receivedPerson.getBlocked(), password.getText().toString().trim());
                             dbHelper.updatePasswordPerson(receivedPersonId, UserPanelActivity.this, updatedPerson);
                             dialog.dismiss();
                             handler.postDelayed(textRunnable, 10000);
