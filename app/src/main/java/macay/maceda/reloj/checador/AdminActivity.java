@@ -157,40 +157,11 @@ public class AdminActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
             return true;
         }
-        if (id== R.id.mensaje){
-            editarcomunicado();
-            return true;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
-    public void editarcomunicado(){
-        LayoutInflater layoutinflater = LayoutInflater.from(this);
-        @SuppressLint("InflateParams") View promptUserView = layoutinflater.inflate(R.layout.alert_comunicado, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        alertDialogBuilder.setView(promptUserView);
-
-        final EditText cominicado_a = (EditText) promptUserView.findViewById(R.id.comunicado_edit);
-
-        alertDialogBuilder.setTitle("Comunicado para los empleados");
-        String comuni = PreferenceManager.getDefaultSharedPreferences(AdminActivity.this)
-                .getString("comunicado", "");
-        cominicado_a.setText(comuni);
-        alertDialogBuilder.setPositiveButton("Enviar",new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                PreferenceManager.getDefaultSharedPreferences(AdminActivity.this)
-                        .edit()
-                        .putBoolean("mensaje", true)
-                        .putString("comunicado", cominicado_a.getText().toString().trim())
-                        .apply();
-
-            }
-        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
 
     @Override
     protected void onResume() {

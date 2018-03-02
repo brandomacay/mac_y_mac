@@ -116,6 +116,7 @@ public class EditUser extends AppCompatActivity {
         blocked = receivedPerson.getBlocked();
         if (blocked == 0) {
            // blocked_sw.setChecked(false);
+            blocked_sw.setText("Desbloqueado");
         }
         if (blocked == 1){
             dialogo_este_men_esta_bloqueado();
@@ -139,12 +140,14 @@ public class EditUser extends AppCompatActivity {
                                             // if this button is clicked, close
                                             // current activity
                                             blocked_sw.setChecked(true);
+                                            blocked_sw.setText("Bloqueado");
                                             blocked = 1;
                                         }
                                     })
                                     .setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog,int id) {
                                             blocked_sw.setChecked(false);
+                                            blocked_sw.setText("Desbloqueado");
                                             blocked = 0;
                                         }
                                     });
@@ -160,6 +163,7 @@ public class EditUser extends AppCompatActivity {
                         //    blocked_sw.setText("All List");  //To change the text near to switch
                         // Log.d("You are :", " Not Checked");
                         blocked = 0;
+                        blocked_sw.setText("Desbloqueado");
                     }
 
 
@@ -182,6 +186,7 @@ public class EditUser extends AppCompatActivity {
                 .setPositiveButton("Si",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         blocked_sw.setChecked(false);
+                        blocked_sw.setText("Desbloqueado");
                         blocked = 0;
                     }
                 })

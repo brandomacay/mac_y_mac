@@ -1,5 +1,6 @@
 package macay.maceda.reloj.checador;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -45,7 +47,7 @@ import macay.maceda.reloj.checador.DataBase.DatabaseOpenHelper;
 
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
-    CardView cv,cv_pdf,cv_cvs;
+    CardView cv,cv_pdf,cv_cvs,comunica;
     ProgressDialog pd;
     private DatabaseOpenHelper dbHelper;
     File f;
@@ -60,6 +62,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         cv_pdf.setOnClickListener(this);
         cv_cvs = (CardView) findViewById(R.id.cvs_share);
         cv_cvs.setOnClickListener(this);
+        comunica = (CardView) findViewById(R.id.comunicate);
+        comunica.setOnClickListener(this);
         setupActionBar();
 
         dbHelper = new DatabaseOpenHelper(this);
@@ -88,8 +92,38 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                // Toast.makeText(SettingActivity.this, "CVS CREADO!!", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.comunicate:
+                editarcomunicado();
+                break;
 
         }
+    }
+    public void editarcomunicado(){
+        LayoutInflater layoutinflater = LayoutInflater.from(this);
+        @SuppressLint("InflateParams") View promptUserView = layoutinflater.inflate(R.layout.alert_comunicado, null);
+
+        android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(this);
+
+        alertDialogBuilder.setView(promptUserView);
+
+        final EditText cominicado_a = (EditText) promptUserView.findViewById(R.id.comunicado_edit);
+
+        alertDialogBuilder.setTitle("Comunicado para los empleados");
+        String comuni = PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)
+                .getString("comunicado", "");
+        cominicado_a.setText(comuni);
+        alertDialogBuilder.setPositiveButton("Enviar",new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)
+                        .edit()
+                        .putBoolean("mensaje", true)
+                        .putString("comunicado", cominicado_a.getText().toString().trim())
+                        .apply();
+
+            }
+        });
+        android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
     private void edit_password_dialog () {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingActivity.this);

@@ -19,11 +19,4 @@
         android:title="Todos los registros"
         app:showAsAction="always"
         />
-    <item
-        android:id="@+id/mensaje"
-        android:title="Comunicado"
-        android:icon="@drawable/ic_message"
-        app:showAsAction="always"
-        />
-
 </menu>
