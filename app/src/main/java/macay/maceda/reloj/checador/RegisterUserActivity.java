@@ -334,12 +334,13 @@ public class RegisterUserActivity extends AppCompatActivity {
                 new AsyncTask<Object, Object, Cursor>() {
             @Override
             protected Cursor doInBackground(Object... params) {
+                int a = 0;
                 Empleados_admin person = new Empleados_admin(name.getText().toString(),
                         lastname.getText().toString(), phone.getText().toString(),
                         ocupation.getText().toString(), area.getText().toString(),
                         email.getText().toString(), birthday.getText().toString(),
                         address.getText().toString(), started_date.getText().toString(),
-                        mCurrentPhotoPath, password.getText().toString().trim());
+                        mCurrentPhotoPath,a, password.getText().toString().trim());
                 dbHelper.insertPerson(person);
 
                 return null;

@@ -183,14 +183,15 @@ public class AdminActivity extends AppCompatActivity {
                 }else{
                     PreferenceManager.getDefaultSharedPreferences(AdminActivity.this)
                             .edit()
-                            .putBoolean("isPasswordSet", true)
+                            .putBoolean("mensaje", true)
                             .putString("comunicado", cominicado_a.getText().toString().trim())
                             .apply();
                 }
             }
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();    }
+        alertDialog.show();
+    }
 
     @Override
     protected void onResume() {

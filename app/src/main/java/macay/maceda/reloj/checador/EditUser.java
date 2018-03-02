@@ -167,7 +167,8 @@ public class EditUser extends AppCompatActivity {
 
             }
             else {
-                Empleados_admin updatedPerson = new Empleados_admin(name, lastname,cellphone,occupation,area,email, birthday,address,datawork,mCurrentPhotoPath, passwd);
+                int a = 0;
+                Empleados_admin updatedPerson = new Empleados_admin(name, lastname,cellphone,occupation,area,email, birthday,address,datawork,mCurrentPhotoPath,a, passwd);
 
                 dbHelper.updatePerson(receivedPersonId, this, updatedPerson);
 
