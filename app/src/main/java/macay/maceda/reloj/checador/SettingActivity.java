@@ -109,9 +109,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         final EditText cominicado_a = (EditText) promptUserView.findViewById(R.id.comunicado_edit);
 
         alertDialogBuilder.setTitle("Comunicado para los empleados");
+
         String comuni = PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)
                 .getString("comunicado", "");
-        cominicado_a.setText(comuni);
+        if (comuni.equals("")){
+            cominicado_a.setText("No puedes acceder al sistema, pasa a Recursos Humanos para consultar tu situacion");
+        }else{
+            cominicado_a.setText(comuni);
+        }
         alertDialogBuilder.setPositiveButton("Enviar",new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)

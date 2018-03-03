@@ -357,17 +357,31 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
     }
     public void dialogo_este_men_esta_bloqueado(){
+        String comuni = PreferenceManager.getDefaultSharedPreferences(StartActivity.this)
+                .getString("comunicado", "");
         final android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(
                 StartActivity.this);
         alertDialogBuilder.setTitle("Estas bloqueado");
-        alertDialogBuilder
-                .setMessage("No puedes acceder al sistema,estas bloqueado pasa a Recursos Humanos para consultar tu situacion ")
-                .setCancelable(false)
-                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.dismiss();
-                    }
-                });
+        if (comuni.equals("")){
+            alertDialogBuilder
+                    .setMessage("No puedes acceder al sistema, pasa a Recursos Humanos para consultar tu situacion ")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.dismiss();
+                        }
+                    });
+        }else{
+            alertDialogBuilder
+                    .setMessage(comuni)
+                    .setCancelable(false)
+                    .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int id) {
+                            dialog.dismiss();
+                        }
+                    });
+        }
+
                 /*.setNegativeButton("No",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
 
