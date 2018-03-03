@@ -61,7 +61,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:tint="#616161"
-                    app:srcCompat="@drawable/ic_pdf" />
+                    app:srcCompat="@drawable/ic_list" />
 
                 <TextView
                     android:layout_width="match_parent"
