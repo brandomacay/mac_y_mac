@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -344,7 +345,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                         if (receivedPerson.getBlocked() == 0){
                             goToUpdateUser(Long.parseLong(user_id.getText().toString()));
                         }else{
-
+                            dialogo_este_men_esta_bloqueado();
                         }
                     }
 
@@ -354,6 +355,26 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         });
 
 
+    }
+    public void dialogo_este_men_esta_bloqueado(){
+        final android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(
+                StartActivity.this);
+        alertDialogBuilder.setTitle("Estas bloqueado");
+        alertDialogBuilder
+                .setMessage("No puedes acceder al sistema,estas bloqueado pasa a Recursos Humanos para consultar tu situacion ")
+                .setCancelable(false)
+                .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.dismiss();
+                    }
+                });
+                /*.setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+
+                    }*/
+
+        android.support.v7.app.AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private void goToUpdateUser(long personId){
