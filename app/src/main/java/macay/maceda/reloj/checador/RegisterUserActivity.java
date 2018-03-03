@@ -79,6 +79,7 @@ public class RegisterUserActivity extends AppCompatActivity {
         ocupation = (EditText) findViewById(R.id.register_user_ocupation_et);
         area = (EditText) findViewById(R.id.register_user_area_et);
         blocked_sw = (Switch) findViewById(R.id.user_blocked_switch);
+        blocked_sw.setText("Desbloqueado");
         blocked_sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -100,6 +101,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                                     // if this button is clicked, close
                                     // current activity
                                     blocked_sw.setChecked(true);
+                                    blocked_sw.setText("Bloqueado");
                                     blocked = 1;
                                 }
                             })
@@ -109,6 +111,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                                     // the dialog box and do nothing
                                     blocked_sw.setChecked(false);
                                     blocked = 0;
+                                    blocked_sw.setText("Desbloqueado");
                                 }
                             });
 
@@ -121,6 +124,7 @@ public class RegisterUserActivity extends AppCompatActivity {
                 else {
                 //    blocked_sw.setText("All List");  //To change the text near to switch
                    // Log.d("You are :", " Not Checked");
+                    blocked_sw.setText("Desbloqueado");
                     blocked = 0;
                 }
             }
