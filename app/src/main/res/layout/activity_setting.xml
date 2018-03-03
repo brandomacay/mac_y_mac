@@ -69,7 +69,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
-                    android:text="PDF SHARE" />
+                    android:text="Reporte de asistencia" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -110,7 +110,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
-                    android:text="Enviar mensaje a todos" />
+                    android:text="Mensaje para usuarios bloqueados" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
