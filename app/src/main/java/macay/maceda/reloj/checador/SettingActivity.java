@@ -703,12 +703,97 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         protected void onPostExecute(Cursor result) {
 
             if (result.moveToFirst()) {
+
+                StringBuilder sb = new StringBuilder();
+
+
+                sb.append("<!DOCTYPE html> \n");
+                sb.append("<html>");
+                sb.append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> ");
+                sb.append("<head>");
+                sb.append("<style>");
+                sb.append("table {");
+                sb.append("width:100%;");
+                sb.append("}");
+                sb.append("table, th, td {");
+                sb.append("border: 1px solid black;");
+                sb.append("border-collapse: collapse;");
+                sb.append("}");
+                sb.append(" th, td {");
+                sb.append("padding: 5px;");
+                sb.append("text-align: left;");
+                sb.append(" }");
+                sb.append("table#t01 tr:nth-child(even) {");
+                sb.append("background-color: #eee;");
+                sb.append("}");
+                sb.append("table#t01 tr:nth-child(odd) {");
+                sb.append("background-color:#fff;");
+                sb.append("}");
+                sb.append("table#t01 th {");
+                sb.append("background-color: black;");
+                sb.append("color: white;");
+                sb.append("}");
+                sb.append("</style>");
+                sb.append("</head>");
+                sb.append("<body>");
+                sb.append(" ");
                 do {
+                    sb.append("<table id=\"t01\">");
+                    sb.append("<tr>");
+                    sb.append("<th>Nombre: </th>");
+                    sb.append("<th>" + result.getString(result.getColumnIndex("name"))
+                            + " " + result.getString(result.getColumnIndex("lastname")) + "</th>");
+                    sb.append("<th>Cargo: " + result.getString(result.getColumnIndex("occupation")) + "</th>");
+                    sb.append("<th> </th>");
+                    sb.append("</tr>");
+                    sb.append("<tr>");
+                    sb.append("<th>Entrada</th>");
+                    sb.append("<th>Salida</th>");
+                    sb.append("<th>Salida comida</th>");
+                    sb.append("<th>Llegada comida</th>");
+                    sb.append("</tr>");
+                    sb.append("<tr>");
+                    sb.append("<td>12-04-2018\n4:06:56 </td>");
+                    sb.append("<td>12-04-2018\n10:06:56 </td>");
+                    sb.append("<td>12-04-2018\n6:06:56 </td>");
+                    sb.append("<td>12-04-2018\n7:06:56 </td>");
+                    sb.append("</tr>");
+                    sb.append("<tr>");
+                    sb.append("<td>13-04-2018\n4:06:56 </td>");
+                    sb.append("<td>13-04-2018\n10:06:56 </td>");
+                    sb.append("<td>13-04-2018\n6:06:56 </td>");
+                    sb.append("<td>13-04-2018\n7:06:56 </td>");
+                    sb.append("</tr> ");
+                    sb.append("<br/>");
+                   /*
                     Toast.makeText(SettingActivity.this,
                             result.getString(result.getColumnIndex("name")) + " " +
-                                    result.getString(result.getColumnIndex("lastname")), Toast.LENGTH_LONG).show();
+                                    result.getString(result.getColumnIndex("lastname")),
+                                     Toast.LENGTH_LONG).show();
+                    */
 
                 } while (result.moveToNext());
+
+                sb.append("</table> ");
+                sb.append("</body> ");
+                sb.append("</html> ");
+
+                String sFileName = "prueba.html";
+
+                try {
+                    File root = new File(Environment.getExternalStorageDirectory(), "/relojchecador/archivos/");
+                    if (!root.exists()) {
+                        root.mkdirs();
+                    }
+                    File gpxfile = new File(root, sFileName);
+                    FileWriter writer = new FileWriter(gpxfile);
+                    writer.append(sb);
+                    writer.flush();
+                    writer.close();
+                    Toast.makeText(SettingActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
         }
