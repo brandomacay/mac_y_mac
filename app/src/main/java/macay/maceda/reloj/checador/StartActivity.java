@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
@@ -46,6 +47,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         hide();
         ImageButton btn_admin = (ImageButton) findViewById(R.id.admin);
         ImageButton btn_user = (ImageButton) findViewById(R.id.user);
+        btn_admin.setColorFilter(getResources().getColor(android.R.color.white));
+        btn_user.setColorFilter(getResources().getColor(android.R.color.white));
         datte = (TextView) findViewById(R.id.fecha);
         vhour = (TextView) findViewById(R.id.hora);
         vpuntos = (TextView) findViewById(R.id.puntos);
