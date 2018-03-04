@@ -702,11 +702,13 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         @Override
         protected void onPostExecute(Cursor result) {
 
-            if (result.moveToFirst()){
-                Toast.makeText(SettingActivity.this,
-                        result.getString(result.getColumnIndex("name")) + " " +
-                        result.getString(result.getColumnIndex("lastname")), Toast.LENGTH_LONG).show();
+            if (result.moveToFirst()) {
+                do {
+                    Toast.makeText(SettingActivity.this,
+                            result.getString(result.getColumnIndex("name")) + " " +
+                                    result.getString(result.getColumnIndex("lastname")), Toast.LENGTH_LONG).show();
 
+                } while (result.moveToNext());
             }
 
         }
