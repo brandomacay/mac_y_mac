@@ -11,7 +11,7 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="#000000" />
+        android:src="#ff0000" />
 
     <LinearLayout
         android:id="@+id/horas"
@@ -36,7 +36,6 @@
             android:fontFamily="sans-serif-thin"
             android:includeFontPadding="false"
             android:singleLine="true"
-            android:textColor="@android:color/white"
             android:textSize="80sp"
             android:textStyle="bold" />
 
@@ -45,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:fontFamily="sans-serif-thin"
-            android:textColor="@android:color/white"
             android:textSize="80sp"
             android:textStyle="bold" />
 
@@ -57,7 +55,6 @@
             android:fontFamily="sans-serif-thin"
             android:includeFontPadding="false"
             android:singleLine="true"
-            android:textColor="@android:color/white"
             android:textSize="80sp"
             android:textStyle="bold" />
 
@@ -69,7 +66,6 @@
             android:fontFamily="sans-serif-thin"
             android:includeFontPadding="false"
             android:singleLine="true"
-            android:textColor="@android:color/white"
             android:textSize="80sp"
             android:textStyle="bold" />
 
@@ -83,7 +79,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/setting2"
-        android:backgroundTint="#FFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginRight="8dp" />
@@ -95,7 +90,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/persona"
-        android:backgroundTint="#FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="8dp" />
@@ -106,7 +100,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:textColor="@android:color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
