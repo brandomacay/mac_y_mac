@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.AppCompatImageView;
 import android.text.InputType;
 import android.text.format.Time;
 import android.util.Log;
@@ -45,10 +46,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
         hide();
-        ImageButton btn_admin = (ImageButton) findViewById(R.id.admin);
-        ImageButton btn_user = (ImageButton) findViewById(R.id.user);
-        btn_admin.setColorFilter(getResources().getColor(android.R.color.white));
-        btn_user.setColorFilter(getResources().getColor(android.R.color.white));
+        AppCompatImageView btn_admin = (AppCompatImageView) findViewById(R.id.admin);
+        AppCompatImageView btn_user = (AppCompatImageView) findViewById(R.id.user);
         datte = (TextView) findViewById(R.id.fecha);
         vhour = (TextView) findViewById(R.id.hora);
         vpuntos = (TextView) findViewById(R.id.puntos);
