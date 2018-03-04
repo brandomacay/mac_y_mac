@@ -93,7 +93,7 @@ public class DetailPersonActivity extends AppCompatActivity {
     private void deletUser(){
         AlertDialog.Builder myBulid = new AlertDialog.Builder(this).setCancelable(false);
         myBulid.setMessage("En verdad deseas eliminar a esta persona?");
-        myBulid.setIcon(R.drawable.ic_delete);
+        myBulid.setIcon(R.drawable.delete);
         myBulid.setTitle("Eliminar Usuario");
         myBulid.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
             @Override

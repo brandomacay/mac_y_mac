@@ -34,7 +34,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:srcCompat="@drawable/ic_exit"
+        app:srcCompat="@drawable/exit"
          />
         <TextView
             android:gravity="center_horizontal"
@@ -55,7 +55,7 @@
         android:tint="@color/colorPrimary"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        app:srcCompat="@drawable/ic_restaurant" />
+        app:srcCompat="@drawable/food" />
 
     <TextView
         android:id="@+id/textView3"

@@ -49,7 +49,7 @@
             android:id="@+id/b_edit"
             android:layout_width="wrap_content"
             app:fabSize="mini"
-            app:srcCompat="@drawable/ic_lock"
+            app:srcCompat="@drawable/lock"
             app:backgroundTint="@color/colorPrimary"
             android:tint="@android:color/white"
             app:rippleColor="@color/colorAccent"
@@ -164,8 +164,8 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ic_play"
-                    android:backgroundTint="@android:color/holo_green_dark"
+                    android:background="@drawable/power"
+                    android:backgroundTint="#11ff00"
                     android:visibility="visible" />
 
                 <TextView
@@ -202,7 +202,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ic_back"
+                    android:background="@drawable/back"
                     android:backgroundTint="@color/colorAccent" />
 
                 <TextView
@@ -237,7 +237,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/ic_exit"
+                    android:background="@drawable/exit"
                     android:backgroundTint="@android:color/holo_red_light"
                     android:visibility="visible" />
 

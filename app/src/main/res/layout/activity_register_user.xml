@@ -33,7 +33,7 @@
                 android:layout_height="150dp">
                 <ImageView
                     android:id="@+id/foto"
-                    android:background="@drawable/ic_account_circle"
+                    android:background="@drawable/persona"
                     android:adjustViewBounds="true"
                     android:layout_width="150dp"
                     android:layout_height="150dp" />
@@ -48,7 +48,7 @@
                     android:clickable="true"
                     android:tint="@android:color/white"
                     app:fabSize="mini"
-                    app:srcCompat="@drawable/ic_add_a_photo"
+                    app:srcCompat="@drawable/add_camera"
                     tools:targetApi="o" />
 
             </RelativeLayout>

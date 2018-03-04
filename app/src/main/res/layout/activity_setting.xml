@@ -21,10 +21,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:tint="#616161"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    app:srcCompat="@drawable/ic_lock" />
+                    app:srcCompat="@drawable/lock" />
                 <TextView
                     android:layout_marginStart="5dp"
                     android:layout_gravity="center_vertical"
@@ -60,8 +59,7 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:tint="#616161"
-                    app:srcCompat="@drawable/ic_list" />
+                    app:srcCompat="@drawable/list" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -101,8 +99,7 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:tint="#616161"
-                    app:srcCompat="@drawable/ic_message" />
+                    app:srcCompat="@drawable/sms" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -139,8 +136,7 @@
                 <ImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:tint="#616161"
-                    app:srcCompat="@drawable/ic_cvs" />
+                    app:srcCompat="@drawable/folder" />
 
                 <TextView
                     android:layout_width="match_parent"
