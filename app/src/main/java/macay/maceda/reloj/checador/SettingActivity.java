@@ -570,12 +570,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private StringBuilder create_html_report () {
 
         StringBuilder sb = new StringBuilder();
-      //  sb.append("<p> Joder, works </> \n");
-        //sb.append("<p> Mamadas pendejas </> \n");
-        //sb.append("");
+
 
        sb.append("<!DOCTYPE html> \n");
     sb.append("<html>");
+    sb.append("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> ");
     sb.append("<head>");
     sb.append("<style>");
     sb.append("table {");
@@ -602,17 +601,41 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         sb.append("</style>");
         sb.append("</head>");
         sb.append("<body>");
+        sb.append(" ");
         sb.append("<table id=\"t01\">");
         sb.append("<tr>");
-        sb.append("<th>Firstname</th>");
-        sb.append("<th>Lastname</th>");
-        sb.append("<th>Age</th>");
+        sb.append("<th>Nombre: </th>");
+        sb.append("<th>Alejandro Maceda </th>");
+        sb.append("<th>Cargo: El mas mera verga </th>");
+        sb.append("<th> </th>");
         sb.append("</tr>");
         sb.append("<tr>");
-        sb.append("<td>Jill</td>");
-        sb.append("<td>Smith</td>");
-        sb.append("<td>50</td>");
+        sb.append("<th>Entrada</th>");
+        sb.append("<th>Salida</th>");
+        sb.append("<th>Salida comida</th>");
+        sb.append("<th>Llegada comida</th>");
         sb.append("</tr>");
+        sb.append("<tr>");
+        sb.append("<td>12-04-2018\n4:06:56 </td>");
+        sb.append("<td>12-04-2018\n10:06:56 </td>");
+        sb.append("<td>12-04-2018\n6:06:56 </td>");
+        sb.append("<td>12-04-2018\n7:06:56 </td>");
+        sb.append("</tr>");
+        sb.append("<tr>");
+        sb.append("<td>13-04-2018\n4:06:56 </td>");
+        sb.append("<td>13-04-2018\n10:06:56 </td>");
+        sb.append("<td>13-04-2018\n6:06:56 </td>");
+        sb.append("<td>13-04-2018\n7:06:56 </td>");
+        sb.append("</tr> ");
+        sb.append("</table> ");
+        sb.append("</body> ");
+        sb.append("</html> ");
+
+
+        sb.append(" ");
+        sb.append(" ");
+
+
 
 
 
@@ -622,11 +645,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
+
+
+
+
+
   <tr>
     <td>John</td>
     <td>Doe</td>
@@ -656,10 +679,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     <td>Doe</td>
     <td>80</td>
   </tr>
-</table>
 
-</body>
-</html>
+
+
+
 */
 
 
