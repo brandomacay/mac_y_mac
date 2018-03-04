@@ -479,7 +479,17 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor get_all_users_report(){
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        String query = "SELECT  * FROM " + TABLE_NAME;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+
+
+    }
 
 
 }

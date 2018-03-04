@@ -81,7 +81,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 //createPdf();
                // stringtopdf("Prueba de sonido\n Joder 123");
                // exportdb();
-                generateHtmlOnSD("prueba.html", create_html_report());
+                new reportTask().execute();
+                //generateHtmlOnSD("prueba.html", create_html_report());
 
 
                 //Toast.makeText(SettingActivity.this, "PDF CREADO!!", Toast.LENGTH_SHORT).show();
@@ -691,4 +692,24 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         return sb;
     }
 
+    public class reportTask extends AsyncTask<String, String, Cursor> {
+
+        @Override
+        protected Cursor doInBackground(String... params) {
+            return dbHelper.get_all_users_report();
+        }
+
+        @Override
+        protected void onPostExecute(Cursor result) {
+
+            if (result.moveToFirst()){
+                Toast.makeText(SettingActivity.this,
+                        result.getString(result.getColumnIndex("name")) + " " +
+                        result.getString(result.getColumnIndex("lastname")), Toast.LENGTH_LONG).show();
+
+            }
+
+        }
+
+    }
 }
