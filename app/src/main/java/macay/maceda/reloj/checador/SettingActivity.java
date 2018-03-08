@@ -81,7 +81,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 //createPdf();
                // stringtopdf("Prueba de sonido\n Joder 123");
                // exportdb();
-                new reportTask().execute();
+              //  new reportTask().execute();
+                create_alertDialog_report();
                 //generateHtmlOnSD("prueba.html", create_html_report());
 
 
@@ -798,5 +799,62 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         }
 
+    }
+
+
+    private void create_alertDialog_report () {
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingActivity.this);
+        View mView = getLayoutInflater().inflate(R.layout.dialog_report, null);
+        final TextView password = (TextView) mView.findViewById(R.id.pass);
+        final TextView repeatpassword = (TextView) mView.findViewById(R.id.repeatpass);
+        //TextView tv = (TextView) mView.findViewById(R.id.textView);
+        //  tv.setVisibility(View.GONE);
+        //tv.setText("Crear una contraseña");
+        Button cancel = (Button) mView.findViewById(R.id.cancel);
+        Button register = (Button) mView.findViewById(R.id.login);
+
+        mBuilder.setView(mView);
+        //mBuilder.setTitle("Crear una contraseña");
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+                if (!password.getText().toString().isEmpty() && !repeatpassword.getText().toString().isEmpty()) {
+                    if (password.getText().toString().equals(repeatpassword.getText().toString())) {
+
+                        PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)
+                                .edit()
+                                .putBoolean("isPasswordSet", true)
+                                .putString("password", repeatpassword.getText().toString().trim())
+                                .apply();
+                        Toast.makeText(SettingActivity.this,
+                                "Bienvenido",
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        startActivity(new Intent(SettingActivity.this, AdminActivity.class));
+                        overridePendingTransition(0,0);
+
+                    } else {
+                        repeatpassword.setError("Las contraseñas no coinciden");
+                    }
+                } else {
+                    Toast.makeText(SettingActivity.this,
+                            "Ingresa todos los campos",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 }
