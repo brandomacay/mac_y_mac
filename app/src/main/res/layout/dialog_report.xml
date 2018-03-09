@@ -11,33 +11,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Fecha Inicial: "
+        android:text="Rango de busqueda: "
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/pass"
+        android:id="@+id/report_initialdate_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
         style="?android:attr/spinnerStyle"
         />
-    <TextView
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:text="Fecha final: "
-        android:textSize="18sp"
-        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/repeatpass"
+        android:id="@+id/report_finaldate_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         style="?android:attr/spinnerStyle"
        />

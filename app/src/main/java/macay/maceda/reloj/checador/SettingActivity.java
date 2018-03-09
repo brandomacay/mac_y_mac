@@ -2,6 +2,9 @@ package macay.maceda.reloj.checador;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +55,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     ProgressDialog pd;
     private DatabaseOpenHelper dbHelper;
     File f;
+    private static boolean datestart_picked = false;
+    private static boolean dateend_picked = false;
+    private static int mYear, mMonth, mDay;
+    private static TextView initialdate;
+    private static TextView finaldate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -805,13 +814,30 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private void create_alertDialog_report () {
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_report, null);
-        final TextView password = (TextView) mView.findViewById(R.id.pass);
-        final TextView repeatpassword = (TextView) mView.findViewById(R.id.repeatpass);
+        initialdate = (TextView) mView.findViewById(R.id.report_initialdate_tv);
+       finaldate = (TextView) mView.findViewById(R.id.report_finaldate_tv);
         //TextView tv = (TextView) mView.findViewById(R.id.textView);
         //  tv.setVisibility(View.GONE);
         //tv.setText("Crear una contraseña");
         Button cancel = (Button) mView.findViewById(R.id.cancel);
         Button register = (Button) mView.findViewById(R.id.login);
+
+        initialdate.setText("Fecha inicial");
+        initialdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newfrag = new DateStart();
+                newfrag.show(getFragmentManager(), "datePicker");
+            }
+        });
+        finaldate.setText("Fecha final");
+        finaldate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment newfrag = new DateEnd();
+                newfrag.show(getFragmentManager(), "datePicker");
+            }
+        });
 
         mBuilder.setView(mView);
         //mBuilder.setTitle("Crear una contraseña");
@@ -828,33 +854,74 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View view) {
 
-
-
-                if (!password.getText().toString().isEmpty() && !repeatpassword.getText().toString().isEmpty()) {
-                    if (password.getText().toString().equals(repeatpassword.getText().toString())) {
-
-                        PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)
-                                .edit()
-                                .putBoolean("isPasswordSet", true)
-                                .putString("password", repeatpassword.getText().toString().trim())
-                                .apply();
-                        Toast.makeText(SettingActivity.this,
-                                "Bienvenido",
-                                Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                        startActivity(new Intent(SettingActivity.this, AdminActivity.class));
-                        overridePendingTransition(0,0);
-
-                    } else {
-                        repeatpassword.setError("Las contraseñas no coinciden");
-                    }
-                } else {
-                    Toast.makeText(SettingActivity.this,
-                            "Ingresa todos los campos",
-                            Toast.LENGTH_SHORT).show();
+                if (datestart_picked && dateend_picked) {
+                    //dothething
                 }
+                else {
+                    Toast.makeText(SettingActivity.this, "Seleccione un rango valido", Toast.LENGTH_SHORT).show();
+
+                }
+
 
             }
         });
     }
+
+
+    public static class DateStart extends DialogFragment implements
+            DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // set default date
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            mYear = year;
+            mMonth = month;
+            mDay = day;
+
+            initialdate.setText(new StringBuilder()
+                    .append(mYear).append("-")
+                    .append(mMonth + 1).append("-")
+                    .append(mDay).append(" "));
+            datestart_picked = true;
+
+        }
+    }
+
+    public static class DateEnd extends DialogFragment implements
+            DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // set default date
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            mYear = year;
+            mMonth = month;
+            mDay = day;
+
+            finaldate.setText(new StringBuilder()
+                    .append(mYear).append("-")
+                    .append(mMonth + 1).append("-")
+                    .append(mDay).append(" "));
+            dateend_picked = true;
+
+        }
+    }
+
 }
