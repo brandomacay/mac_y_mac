@@ -287,7 +287,6 @@ public class RegisterUserActivity extends AppCompatActivity {
 
         }
     }
-
     public static class DateStartWork extends DialogFragment implements
             DatePickerDialog.OnDateSetListener {
 
