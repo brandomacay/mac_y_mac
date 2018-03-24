@@ -167,6 +167,16 @@ public class RegisterUserActivity extends AppCompatActivity {
 
             }
         });
+        Picasso.with(this)
+                .load(new File(mCurrentPhotoPath))
+                .fit()
+                //.resize(600,6000)
+                .centerInside()
+                .placeholder(R.drawable.persona)
+                //.error(R.drawable.vlover)
+                //.networkPolicy(NetworkPolicy.NO_STORE)
+                //.memoryPolicy(MemoryPolicy.NO_STORE)
+                .into(photo);
         birthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

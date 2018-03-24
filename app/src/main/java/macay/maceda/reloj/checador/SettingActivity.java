@@ -148,7 +148,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         View mView = getLayoutInflater().inflate(R.layout.dialog_admin, null);
         final EditText password = (EditText) mView.findViewById(R.id.pass);
         final EditText repeatpassword = (EditText) mView.findViewById(R.id.repeatpass);
-        password.setHint("new password");
+        password.setHint("Nueva contraseña");
         TextView tv = (TextView) mView.findViewById(R.id.textView);
         tv.setText("Cambiar contraseña");
         Button cancel = (Button) mView.findViewById(R.id.cancel);
