@@ -144,7 +144,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="5dp"
                     android:layout_marginStart="5dp"
-                    android:text="Carpeta de empleados" />
+                    android:text="Lista de empleados" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
