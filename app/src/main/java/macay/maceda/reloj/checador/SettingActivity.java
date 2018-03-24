@@ -710,7 +710,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         protected Cursor doInBackground(String... params) {
             return dbHelper.get_all_users_report();
         }
-------20++
+
         @Override
         protected void onPostExecute(Cursor result) {
 
