@@ -818,6 +818,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     writer.append(sb);
                     writer.flush();
                     writer.close();
+                    Uri uri = Uri.fromFile(gpxfile);
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                   // browserIntent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
+                //    browserIntent.setDataAndType(uri, "text/html");
+                    browserIntent.setDataAndType(uri, "multipart/related");
+
+                    //  browserIntent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    startActivity(browserIntent);
                     Toast.makeText(SettingActivity.this, "Saved", Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
