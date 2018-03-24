@@ -32,6 +32,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
     private List<Empleados_admin> mEmpleados;
     private Context mContext;
     private RecyclerView mRecyclerV;
+    private int screenWidth;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView personId;
@@ -115,7 +116,19 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
 
                         ImageView imv = (ImageView) (dialoglayout != null ? dialoglayout.findViewById(R.id.user_dialog_imageView) : null);
                         String path = personImage.getTag().toString();
-                        Picasso.with(mContext).load(new File(path)).placeholder(R.mipmap.ic_launcher).into(imv);
+
+                        int height;
+                        if (getPosition() == 1 || getPosition() == (mEmpleados.size() - 1)) {
+                            height = 700;
+                        } else {
+                            height = 600;
+                        }
+                            Picasso.with(mContext)
+                                    .load(new File(path))
+                                    .resize(screenWidth / 2, height)
+                                    .placeholder(R.drawable.persona)
+                                    .into(imv);
+
                         builder.setView(dialoglayout);
                         builder.show();
                     }
@@ -217,8 +230,19 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         holder.personStartWork.setText("Fecha de contrato: "+person.getDatework());
         holder.personId.setText("ID empleado: " +person.getId());
 
+
+        int height;
+        if (position == 1 || position == (mEmpleados.size() - 1)) {
+            height = 700;
+        } else {
+            height = 600;
+        }
         if (!person.getImage().isEmpty()) {
-            Picasso.with(mContext).load(new File(person.getImage())).placeholder(R.mipmap.ic_launcher).into(holder.personImage);
+            Picasso.with(mContext)
+                    .load(new File(person.getImage()))
+                    .resize(screenWidth / 2, height)
+                    .placeholder(R.drawable.persona)
+                    .into(holder.personImage);
             holder.personImage.setTag(person.getImage());
 
         }

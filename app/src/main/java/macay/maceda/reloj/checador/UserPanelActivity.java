@@ -45,6 +45,7 @@ public class UserPanelActivity extends AppCompatActivity {
     //private Handler _handler;
     private static final Handler handler = new Handler();
 
+    private int screenWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,8 +180,17 @@ public class UserPanelActivity extends AppCompatActivity {
 
         }
 
-
-        Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(imagen);
+        int height;
+        if (this.receivedPersonId == 1 || receivedPerson.getImage() == null) {
+            height = 700;
+        } else {
+            height = 600;
+        }
+        Picasso.with(this)
+                .load(new File(receivedPerson.getImage()))
+                .resize(screenWidth / 2, height)
+                .placeholder(R.drawable.persona)
+                .into(imagen);
 
         workback.setOnClickListener(  new View.OnClickListener() {
             @Override
