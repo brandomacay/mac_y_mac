@@ -73,7 +73,6 @@
 
         <activity
             android:name=".SettingActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label="Opciones" />
         <activity
             android:name=".DetailPersonActivity"
