@@ -34,7 +34,6 @@
                     android:layout_height="150dp">
                     <ImageView
                         android:id="@+id/user_edit_foto"
-                        android:background="@drawable/persona"
                         android:adjustViewBounds="true"
                         android:layout_width="150dp"
                         android:layout_height="150dp" />

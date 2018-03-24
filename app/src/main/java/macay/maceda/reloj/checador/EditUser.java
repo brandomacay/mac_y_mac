@@ -46,6 +46,7 @@ public class EditUser extends AppCompatActivity {
     private String path = "/sdcard/relojchecador/fotos/";
     Bitmap bitmappost;
     boolean imageIsSet = false;
+    private int screenWidth;
 
 
     @Override
@@ -172,7 +173,18 @@ public class EditUser extends AppCompatActivity {
         ePassword.setText(receivedPerson.getPassword());
         mCurrentPhotoPath = receivedPerson.getImage();
 
-        Picasso.with(this).load(new File(receivedPerson.getImage())).placeholder(R.mipmap.ic_launcher).into(photoUser);
+
+        int height;
+        if (this.receivedPersonId == 1 || receivedPerson.getImage() == null) {
+            height = 700;
+        } else {
+            height = 600;
+        }
+        Picasso.with(this)
+                .load(new File(receivedPerson.getImage()))
+                .resize(screenWidth / 2, height)
+                .placeholder(R.drawable.persona)
+                .into(photoUser);
 
     }
 

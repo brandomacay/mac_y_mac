@@ -49,6 +49,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name=".RegisterUserActivity"
             android:label="Registrar empleados" />
         <activity
@@ -56,6 +57,7 @@
             android:theme="@style/FullScreen" />
         <activity
             android:name=".EditUser"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="Editar persona" />
         <activity
             android:name=".FileChooser"
@@ -73,12 +75,13 @@
 
         <activity
             android:name=".SettingActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="Opciones" />
         <activity
             android:name=".DetailPersonActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".AllRegistersActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AllRegistersActivity" />
     </application>
 
 </manifest>
