@@ -223,7 +223,7 @@ public class UserPanelActivity extends AppCompatActivity {
                 */
 
                 if (mBreakout == null) {
-                    dbHelper.insert_user_workin(receivedPersonId, datetimex());
+                    dbHelper.insert_user_workin(receivedPersonId, datex(), datetimex());
                     Toast.makeText(UserPanelActivity.this,
                             "La entrada fue registrada correctamente",
                             Toast.LENGTH_LONG).show();
@@ -231,7 +231,7 @@ public class UserPanelActivity extends AppCompatActivity {
                 }
                 else {
 
-                        dbHelper.insert_user_workin(receivedPersonId, datetimex());
+                        dbHelper.insert_user_workin(receivedPersonId, datex(), datetimex());
                         Toast.makeText(UserPanelActivity.this,
                                 "La entrada fue registrada correctamente",
                                 Toast.LENGTH_LONG).show();
@@ -446,7 +446,7 @@ public class UserPanelActivity extends AppCompatActivity {
     public static String datex () {
         Date date = Calendar.getInstance().getTime();
 
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String today = formatter.format(date);
 
         return today;
@@ -455,7 +455,7 @@ public class UserPanelActivity extends AppCompatActivity {
     public static String datetimex () {
         Date date = Calendar.getInstance().getTime();
 
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         String today = formatter.format(date);
 
         return today;

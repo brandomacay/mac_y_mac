@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,6 +61,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private static int mYear, mMonth, mDay;
     private static TextView initialdate;
     private static TextView finaldate;
+    private static String initial_d, final_d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -762,18 +764,35 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     sb.append("<th>Salida comida</th>");
                     sb.append("<th>Llegada comida</th>");
                     sb.append("</tr>");
-                    sb.append("<tr>");
-                    sb.append("<td>12-04-2018\n4:06:56 </td>");
-                    sb.append("<td>12-04-2018\n10:06:56 </td>");
-                    sb.append("<td>12-04-2018\n6:06:56 </td>");
-                    sb.append("<td>12-04-2018\n7:06:56 </td>");
-                    sb.append("</tr>");
-                    sb.append("<tr>");
-                    sb.append("<td>13-04-2018\n4:06:56 </td>");
-                    sb.append("<td>13-04-2018\n10:06:56 </td>");
-                    sb.append("<td>13-04-2018\n6:06:56 </td>");
-                    sb.append("<td>13-04-2018\n7:06:56 </td>");
-                    sb.append("</tr> ");
+                    Cursor mc = dbHelper.user_activity_from_date(result.getString(result.getColumnIndex("_id")),
+                            initial_d, final_d);
+                    //Toast.makeText(SettingActivity.this, initial_d, Toast.LENGTH_SHORT).show();
+
+//                    Toast.makeText(SettingActivity.this, final_d, Toast.LENGTH_SHORT).show();
+
+
+
+                    if (mc.moveToFirst()) {
+                       // Toast.makeText(SettingActivity.this, "inside movetofirst", Toast.LENGTH_SHORT).show();
+
+                        do {
+                            sb.append("<tr>");
+                            sb.append("<td>" + mc.getString(mc.getColumnIndex("workin")) + "</td>");
+                            sb.append("<td>" + mc.getString(mc.getColumnIndex("workout")) + "</td>");
+                            sb.append("<td>" + mc.getString(mc.getColumnIndex("breakin")) + "</td>");
+                            sb.append("<td>" + mc.getString(mc.getColumnIndex("breakout")) + "</td>");
+                            sb.append("</tr>");
+                            //Toast.makeText(SettingActivity.this, "registro encontrado", Toast.LENGTH_SHORT).show();
+
+
+                        } while (mc.moveToNext());
+                    }
+                    else {
+                        sb.append("<td> No hay registros </td>");
+                    }
+
+
+
                     sb.append("<br/>");
                    /*
                     Toast.makeText(SettingActivity.this,
@@ -805,6 +824,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     e.printStackTrace();
                 }
             }
+            else {
+                Toast.makeText(SettingActivity.this, "Aun no ha registrado usuarios", Toast.LENGTH_SHORT).show();
+
+            }
 
         }
 
@@ -812,6 +835,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private void create_alertDialog_report () {
+
+        datestart_picked = false;
+        dateend_picked = false;
+
+
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(SettingActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_report, null);
         initialdate = (TextView) mView.findViewById(R.id.report_initialdate_tv);
@@ -856,6 +884,25 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
                 if (datestart_picked && dateend_picked) {
                     //dothething
+                    if (finaldate.getText().toString().compareTo(initialdate.getText().toString()) > 0 ||
+                            finaldate.getText().toString().equals(initialdate.getText().toString())) {
+                       // DotheThing
+                        dialog.dismiss();
+                        new reportTask().execute();
+
+                    }
+                    else{
+
+
+                        AlertDialog.Builder alert = new AlertDialog.Builder(SettingActivity.this);
+                        alert.setTitle("Fecha erronea");
+                        alert.setMessage("La fecha final no debe ser menor a la inicial");
+                        alert.setPositiveButton("Aceptar", null);
+                        alert.show();
+
+
+                    }
+
                 }
                 else {
                     Toast.makeText(SettingActivity.this, "Seleccione un rango valido", Toast.LENGTH_SHORT).show();
@@ -886,12 +933,15 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             mYear = year;
             mMonth = month;
             mDay = day;
+            DecimalFormat mFormat = new DecimalFormat("00");
+
 
             initialdate.setText(new StringBuilder()
                     .append(mYear).append("-")
-                    .append(mMonth + 1).append("-")
-                    .append(mDay).append(" "));
+                    .append(mFormat.format(mMonth + 1)).append("-")
+                    .append(mFormat.format(mDay)));
             datestart_picked = true;
+            initial_d = initialdate.getText().toString();
 
         }
     }
@@ -914,12 +964,14 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             mYear = year;
             mMonth = month;
             mDay = day;
+            DecimalFormat mFormat = new DecimalFormat("00");
 
             finaldate.setText(new StringBuilder()
                     .append(mYear).append("-")
-                    .append(mMonth + 1).append("-")
-                    .append(mDay).append(" "));
+                    .append(mFormat.format(mMonth + 1)).append("-")
+                    .append(mFormat.format(mDay)));
             dateend_picked = true;
+            final_d = finaldate.getText().toString();
 
         }
     }

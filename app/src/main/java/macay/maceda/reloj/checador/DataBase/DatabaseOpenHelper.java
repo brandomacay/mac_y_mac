@@ -39,6 +39,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     public static final String TABLE_CLOCKING_NAME = "clocking";
     public static final String COLUMN_CLOCKING_ID = "_id";
     public static final String COLUMN_CLOCKING_USERID = "userid";
+    public static final String COLUMN_CLOCKING_SDATE = "sdate";
     public static final String COLUMN_CLOCKING_IN = "workin";
     public static final String COLUMN_CLOCKING_OUT = "workout";
     public static final String COLUMN_CLOCKING_BREAKIN = "breakin";
@@ -70,7 +71,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         db.execSQL(" CREATE TABLE " + TABLE_CLOCKING_NAME + " (" +
                 COLUMN_CLOCKING_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_CLOCKING_USERID + " NUMBER NOT NULL, " +
-            //    COLUMN_CLOCKING_DATE + " DATE NOT NULL, " +
+                COLUMN_CLOCKING_SDATE + " DATE , " +
 
                 COLUMN_CLOCKING_IN + " DATETIME , " +
                 COLUMN_CLOCKING_OUT + " DATETIME , " +
@@ -271,6 +272,42 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         return personLinkedList;
     }
 
+
+    public List<Actividades_empleados> getActivityByDate(String filter,long id, String initial_date, String final_date) {
+        String query;
+        if(filter.equals("")){
+            query = "SELECT  * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ id + " ORDER BY " + filter + " DESC";
+        }else{
+
+            query = "SELECT  * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ id + " ORDER BY " + filter + " DESC";
+        }
+
+        List<Actividades_empleados> personLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Actividades_empleados person;
+
+        if (cursor.moveToFirst()) {
+            do {
+                person = new Actividades_empleados();
+
+                person.setId(cursor.getLong(cursor.getColumnIndex(COLUMN_CLOCKING_ID)));
+                person.setUserid(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_USERID)));
+                person.setWorking(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_IN)));
+                person.setWorkout(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_OUT)));
+                person.setBreaking(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_BREAKIN)));
+                person.setBreakout(cursor.getString(cursor.getColumnIndex(COLUMN_CLOCKING_BREAKOUT)));
+
+                personLinkedList.add(person);
+            } while (cursor.moveToNext());
+            db.close();
+            cursor.close();
+        }
+
+
+        return personLinkedList;
+    }
+
     public List<Actividades_empleados> getAllActividades(String filter) {
         String query;
         if(filter.equals("")){
@@ -387,7 +424,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
     }
 
     //insertar entradas y salidas por fecha
-    public void insert_user_workin(long userid, String datetimex) {
+    public void insert_user_workin(long userid, String datex, String datetimex) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -395,6 +432,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CLOCKING_USERID, userid);
       //  values.put(COLUMN_CLOCKING_DATE, today);
 
+        values.put(COLUMN_CLOCKING_SDATE, datex);
         values.put(COLUMN_CLOCKING_IN, datetimex);
         /*
         values.put(COLUMN_PERSON_BIRTHDAY, person.getBirthday());
@@ -491,6 +529,45 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
     }
 
+    public  Cursor user_activity_from_date1 (String _id, String idate, String fdate) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ _id
+                + " AND  strftime('%d-%m-%Y', workin) BETWEEN strftime('%d-%m-%Y', '" + idate + "') " +
+                "AND strftime('%d-%m-%Y', '" + fdate + "') " +
+                 " ORDER BY _id " + " DESC";
+
+      //  Cursor mCursor = db.query(TABLE_CLOCKING_NAME, null,
+        //        "userid = ? AND workin BETWEEN strftime('%d-%m-%Y', ?) AND strftime('%d-%m-%Y', ?)",
+          //      new String[] {_id, idate, fdate} ,
+            //    null, null, "_id DESC");
+
+
+
+        Cursor c = db.rawQuery(query, null);
+
+        //return mCursor;
+        return c;
+    }
+    public  Cursor user_activity_from_date (String _id, String idate, String fdate) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+       // String query = "SELECT * FROM " + TABLE_CLOCKING_NAME + " WHERE userid="+ _id
+         //       +
+           //     " ORDER BY _id " + " DESC";
+
+          Cursor mCursor = db.query(TABLE_CLOCKING_NAME, null,
+                "userid = ? AND sdate BETWEEN ? AND ?",
+              new String[] {_id, idate, fdate} ,
+            null, null, "_id DESC");
+
+
+
+        //Cursor c = db.rawQuery(query, null);
+
+        return mCursor;
+        //return c;
+    }
 
 }
 
