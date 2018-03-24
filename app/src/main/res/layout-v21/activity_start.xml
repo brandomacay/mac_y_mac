@@ -95,13 +95,11 @@
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/persona"
-        android:backgroundTint="@android:color/white"
+        android:background="@drawable/persona2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginRight="8dp"
-        android:tint="#ffffff"
-        />
+         />
 
     <TextView
         android:id="@+id/fecha"
