@@ -92,10 +92,10 @@ public class DetailPersonActivity extends AppCompatActivity {
 
     private void deletUser(){
         AlertDialog.Builder myBulid = new AlertDialog.Builder(this).setCancelable(false);
-        myBulid.setMessage("En verdad deseas eliminar a esta persona?");
+        myBulid.setMessage(getString(R.string.seguro_eliminar));
         myBulid.setIcon(R.drawable.delete);
-        myBulid.setTitle("Eliminar Usuario");
-        myBulid.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+        myBulid.setTitle(getString(R.string.eliminar_persona));
+        myBulid.setPositiveButton(getString(R.string.eliminar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DatabaseOpenHelper dbHelper = new DatabaseOpenHelper(DetailPersonActivity.this);
@@ -103,7 +103,7 @@ public class DetailPersonActivity extends AppCompatActivity {
                 finish();
             }
         });
-        myBulid.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        myBulid.setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

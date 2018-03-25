@@ -110,25 +110,25 @@ public class Person_detail_activivities extends RecyclerView.Adapter<Person_deta
         final Actividades_empleados person = mEmpleados.get(position);
         final Empleados_admin receivedPerson = dbHelper.getPerson(Long.parseLong(person.getUserid()));
        // holder.personId.setText("Numero:"+ person.getId());
-        holder.personUserId.setText("ID empleado: " +person.getUserid());
+        holder.personUserId.setText(mContext.getString(R.string.empleado_id) +person.getUserid());
         holder.personId.setText(receivedPerson.getName()+" "+receivedPerson.getLastname());
         holder.personId.setTextSize(20);
-        holder.personWorking.setText("Inicio de trabajo: "+person.getWorking());
+        holder.personWorking.setText(mContext.getString(R.string.inicio_trabajo) +person.getWorking());
         if (person.getWorkout() == null ){
             holder.personWorkout.setVisibility(View.GONE);
         }else{
-            holder.personWorkout.setText("Culminacion de Trabajo: "+person.getWorkout());
+            holder.personWorkout.setText(mContext.getString(R.string.culminacion_trabajo)+person.getWorkout());
         }
         if (person.getBreaking() == null){
             holder.personBreakout.setVisibility(View.GONE);
         }else{
-            holder.personBreakout.setText("Regreso al trabajo: "+person.getBreaking());
+            holder.personBreakout.setText(mContext.getString(R.string.regreso_trabajo)+person.getBreaking());
 
         }
         if (person.getBreakout() == null){
             holder.personBreaking.setVisibility(View.GONE);
         }else{
-            holder.personBreaking.setText("Salida a comer: "+person.getBreakout());
+            holder.personBreaking.setText(mContext.getString(R.string.salida_comer)+person.getBreakout());
 
         }
 

@@ -24,7 +24,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="end|center_vertical"
-                android:text="Bloqueado" />
+                android:text="@string/bloqueado" />
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content">
                     <EditText
                         android:id="@+id/nombres"
-                        android:hint="Nombres"
+                        android:hint="@string/nombres"
                         android:inputType="textCapWords"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -73,14 +73,14 @@
                         android:layout_alignParentStart="true"
                         android:layout_below="@+id/floatingActionButton"
                         android:layout_marginTop="11dp"
-                        android:hint="Apellidos"
+                        android:hint="@string/apellidos"
                         android:inputType="textCapSentences"
                         />
                     <TextView
                         android:id="@+id/fecha_nacimiento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Fecha de nacimiento"
+                        android:text="@string/nacimiento"
                         android:layout_gravity="center"
                         android:textSize="16dp"
                         android:padding="10dp"
@@ -90,39 +90,39 @@
             </LinearLayout>
             <EditText
                 android:id="@+id/password"
-                android:hint="Pin o contraseña"
+                android:hint="@string/pin_acceso"
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/correo"
-                android:hint="Correo electronico"
+                android:hint="@string/correo"
                 android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/numero_celular"
-                android:hint="Celular"
+                android:hint="@string/numero_celular"
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/direccion"
-                android:hint="Direccion"
+                android:hint="@string/direccion"
                 android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/cargo"
-                android:hint="Cargo en la empresa"
+                android:hint="@string/cargo"
                 android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <EditText
                 android:id="@+id/area"
 
-                android:hint="Departamento o area"
+                android:hint="@string/area_tra"
                 android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -130,7 +130,7 @@
                 android:id="@+id/trabajo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Fecha de contrato"
+                android:text="@string/contrato"
                 android:layout_gravity="center"
                 android:textSize="16dp"
                 android:padding="10dp"

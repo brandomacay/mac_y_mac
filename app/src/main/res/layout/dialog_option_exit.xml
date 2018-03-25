@@ -9,7 +9,7 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_margin="5dp"
-        android:text="Motivo de salida: "
+        android:text="@string/motivo_salida"
         android:textSize="20sp"
         android:textColor="@color/colorAccent"
         android:textStyle="bold"
@@ -40,7 +40,7 @@
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Culminacion de trabajo" />
+            android:text="@string/fin_trabajo" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,7 +62,7 @@
         android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comida" />
+        android:text="@string/hora_comer" />
     </LinearLayout>
     </LinearLayout>
 

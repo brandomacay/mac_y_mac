@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Rango de busqueda: "
+        android:text="@string/rango_busqueda"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:layout_marginTop="10dp"
             android:background="@android:color/holo_orange_dark"
-            android:text="Cancelar"
+            android:text="@string/cancelar"
             android:textColor="@android:color/white" />
         <Button
             android:id="@+id/login"
@@ -56,7 +56,7 @@
             android:layout_weight="1"
             android:layout_marginTop="10dp"
             android:background="@color/colorPrimary"
-            android:text="Aceptar"
+            android:text="@string/aceptar"
             android:textColor="@android:color/white"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp" />

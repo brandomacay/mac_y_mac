@@ -121,16 +121,16 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
         final EditText cominicado_a = (EditText) promptUserView.findViewById(R.id.comunicado_edit);
 
-        alertDialogBuilder.setTitle("Comunicado para los empleados");
+        alertDialogBuilder.setTitle(getString(R.string.comunicado));
 
         String comuni = PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)
                 .getString("comunicado", "");
         if (comuni.equals("")){
-            cominicado_a.setText("No puedes acceder al sistema, pasa a Recursos Humanos para consultar tu situacion");
+            cominicado_a.setText(getString(R.string.mensaje_sin_acceso));
         }else{
             cominicado_a.setText(comuni);
         }
-        alertDialogBuilder.setPositiveButton("Enviar",new DialogInterface.OnClickListener() {
+        alertDialogBuilder.setPositiveButton(getString(R.string.enviar),new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 PreferenceManager.getDefaultSharedPreferences(SettingActivity.this)
                         .edit()
@@ -148,9 +148,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         View mView = getLayoutInflater().inflate(R.layout.dialog_admin, null);
         final EditText password = (EditText) mView.findViewById(R.id.pass);
         final EditText repeatpassword = (EditText) mView.findViewById(R.id.repeatpass);
-        password.setHint("Nueva contraseña");
+        password.setHint(getString(R.string.nueva_clave));
         TextView tv = (TextView) mView.findViewById(R.id.textView);
-        tv.setText("Cambiar contraseña");
+        tv.setText(getString(R.string.cambiar_clave));
         Button cancel = (Button) mView.findViewById(R.id.cancel);
         Button register = (Button) mView.findViewById(R.id.login);
 
@@ -179,17 +179,17 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                                 .putString("password", repeatpassword.getText().toString().trim())
                                 .apply();
                         Toast.makeText(SettingActivity.this,
-                                "Contraseña cambiada exitosamente!",
+                                getString(R.string.clave_cambiada),
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
 
                     } else {
-                        repeatpassword.setError("Las contraseñas no coinciden");
+                        repeatpassword.setError(getString(R.string.clave_no_coinciden));
                     }
                 } else {
                     Toast.makeText(SettingActivity.this,
-                            "Ingresa todos los campos",
+                            getString(R.string.ingresar_campos),
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -252,8 +252,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     public void exportdb() //throws IOException
     {
         pd = new ProgressDialog(SettingActivity.this);
-        pd.setTitle("Guardando DB");
-        pd.setMessage("Please Wait...");
+        pd.setTitle(getString(R.string.guardando_db));
+        pd.setMessage(getString(R.string.porfa_espere));
         //	pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setCancelable(false);
         pd.setIndeterminate(true);
@@ -271,7 +271,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             //se ha creado bien
             //string.replace(" ", "\\ ");
             Toast.makeText(SettingActivity.this,
-                    "Carpeta creada", Toast.LENGTH_LONG).show();
+                    getString(R.string.carpeta_creada), Toast.LENGTH_LONG).show();
             //pd.dismiss();
 
         }
@@ -283,7 +283,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             else
 
             Toast.makeText(SettingActivity.this,
-                    "Carpeta o SD no encontrada", Toast.LENGTH_LONG).show();
+                    getString(R.string.error_archivo), Toast.LENGTH_LONG).show();
             pd.dismiss();
         }
 
@@ -365,13 +365,13 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
                     writer.close();
-                    Toast.makeText(SettingActivity.this, "EXITO: Archivo CSV creado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, getString(R.string.csv_creado), Toast.LENGTH_SHORT).show();
 
 
                 }
                 catch (Exception ex)
                 {
-                    Toast.makeText(SettingActivity.this, "Error al escribir fichero en la tarjeta SD", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, getString(R.string.error), Toast.LENGTH_SHORT).show();
                     //	Log.e("Ficheros", "Error al escribir fichero a tarjeta SD");
                 }
             }
@@ -386,10 +386,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             } else {
                 builder = new AlertDialog.Builder(SettingActivity.this);
             }
-            builder.setTitle("Compartir")
+            builder.setTitle(getString(R.string.compartir))
                     .setCancelable(false)
-                    .setMessage("Compartir o guardar el archivo")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    .setMessage(getString(R.string.compartir_csv))
+                    .setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // continue with delete
                             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -404,7 +404,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
                         }
                     })
-                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // do nothing
                         }
@@ -751,17 +751,17 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 do {
                     sb.append("<table id=\"t01\">");
                     sb.append("<tr>");
-                    sb.append("<th>Nombre: </th>");
+                    sb.append("<th>"+getString(R.string.nombres)+"</th>");
                     sb.append("<th>" + result.getString(result.getColumnIndex("name"))
                             + " " + result.getString(result.getColumnIndex("lastname")) + "</th>");
-                    sb.append("<th>Cargo: " + result.getString(result.getColumnIndex("occupation")) + "</th>");
+                    sb.append("<th>"+getString(R.string.cargo) + result.getString(result.getColumnIndex("occupation")) + "</th>");
                     sb.append("<th> </th>");
                     sb.append("</tr>");
                     sb.append("<tr>");
-                    sb.append("<th>Entrada</th>");
-                    sb.append("<th>Salida</th>");
-                    sb.append("<th>Salida comida</th>");
-                    sb.append("<th>Llegada comida</th>");
+                    sb.append("<th>"+getString(R.string.entrada)+"</th>");
+                    sb.append("<th>"+getString(R.string.salida)+" </th>");
+                    sb.append("<th>"+getString(R.string.salida_comer)+"</th>");
+                    sb.append("<th>"+getString(R.string.regreso_trabajo)+"</th>");
                     sb.append("</tr>");
                     Cursor mc = dbHelper.user_activity_from_date(result.getString(result.getColumnIndex("_id")),
                             initial_d, final_d);
@@ -787,7 +787,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                         } while (mc.moveToNext());
                     }
                     else {
-                        sb.append("<td> No hay registros </td>");
+                        sb.append("<td>"+getString(R.string.sin_registro)+ "</td>");
                     }
 
 
@@ -806,7 +806,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 sb.append("</body> ");
                 sb.append("</html> ");
 
-                String sFileName = "prueba.html";
+                String sFileName = "reportes.html";
 
                 try {
                     File root = new File(Environment.getExternalStorageDirectory(), "/relojchecador/archivos/");
@@ -826,13 +826,13 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
                     //  browserIntent.addCategory(Intent.CATEGORY_BROWSABLE);
                     startActivity(browserIntent);
-                    Toast.makeText(SettingActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, getString(R.string.guardado), Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
             else {
-                Toast.makeText(SettingActivity.this, "Aun no ha registrado usuarios", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SettingActivity.this, getString(R.string.sin_usuarios), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -857,7 +857,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         Button cancel = (Button) mView.findViewById(R.id.cancel);
         Button register = (Button) mView.findViewById(R.id.login);
 
-        initialdate.setText("Fecha inicial");
+        initialdate.setText(getString(R.string.fecha_inicial));
         initialdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -865,7 +865,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 newfrag.show(getFragmentManager(), "datePicker");
             }
         });
-        finaldate.setText("Fecha final");
+        finaldate.setText(getString(R.string.fecha_final));
         finaldate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -902,9 +902,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
 
                         AlertDialog.Builder alert = new AlertDialog.Builder(SettingActivity.this);
-                        alert.setTitle("Fecha erronea");
-                        alert.setMessage("La fecha final no debe ser menor a la inicial");
-                        alert.setPositiveButton("Aceptar", null);
+                        alert.setTitle(getString(R.string.error_fecha));
+                        alert.setMessage(getString(R.string.error_fecha_menor));
+                        alert.setPositiveButton(getString(R.string.aceptar), null);
                         alert.show();
 
 
@@ -912,7 +912,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
 
                 }
                 else {
-                    Toast.makeText(SettingActivity.this, "Seleccione un rango valido", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SettingActivity.this, getString(R.string.selecciona_rango_valido), Toast.LENGTH_SHORT).show();
 
                 }
 

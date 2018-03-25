@@ -166,7 +166,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         repeatpassword.setVisibility(View.GONE);
         TextView tv = (TextView) mView.findViewById(R.id.textView);
       //  tv.setVisibility(View.GONE);
-        tv.setText("Administrador");
+        tv.setText(getString(R.string.administrador));
         Button cancel = (Button) mView.findViewById(R.id.cancel);
         Button login = (Button) mView.findViewById(R.id.login);
 
@@ -189,7 +189,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 if (password.getText().toString().isEmpty()) {
 
 
-                    password.setError("Escribe una contraseña valida");
+                    password.setError(getString(R.string.ingresar_campos));
 
                 } else {
                     String realPassword = PreferenceManager.getDefaultSharedPreferences(StartActivity.this)
@@ -204,13 +204,13 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                         if (password.getText().toString().trim().equals(realPassword)) {
                             dialog.dismiss();
                             Toast.makeText(StartActivity.this,
-                                    "Bienvenido",
+                                    getString(R.string.bienvenido),
                                     Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(StartActivity.this, AdminActivity.class));
 
                         }
                         else {
-                            password.setError("Contraseña incorrecta");
+                            password.setError(getString(R.string.error_clave));
                         }
                     }
 
@@ -227,7 +227,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         final EditText repeatpassword = (EditText) mView.findViewById(R.id.repeatpass);
         TextView tv = (TextView) mView.findViewById(R.id.textView);
         //  tv.setVisibility(View.GONE);
-        tv.setText("Crear una contraseña");
+        tv.setText(getString(R.string.crear_clave));
         Button cancel = (Button) mView.findViewById(R.id.cancel);
         Button register = (Button) mView.findViewById(R.id.login);
 
@@ -257,18 +257,18 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                         .putString("password", repeatpassword.getText().toString().trim())
                         .apply();
                         Toast.makeText(StartActivity.this,
-                                "Bienvenido",
+                                getString(R.string.bienvenido),
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                         startActivity(new Intent(StartActivity.this, AdminActivity.class));
                         overridePendingTransition(0,0);
 
                     } else {
-                        repeatpassword.setError("Las contraseñas no coinciden");
+                        repeatpassword.setError(getString(R.string.clave_no_coinciden));
                     }
                 } else {
                     Toast.makeText(StartActivity.this,
-                            "Ingresa todos los campos",
+                            getString(R.string.ingresar_campos),
                             Toast.LENGTH_SHORT).show();
                 }
 
@@ -302,9 +302,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         final EditText user_password = (EditText) mView.findViewById(R.id.repeatpass);
         TextView tv = (TextView) mView.findViewById(R.id.textView);
         //  tv.setVisibility(View.GONE);
-        tv.setText("Empleado");
-        user_id.setHint("ID empleado");
-        user_password.setHint("Pin de acceso");
+        tv.setText(getString(R.string.empleado));
+        user_id.setHint(getString(R.string.empleado_id));
+        user_password.setHint(getString(R.string.pin_acceso));
 
         user_id.setInputType(InputType.TYPE_CLASS_NUMBER);
         user_password.setInputType(InputType.TYPE_CLASS_NUMBER |InputType.TYPE_NUMBER_VARIATION_PASSWORD);
@@ -330,16 +330,16 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View view) {
 
                 if (user_id.getText().toString().trim().isEmpty()){
-                    user_id.setError("Ingresa tu id");
+                    user_id.setError(getString(R.string.ingresa_id));
                 }
                 if (user_password.getText().toString().trim().isEmpty()){
-                    user_password.setError("Ingrese su pin de clave");
+                    user_password.setError(getString(R.string.ingresa_pin));
                 }else {
                     Empleados_admin receivedPerson = dbHelper.getEmpleado(user_id.getText().toString(), user_password.getText().toString());
                     //Long longValue = null;
                     if (receivedPerson == null){
                         Toast.makeText(StartActivity.this,
-                                "ID o PIN incorrectos",
+                                getString(R.string.pin_incorrecto),
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }else{
@@ -363,10 +363,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 .getString("comunicado", "");
         final android.support.v7.app.AlertDialog.Builder alertDialogBuilder = new android.support.v7.app.AlertDialog.Builder(
                 StartActivity.this);
-        alertDialogBuilder.setTitle("Estas bloqueado");
+        alertDialogBuilder.setTitle(getString(R.string.estas_bloqueado));
         if (comuni.equals("")){
             alertDialogBuilder
-                    .setMessage("No puedes acceder al sistema, pasa a Recursos Humanos para consultar tu situacion ")
+                    .setMessage(getString(R.string.mensaje_sin_acceso))
                     .setCancelable(false)
                     .setPositiveButton("Ok",new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,int id) {

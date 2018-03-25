@@ -83,12 +83,12 @@ public class EditUser extends AppCompatActivity {
                 } catch (IOException ex) {
                     // Error occurred while creating the File
                     Toast.makeText(EditUser.this,
-                            "Error creando el archivo", Toast.LENGTH_LONG).show();
+                            getString(R.string.error_archivo), Toast.LENGTH_LONG).show();
                 }
 
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
-                        .setCropMenuCropButtonTitle("Elegir")
+                        .setCropMenuCropButtonTitle(getString(R.string.elegir))
                         .setCropShape(CropImageView.CropShape.RECTANGLE)
                         .setOutputCompressFormat(Bitmap.CompressFormat.JPEG)
                         .setOutputCompressQuality(75)
@@ -117,7 +117,7 @@ public class EditUser extends AppCompatActivity {
         blocked = receivedPerson.getBlocked();
         if (blocked == 0) {
            // blocked_sw.setChecked(false);
-            blocked_sw.setText("Desbloqueado");
+            blocked_sw.setText(getString(R.string.desbloqueado));
         }
         if (blocked == 1){
             dialogo_este_men_esta_bloqueado();
@@ -132,11 +132,11 @@ public class EditUser extends AppCompatActivity {
                         }else{
                             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                     EditUser.this);
-                            alertDialogBuilder.setTitle("Bloquear usuario");
+                            alertDialogBuilder.setTitle(getString(R.string.bloquear_persona));
                             alertDialogBuilder
-                                    .setMessage("El usuario no podra acceder")
+                                    .setMessage(getString(R.string.no_acceso))
                                     .setCancelable(false)
-                                    .setPositiveButton("Bloquear",new DialogInterface.OnClickListener() {
+                                    .setPositiveButton(getString(R.string.bloquear),new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog,int id) {
                                             // if this button is clicked, close
                                             // current activity
@@ -145,10 +145,10 @@ public class EditUser extends AppCompatActivity {
                                             blocked = 1;
                                         }
                                     })
-                                    .setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
+                                    .setNegativeButton(getString(R.string.cancelar),new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog,int id) {
                                             blocked_sw.setChecked(false);
-                                            blocked_sw.setText("Desbloqueado");
+                                            blocked_sw.setText(getString(R.string.desbloqueado));
                                             blocked = 0;
                                         }
                                     });
@@ -164,7 +164,7 @@ public class EditUser extends AppCompatActivity {
                         //    blocked_sw.setText("All List");  //To change the text near to switch
                         // Log.d("You are :", " Not Checked");
                         blocked = 0;
-                        blocked_sw.setText("Desbloqueado");
+                        blocked_sw.setText(getString(R.string.desbloqueado));
                     }
 
 
@@ -191,18 +191,18 @@ public class EditUser extends AppCompatActivity {
     public void dialogo_este_men_esta_bloqueado(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 EditUser.this);
-        alertDialogBuilder.setTitle("Este empleado esta bloqueado");
+        alertDialogBuilder.setTitle(getString(R.string.persona_bloqueada));
         alertDialogBuilder
-                .setMessage("Deseas desbloquearlo?")
+                .setMessage(getString(R.string.desea_desblo))
                 .setCancelable(false)
-                .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.si),new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         blocked_sw.setChecked(false);
-                        blocked_sw.setText("Desbloqueado");
+                        blocked_sw.setText(getString(R.string.desbloqueado));
                         blocked = 0;
                     }
                 })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.no),new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         blocked_sw.setChecked(true);
                         blocked = 1;
@@ -243,27 +243,24 @@ public class EditUser extends AppCompatActivity {
 
 
         if(name.isEmpty()){
-            Toast.makeText(this, "You must enter a name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ingresar_nombre), Toast.LENGTH_SHORT).show();
         }
 
         if(lastname.isEmpty()){
-            Toast.makeText(this, "You must enter an lastname", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.ingresar_apellido), Toast.LENGTH_SHORT).show();
         }
 
-        if(occupation.isEmpty()){
-            Toast.makeText(this, "You must enter an occupation", Toast.LENGTH_SHORT).show();
-        }
 
         if (passwd.isEmpty() ||
                 passwd.length() < 4 ) {
-            ePassword.setError("Agrege al menos 4 numeros");
+            ePassword.setError(getString(R.string.agregue_4_numeros));
         }
 
         if (!name.isEmpty() && !lastname.isEmpty()
                  && !passwd.isEmpty()) {
 
             if (passwd.length() < 4 ) {
-                ePassword.setError("Agrege al menos 4 numeros");
+                ePassword.setError(getString(R.string.agregue_4_numeros));
 
             }
             else {
@@ -311,7 +308,7 @@ public class EditUser extends AppCompatActivity {
             //se ha creado bien
             //string.replace(" ", "\\ ");
             Toast.makeText(EditUser.this,
-                    "Carpeta creada", Toast.LENGTH_LONG).show();
+                    getString(R.string.carpeta_creada), Toast.LENGTH_LONG).show();
 
 
         }
@@ -321,7 +318,7 @@ public class EditUser extends AppCompatActivity {
             }
             else
                 Toast.makeText(EditUser.this,
-                        "Carpeta o SD no encontrada", Toast.LENGTH_LONG).show();
+                        getString(R.string.carpeta_no_creada), Toast.LENGTH_LONG).show();
 
         }
 

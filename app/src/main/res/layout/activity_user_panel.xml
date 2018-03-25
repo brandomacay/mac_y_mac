@@ -72,7 +72,7 @@
         android:layout_marginTop="60dp"
         android:background="#e7e7e7"
         android:gravity="center"
-        android:text="Que vas a registrar?"
+        android:text="@string/que_registraras"
         android:textColor="@color/colorPrimary"
         android:textSize="19.5sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Actividad"
+                    android:text="@string/ultima_actividad"
                     android:textSize="20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -173,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|bottom"
-                    android:text="Inicio de Trabajo" />
+                    android:text="@string/comienzo_trabajo" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -209,7 +209,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|bottom"
-                    android:text="Regreso al trabajo" />
+                    android:text="@string/de_vuelta_trabajo" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>
@@ -245,7 +245,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|bottom"
-                    android:text="Salida de trabajo" />
+                    android:text="@string/salida" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>

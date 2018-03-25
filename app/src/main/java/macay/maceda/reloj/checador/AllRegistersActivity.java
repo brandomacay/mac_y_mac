@@ -26,7 +26,7 @@ public class AllRegistersActivity extends AppCompatActivity {
             // Habilita la acccion de volver a la actividad anterior xD.
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        actionBar.setTitle("Registro de todos");
+        actionBar.setTitle(getString(R.string.registro_todos));
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_getall);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);

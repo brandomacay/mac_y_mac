@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end|center_vertical"
-            android:text="Bloqueado" />
+            android:text="@string/bloqueado" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -57,14 +57,14 @@
                 android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/register_user_name_et"
-                android:hint="Nombres"
+                android:hint="@string/nombres"
                 android:inputType="textCapSentences"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
                 <EditText
                     android:id="@+id/register_user_lastname_et"
 
-                    android:hint="Apellidos"
+                    android:hint="@string/apellidos"
                     android:inputType="textCapSentences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -74,7 +74,7 @@
                     style="?android:attr/spinnerStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Fecha de nacimiento"
+                    android:text="@string/nacimiento"
                     android:layout_gravity="center"
                     android:textSize="16dp"
 
@@ -86,21 +86,21 @@
         <EditText
             android:id="@+id/register_user_password_et"
 
-            android:hint="Pin o contraseña"
+            android:hint="@string/pin_acceso"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/register_user_email_et"
 
-            android:hint="Correo electronico"
+            android:hint="@string/correo"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/register_user_phone_et"
 
-            android:hint="Celular"
+            android:hint="@string/numero_celular"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -108,20 +108,20 @@
             android:id="@+id/register_user_address_et"
             android:inputType="textCapSentences"
 
-            android:hint="Direccion"
+            android:hint="@string/direccion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/register_user_ocupation_et"
 
-            android:hint="Cargo en la empresa"
+            android:hint="@string/cargo"
             android:inputType="textCapSentences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/register_user_area_et"
 
-            android:hint="Departamento o area"
+            android:hint="@string/area_tra"
             android:inputType="textCapSentences"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -130,7 +130,7 @@
             style="?android:attr/spinnerStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fecha de contrato"
+            android:text="@string/contrato"
             android:layout_gravity="center"
             android:textSize="16dp"
             android:padding="10dp"

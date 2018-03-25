@@ -1,81 +1,104 @@
 <resources>
     <string name="app_name">Reloj Checador Mac</string>
-    <string name="title_activity_admin">AdminActivity</string>
-    <string name="title_activity_settings">Settings</string>
-
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
-
-    <string name="title_activity_detail_person">DetailPersonActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="empleado_id">ID empleado: </string>
+    <string name="inicio_trabajo">Inicio de trabajo: </string>
+    <string name="culminacion_trabajo">Culminacion de Trabajo: </string>
+    <string name="regreso_trabajo">Regreso al trabajo: </string>
+    <string name="salida_comer">Salida a comer: </string>
+    <string name="editar">Editar</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="numero_celular">Numero celular: </string>
+    <string name="cargo">Cargo: </string>
+    <string name="area_tra">Area de trabajo: </string>
+    <string name="correo">Correo electronico: </string>
+    <string name="nacimiento">Fecha de nacimiento: </string>
+    <string name="direccion">Direccion: </string>
+    <string name="contrato">Fecha de contrato: </string>
+    <string name="emple_borrado">Empleado borrado</string>
+    <string name="datos_actualizados">Datos actualizados!</string>
+    <string name="pin_cambiado">Pin cambiado exitosamente!!</string>
+    <string name="salida_registrada">Salida registrada</string>
+    <string name="vuelta_trabajo">De vuelta al trabajo,registrada!</string>
+    <string name="registro_todos">Registro de todos</string>
+    <string name="seguro_eliminar">En verdad deseas eliminar a esta persona?</string>
+    <string name="eliminar_persona">Eliminar Usuario</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="error_archivo">Error al crear el archivo</string>
+    <string name="elegir">Elegir</string>
+    <string name="desbloqueado">Desbloqueado</string>
+    <string name="bloquear_persona">Bloquear usuario</string>
+    <string name="no_acceso">El usuario no podra acceder</string>
+    <string name="bloquear">Bloquear</string>
+    <string name="persona_bloqueada">Este empleado esta bloqueado</string>
+    <string name="desea_desblo">¿Deseas desbloquearlo?</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
+    <string name="ingresar_nombre">Debes ingresar un nombre</string>
+    <string name="ingresar_apellido">Debes ingresar un apellido</string>
+    <string name="agregue_4_numeros">Agregue al menos 4 numeros</string>
+    <string name="carpeta_creada">Carpeta creada</string>
+    <string name="carpeta_no_creada">Carpeta o SD no encontrada</string>
+    <string name="bloqueado">bloqueado</string>
+    <string name="datos_guardados">Datos guardados correctamente!</string>
+    <string name="comunicado">Comunicado para los empleados</string>
+    <string name="mensaje_sin_acceso">No puedes acceder al sistema, pasa a Recursos Humanos para consultar tu situacion</string>
+    <string name="enviar">Enviar</string>
+    <string name="nueva_clave">Nueva contraseña</string>
+    <string name="cambiar_clave">Cambiar contraseña</string>
+    <string name="clave_cambiada">Contraseña cambiada exitosamente!</string>
+    <string name="clave_no_coinciden">Las contraseñas no coinciden</string>
+    <string name="ingresar_campos">Ingresa todos los campos!</string>
+    <string name="guardando_db">Guardando Base de Datos…</string>
+    <string name="porfa_espere">Por favor espere…</string>
+    <string name="csv_creado">Archivo CSV creado!!</string>
+    <string name="compartir">Compartir</string>
+    <string name="compartir_csv">¿Deseas compartir el archivo CSV?</string>
+    <string name="error">Error!</string>
+    <string name="nombres">Nombres: </string>
+    <string name="entrada">Entrada</string>
+    <string name="salida">Salida</string>
+    <string name="sin_registro">No hay registros</string>
+    <string name="guardado">¡Guardado!</string>
+    <string name="sin_usuarios">Aún no ha registrado usuarios</string>
+    <string name="fecha_inicial">Fecha inicial</string>
+    <string name="fecha_final">Fecha final</string>
+    <string name="error_fecha">Fecha errónea</string>
+    <string name="error_fecha_menor">La fecha final no debe ser menor al inicial</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="selecciona_rango_valido">Seleccione un rango válido</string>
+    <string name="administrador">Administrador</string>
+    <string name="error_clave">Contraseña incorrecta</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="crear_clave">Crear una contraseña</string>
+    <string name="empleado">Empleado</string>
+    <string name="pin_acceso">Pin de acceso</string>
+    <string name="ingresa_id">Ingresa tu id</string>
+    <string name="ingresa_pin">Ingrese su pin de clave</string>
+    <string name="pin_incorrecto">ID o PIN incorrectos</string>
+    <string name="estas_bloqueado">Estás bloqueado</string>
+    <string name="entrada_registrada">La entrada fue registrada correctamente</string>
+    <string name="culminacion_trabajo_exitosa">Culminación de trabajo exitosa!</string>
+    <string name="nuevo_pin">Nuevo pin</string>
+    <string name="repita_pin">Repita el pin</string>
+    <string name="cambiar_pin">Cambiar pin</string>
+    <string name="hora_comer">Hora de comer</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="reporte_asistencia">Reporte de asistencia</string>
+    <string name="mensaje_bloqueados">Mensaje para usuarios bloqueados</string>
+    <string name="lista_empleados">Lista de empleados</string>
+    <string name="que_registraras">¿Que vas a registrar?</string>
+    <string name="ultima_actividad">Última actividad</string>
+    <string name="comienzo_trabajo">Comienzo de trabajo</string>
+    <string name="de_vuelta_trabajo">De vuelta al trabajo</string>
+    <string name="ingresa_mensaje">Ingresar mensaje</string>
+    <string name="sin_empleados">Sin empleados registrados</string>
+    <string name="clave">Contraseña</string>
+    <string name="repetir_clave">Repetir contraseña</string>
+    <string name="motivo_salida">Motivo de salida: </string>
+    <string name="fin_trabajo">Finalización de trabajo</string>
+    <string name="rango_busqueda">Rango de búsqueda: </string>
+    <string name="registro_empleados">Registro de empleados</string>
+    <string name="editar_usuario">Editar usuario</string>
+    <string name="opciones">Opciones</string>
 </resources>

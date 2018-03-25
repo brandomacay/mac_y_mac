@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:text="Administrador"
+        android:text="@string/administrador"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Contraseña"
+        android:hint="@string/clave"
         android:inputType="textPassword" />
 
     <EditText
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:ems="10"
-        android:hint="Repita la contraseña"
+        android:hint="@string/repetir_clave"
         android:inputType="textPassword" />
 <LinearLayout
     android:gravity="center"
@@ -44,7 +44,7 @@
         android:layout_weight="1"
         android:layout_marginTop="10dp"
         android:background="@android:color/holo_orange_dark"
-        android:text="Cancelar"
+        android:text="@string/cancelar"
         android:textColor="@android:color/white" />
     <Button
         android:id="@+id/login"
@@ -53,7 +53,7 @@
         android:layout_weight="1"
         android:layout_marginTop="10dp"
         android:background="@color/colorPrimary"
-        android:text="Aceptar"
+        android:text="@string/aceptar"
         android:textColor="@android:color/white"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp" />

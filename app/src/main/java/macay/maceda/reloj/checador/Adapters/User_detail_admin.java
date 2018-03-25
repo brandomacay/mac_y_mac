@@ -88,7 +88,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
                     else {
                         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
 
-                        builder.setNeutralButton("Editar", new DialogInterface.OnClickListener() {
+                        builder.setNeutralButton(mContext.getString(R.string.editar), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
@@ -100,7 +100,7 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
                         });
 
 
-                        builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton(mContext.getString(R.string.cerrar), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //  Toast.makeText(mContext, "Yes button Clicked", Toast.LENGTH_LONG).show();
@@ -193,42 +193,42 @@ public class User_detail_admin extends RecyclerView.Adapter<User_detail_admin.Vi
         if(person.getNumber_phone().equals("")){
             holder.personPhone.setVisibility(View.GONE);
         }else{
-            holder.personPhone.setText("Numero celular: "+person.getNumber_phone());
+            holder.personPhone.setText(mContext.getString(R.string.numero_celular)+person.getNumber_phone());
 
         }
 
         if (person.getOccupation().equals("")){
             holder.personOcupation.setVisibility(View.GONE);
         }else{
-            holder.personOcupation.setText("Cargo/puesto: "+person.getOccupation());
+            holder.personOcupation.setText(mContext.getString(R.string.cargo)+person.getOccupation());
 
         }
         if (person.getArea().equals("")){
             holder.personArea.setVisibility(View.GONE);
         }else{
-            holder.personArea.setText("Area de trabajo: "+person.getArea());
+            holder.personArea.setText(mContext.getString(R.string.area_tra)+person.getArea());
 
         }
         if (person.getEmail().equals("")){
             holder.personEmail.setVisibility(View.GONE);
         }else{
-            holder.personEmail.setText("Correo electronico: "+person.getEmail());
+            holder.personEmail.setText(mContext.getString(R.string.correo)+person.getEmail());
 
         }
         if (person.getBirthday().equals("")){
             holder.personBirthday.setVisibility(View.GONE);
         }else{
-            holder.personBirthday.setText("Fecha de nacimiento: "+person.getBirthday());
+            holder.personBirthday.setText(mContext.getString(R.string.nacimiento)+person.getBirthday());
 
         }
         if (person.getAddress().equals("")){
             holder.personAddress.setVisibility(View.GONE);
         }else{
-            holder.personAddress.setText("Direccion: "+person.getAddress());
+            holder.personAddress.setText(mContext.getString(R.string.direccion)+person.getAddress());
 
         }
-        holder.personStartWork.setText("Fecha de contrato: "+person.getDatework());
-        holder.personId.setText("ID empleado: " +person.getId());
+        holder.personStartWork.setText(mContext.getString(R.string.contrato)+person.getDatework());
+        holder.personId.setText(mContext.getString(R.string.empleado_id) +person.getId());
 
 
         int height;
