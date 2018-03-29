@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.LinkedList;
@@ -165,27 +166,21 @@ public class AdminActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void acerca_de_macymax(){
-
+    private void acerca_de_macymax () {
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(AdminActivity.this);
-        //Button yes = (Button) mView.findViewById(R.id.si);
-        //Button no = (Button) mView.findViewById(R.id.no);
-        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        View mView = getLayoutInflater().inflate(R.layout.dialog_creditos, null);
+        ImageView exit = (ImageView) mView.findViewById(R.id.salir);
+        mBuilder.setView(mView);
+        final android.app.AlertDialog dialog = mBuilder.create();
+        dialog.show();
+        exit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
-        final android.app.AlertDialog dialog = mBuilder.create();
-        dialog.setTitle("Creditos Macymax");
-        dialog.setMessage("Creado por: " +
-                "                                       Alejandro Maceda"+
-                "                                       Brandon Macay" +
-                "                                       Mexico-Ecuador");
-
-        dialog.show();
-
-        //
     }
+
 
 
 
