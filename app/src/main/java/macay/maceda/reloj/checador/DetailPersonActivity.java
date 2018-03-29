@@ -110,6 +110,7 @@ public class DetailPersonActivity extends AppCompatActivity {
             }
         });
         AlertDialog dialog = myBulid.create();
+
         dialog.show();
     }
 
