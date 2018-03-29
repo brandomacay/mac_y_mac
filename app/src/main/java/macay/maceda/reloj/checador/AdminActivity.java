@@ -152,6 +152,10 @@ public class AdminActivity extends AppCompatActivity {
             overridePendingTransition(0,0);
             return true;
         }
+        if (id == R.id.acerca){
+            acerca_de_macymax();
+            return true;
+        }
         if (id == R.id.timeline){
             startActivity(new Intent(AdminActivity.this,AllRegistersActivity.class));
             overridePendingTransition(0,0);
@@ -159,6 +163,28 @@ public class AdminActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void acerca_de_macymax(){
+
+        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(AdminActivity.this);
+        //Button yes = (Button) mView.findViewById(R.id.si);
+        //Button no = (Button) mView.findViewById(R.id.no);
+        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            }
+        });
+        final android.app.AlertDialog dialog = mBuilder.create();
+        dialog.setTitle("Creditos Macymax");
+        dialog.setMessage("Creado por: " +
+                "                                       Alejandro Maceda"+
+                "                                       Brandon Macay" +
+                "                                       Mexico-Ecuador");
+
+        dialog.show();
+
+        //
     }
 
 
