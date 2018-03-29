@@ -101,4 +101,5 @@
     <string name="registro_empleados">Registro de empleados</string>
     <string name="editar_usuario">Editar usuario</string>
     <string name="opciones">Opciones</string>
+    <string name="acerca_de">Acerca de</string>
 </resources>

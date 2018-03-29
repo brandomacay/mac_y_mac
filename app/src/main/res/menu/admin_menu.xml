@@ -11,7 +11,7 @@
 
     <item
         android:id="@+id/setting"
-        android:title="Configuraciones"
+        android:title="@string/opciones"
         android:orderInCategory="0" />
 
     <item android:id="@+id/timeline"

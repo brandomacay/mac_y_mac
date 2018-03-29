@@ -101,4 +101,5 @@
     <string name="registro_empleados">Mitarbeiterregistrierung</string>
     <string name="editar_usuario">Benutzer bearbeiten</string>
     <string name="opciones">Optionen</string>
+    <string name="acerca_de">Ungefähr</string>
 </resources>
