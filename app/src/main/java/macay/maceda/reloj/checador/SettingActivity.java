@@ -837,13 +837,21 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     writer.flush();
                     writer.close();
                     Uri uri = Uri.fromFile(gpxfile);
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                   // browserIntent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
-                //    browserIntent.setDataAndType(uri, "text/html");
-                    browserIntent.setDataAndType(uri, "multipart/related");
+                     Intent browserIntent = new Intent(android.content.Intent.ACTION_VIEW);
 
-                    //  browserIntent.addCategory(Intent.CATEGORY_BROWSABLE);
-                    startActivity(browserIntent);
+                    browserIntent.setDataAndType(uri, "text/html");
+
+
+                    startActivity(Intent.createChooser(browserIntent, "Abrir con..."));
+
+
+                   // Intent sharingIntent = new Intent(android.content.Intent.ACTION_VIEW);
+
+                   // sharingIntent.setType("multipart/related");
+
+                    //sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" +
+                      //      uri) );
+                    //startActivity(Intent.createChooser(sharingIntent, ""));
                     Toast.makeText(SettingActivity.this, getString(R.string.guardado), Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
                     e.printStackTrace();
