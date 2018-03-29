@@ -55,7 +55,7 @@
     <string name="compartir">Share</string>
     <string name="compartir_csv">Do you want to share the CSV file?</string>
     <string name="error">Error!</string>
-    <string name="nombres">Name (s: </string>
+    <string name="nombres">Name: </string>
     <string name="entrada">Entry</string>
     <string name="salida">Output</string>
     <string name="sin_registro">No records</string>
@@ -83,7 +83,7 @@
     <string name="repita_pin">Repeat the pin</string>
     <string name="cambiar_pin">Change pin</string>
     <string name="hora_comer">Time to eat</string>
-    <string name="apellidos">Surnames</string>
+    <string name="apellidos">Last names</string>
     <string name="reporte_asistencia">Assistance report</string>
     <string name="mensaje_bloqueados">Message for blocked users</string>
     <string name="lista_empleados">List of employees</string>
