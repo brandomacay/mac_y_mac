@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -169,7 +170,7 @@ public class AdminActivity extends AppCompatActivity {
     private void acerca_de_macymax () {
         android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(AdminActivity.this);
         View mView = getLayoutInflater().inflate(R.layout.dialog_creditos, null);
-        ImageView exit = (ImageView) mView.findViewById(R.id.salir);
+        Button exit = (Button) mView.findViewById(R.id.salir);
         mBuilder.setView(mView);
         final android.app.AlertDialog dialog = mBuilder.create();
         dialog.show();

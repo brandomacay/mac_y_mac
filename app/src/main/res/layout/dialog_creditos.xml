@@ -18,15 +18,7 @@
             android:textStyle="bold"
             android:textColor="#ffffff"
             android:gravity="center"
-            android:layout_height="match_parent" />
-        <ImageView
-            android:id="@+id/salir"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:src="@drawable/close_red"
-            />
+            android:layout_height="45dp" />
     </LinearLayout>
 
     <ImageView
@@ -64,7 +56,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="168dp"
         android:textColor="#181818"
         android:textSize="18sp"
@@ -72,5 +64,19 @@
         android:text="(c) Brandon Macay"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/salir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
+        android:background="@drawable/custom_ripple"
+        android:text="@string/cerrar"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
